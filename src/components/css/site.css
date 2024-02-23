@@ -1,5 +1,4 @@
 /* CSS common to multiple components */
-
 :root {
     --celadon: rgb(190, 229, 191);
     --honeydew: rgb(223, 243, 227);
@@ -8,51 +7,68 @@
     --english-violet: rgb(73, 54, 87);
 }
 
+.tell-me-about-text {
+    color: var(--honeydew);
+}
+
 nav.navbar {
-    background-color: var(--celadon);
+    background-color: var(--english-violet);
+
+}
+
+a.nav-link {
+    color: white;
+}
+
+a.nav-link:hover {
+    color: var(--thulian-pink);
 }
 
 a.navbar-brand {
     margin: 0 2rem 0 1em;
 }
 
+.navbar-toggler img {
+    height: 2rem;
+    width: 2rem;
+}
+
+body.navbar-toggler:focus {
+    box-shadow: 0 0 0 0;
+}
+
 /* Extra small devices (phones, less than 576px) */
 @media (max-width: 575.98px) {
-    nav img {
+    .navbar-brand img {
         max-width: 48px;
-        margin-left: 5px;
+    
     }
 }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767.98px) {
-    nav img {
+    .navbar-brand img {
         max-width: 64px;
-        margin-left: 5px;
     }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991.98px) {
-    nav img {
+    .navbar-brand img {
         max-width: 64px;
-        margin-left: 5px;
     }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
-    nav img {
+    .navbar-brand img {
         max-width: 64px;
-        margin-left: 5px;
     }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
-    nav img {
+    .navbar-brand img {
         max-width: 64px;
-        margin-left: 5px;
     }
 }
-

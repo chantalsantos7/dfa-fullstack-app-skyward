@@ -1,12 +1,29 @@
 import Footer from '../Footer'
 import Header from '../Header'
+import "../css/site.css"
+import "./css/homepage.css"
+import SearchBox from './SearchBox'
+
+//background image from: https://unsplash.com/photos/vehicle-parking-in-front-of-building-X2ovoIk6ISQ?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash
 
 const HomePage = () => {
   return (
     <>
-        <Header />
+      <Header />
+      <div className="container">
+        <div className="row mb-5">
+          <div className="d-flex justify-content-center align-items-center vh-90">
+            <SearchBox />
+          </div>
+        </div>
+        <div className="row mt-5">
+          <Footer />
+        </div>
+      </div>
 
-        <Footer />
+
+
+
     </>
   )
 }
