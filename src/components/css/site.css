@@ -1,14 +1,21 @@
 /* CSS common to multiple components */
 :root {
     --celadon: rgb(190, 229, 191);
-    --honeydew: rgb(223, 243, 227);
+    --honeydew: rgb(164, 240, 180);
+    --olivine: rgb(158, 189, 110);
     --apricot: rgb(255, 209, 186);
     --thulian-pink: rgb(206, 125, 165);
     --english-violet: rgb(73, 54, 87);
 }
 
 .tell-me-about-text {
-    color: var(--honeydew);
+    color: var(--olivine);
+}
+
+.location-text {
+    color: var(--olivine);
+    font-family: 'SantaChild', 'Times New Roman', Times, serif;
+    font-size: 5rem;
 }
 
 nav.navbar {
@@ -33,6 +40,15 @@ a.navbar-brand {
     width: 2rem;
 }
 
+body {
+    background-image: url("src/assets/lerone-pieters-new-york-sunset.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100%;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
 body.navbar-toggler:focus {
     box-shadow: 0 0 0 0;
 }
@@ -50,6 +66,7 @@ body.navbar-toggler:focus {
     .navbar-brand img {
         max-width: 64px;
     }
+
 }
 
 /* Medium devices (tablets, 768px and up) */

@@ -1,12 +1,3 @@
-body {
-    background-image: url("src/assets/lerone-pieters-new-york-sunset.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    height: 100%;
-    background-size: cover;
-    background-attachment: fixed;
-}
-
 div.container {
     margin: auto;
 }
