@@ -75,10 +75,12 @@ h6 {
     url('src/assets/fonts/santa-child-webfontkit/santa_child_font_by_keithzo-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-
 }
 
-/* trying to override bootstrap container sizing */
-/* #root div.container {
-  max-width: 1400px;
-} */
+@font-face {
+  font-family: 'Thestral';
+  src: url('src/assets/fonts/thestral-webfontkit/Thestral-Bold.woff2') format('woff2'), 
+  url('src/assets/fonts/thestral-webfontkit/Thestral-Bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

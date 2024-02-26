@@ -7,10 +7,11 @@
 } */
 
 div.day-forecast, div.weather-today {
-    background-color: var(--melon);
-    padding: 10px;
+    background-color: var(--apricot);
     border-radius: 5px;
     margin: 1rem 0 1rem 0;
+    border-color: var(--melon);
+    border-width: 2px;
 }
 
 div.day-forecast {
@@ -21,10 +22,18 @@ div.day-forecast {
     margin-bottom: 0.5rem;
 }
 
+.day-forecast img {
+    max-height: 100px;
+}
+
 /* Extra small devices (phones, less than 576px) */
 @media (max-width: 575.98px) {
     body #root {
-        background-color: var(--apricot);
+        background-color: var(--sunset-cloud);
+    }
+
+    .day-forecast img {
+        max-height: 75px;
     }
 }
 
@@ -34,13 +43,15 @@ div.day-forecast {
     body #root {
         background-color: var(--apricot);
     }
+
+    .day-forecast img {
+        max-height: 75px;
+    }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991.98px) {
-    div.row div.container.weather-today {
-        
-    }
+    
 }
 
 /* Large devices (desktops, 992px and up) */

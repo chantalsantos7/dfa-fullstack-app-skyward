@@ -5,6 +5,7 @@ const SearchBox = () => {
     <>
       <div className="container mt-5 text-center">
         <div className="row mt-5 mb-3">
+          //TODO: Add media queries for mobile size to reduce size of these headings
           <h1 className="tell-me-about-text">Tell me about...</h1>
         </div>
 
