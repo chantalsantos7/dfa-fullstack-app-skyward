@@ -79,6 +79,6 @@ h6 {
 }
 
 /* trying to override bootstrap container sizing */
-div#root div.container {
+/* #root div.container {
   max-width: 1400px;
-}
+} */

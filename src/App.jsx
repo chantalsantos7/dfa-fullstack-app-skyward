@@ -1,10 +1,13 @@
+import './css/site.css'
 import HomePage from './components/HomePage/HomePage';
-import './css/style.css'
+import LocationInformation from './components/LocationInformation/LocationInformation'
+
 
 const App = () => {
     return(
     <>
-        <HomePage />
+        
+        <LocationInformation />
     </>
     );
 };
