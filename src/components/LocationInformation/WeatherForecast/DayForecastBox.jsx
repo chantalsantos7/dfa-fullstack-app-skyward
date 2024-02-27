@@ -18,8 +18,15 @@ const DayForecastBox = ({ day: dayWeather }) => {
   )
 }
 
-DayForecastBox.PropTypes = {
-  day: PropTypes.object.isRequired
+DayForecastBox.propTypes = {
+  day: PropTypes.shape(
+    {
+      date: PropTypes.string.isRequired,
+      weather_desc: PropTypes.string.isRequired,
+      icon: PropTypes.string.isRequired,
+      temp: PropTypes.string.isRequired
+    }
+  ).isRequired
 }
 
 DayForecastBox.defaultProps = {

@@ -12,10 +12,10 @@ const WeatherTodayBox = ({ day: dayWeather }) => {
             <img className="mx-auto d-block" src={`/assets/weather-icons/${dayWeather.icon}.svg`} alt="icon for current weather" />
           </div>
             <div className="row col-6 col-sm-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8">
-            <div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+            <div className="d-flex justify-content-center align-items-center col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
               <p>{dayWeather.temp} &deg;C</p>
             </div>
-            <div className="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9 col-xxl-9">
+            <div className="d-flex justify-content-center align-items-center col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9 col-xxl-9">
               <p>{dayWeather.weather_desc}</p>
             </div>
           </div>
@@ -26,8 +26,15 @@ const WeatherTodayBox = ({ day: dayWeather }) => {
   )
 }
 
-WeatherTodayBox.PropTypes = {
-  day: PropTypes.object.isRequired
+WeatherTodayBox.propTypes = {
+  day: PropTypes.shape(
+    {
+      date: PropTypes.string.isRequired,
+      weather_desc: PropTypes.string.isRequired,
+      icon: PropTypes.string.isRequired,
+      temp: PropTypes.string.isRequired
+    }
+  ).isRequired
 }
 
 WeatherTodayBox.defaultProps = {

@@ -8,17 +8,14 @@ const HomePage = () => {
   return (
     <>
       <Header />
-      <div className="container">
+      <div className="container vh-100">
         <div className="row mb-5">
-          <div className="d-flex justify-content-center align-items-center vh-90">
+          <div className="d-flex justify-content-center align-items-center">
             <SearchBox />
           </div>
-        </div>
-        <div className="row mt-5">
-          <Footer />
-        </div>
+        </div>   
       </div>
-
+ <Footer />
 
 
 

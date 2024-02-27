@@ -3,6 +3,7 @@
     --celadon: rgb(190, 229, 191);
     --honeydew: rgb(164, 240, 180);
     --olivine: rgb(158, 189, 110);
+    --hunter-green: rgb(62, 86, 65);
     --apricot: rgb(255, 209, 186);
     --melon: rgb(231, 173, 153);
     --sunset-cloud: #FDE1CC;
@@ -12,13 +13,23 @@
 
 .tell-me-about-text {
     color: var(--olivine);
-    font-family: 'Thestral', 'Times New Roman', Times, serif;
+    font-family: 'Neue Regrade', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 3rem;
 }
 
 .location-text {
     color: var(--olivine);
     font-family: 'Thestral', 'Times New Roman', Times, serif;
+    margin-top: 5px;
     font-size: 5rem;
+}
+
+nav {
+    font-family: 'Neue Regrade', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;;
+    font-weight: 500;
+    font-style: normal;
 }
 
 nav.navbar {
@@ -30,7 +41,16 @@ nav.navbar {
 }
 
 a.nav-link {
+    font-size: 1em;
+}
+
+a.nav-link, a.nav-link:visited {
     color: white;
+}
+
+a.nav-link:active,
+a.nav-link:focus {
+  color: var(--thulian-pink); /* Change this to your desired color */
 }
 
 a.nav-link:hover {
@@ -46,6 +66,11 @@ a.navbar-brand {
     width: 2rem;
 }
 
+.footer {
+    background-color: var(--english-violet);
+    color: var(--thulian-pink);
+}
+
 body {
     background-image: url("src/assets/lerone-pieters-new-york-sunset.jpg");
     background-repeat: no-repeat;
@@ -53,6 +78,8 @@ body {
     height: 100%;
     background-size: cover;
     background-attachment: scroll;
+    font-family: 'Neue Regrade', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;;
+
 }
 
 body.navbar-toggler:focus {

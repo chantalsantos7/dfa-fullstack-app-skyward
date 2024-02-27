@@ -19,7 +19,7 @@ const TellYouLocation = ({displayString}) => {
     )
 }
 
-TellYouLocation.PropTypes = {
+TellYouLocation.propTypes = {
     displayString: PropTypes.string.isRequired,
   };
   

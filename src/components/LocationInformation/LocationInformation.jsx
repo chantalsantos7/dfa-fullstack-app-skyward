@@ -1,3 +1,5 @@
+import React from 'react'; // Add the missing import statement for React
+
 import PropTypes from 'prop-types'
 import Footer from "../Footer"
 import Header from "../Header"
@@ -8,15 +10,17 @@ import './css/location-information.css'
 import TellYouLocation from '../TellYouLocation'
 import FavouriteLocationButton from '../FavouriteLocations/FavouriteLocationButton'
 
-const LocationInformation = ({ location, forecast }) => {
+const LocationInformation = ({ location, weatherResponse }) => {
   return (
     <>
       <Header />
       
 
-        <div className='container  mt-3'>
-          <TellYouLocation displayString="Prop Location" />
-          <FavouriteLocationButton />
+        <div className='container  mt-3 text-center'>
+          <TellYouLocation displayString={location} />
+          <div className='row text-center'>
+            <FavouriteLocationButton />
+          </div>
           <div className="row">
             <div className="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
               <WeatherForecast />
@@ -38,7 +42,7 @@ const LocationInformation = ({ location, forecast }) => {
   )
 }
 
-LocationInformation.PropTypes = {
+LocationInformation.propTypes = {
   location: PropTypes.string.isRequired,
 };
 

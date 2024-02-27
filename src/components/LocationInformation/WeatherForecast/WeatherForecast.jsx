@@ -6,10 +6,6 @@ const WeatherForecast = ({ weatherResponse }) => {
     <>
       <div className ="container mt-5">
         <div className="row">
-          {/* favourite location button */}
-          
-        </div>
-        <div className="row">
           <WeatherTodayBox  />
         </div>
         <div className="row">

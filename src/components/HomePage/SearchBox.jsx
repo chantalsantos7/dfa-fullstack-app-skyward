@@ -1,22 +1,24 @@
-import "./css/homepage.css"
 
 const SearchBox = () => {
   return (
     <>
       <div className="container mt-5 text-center">
         <div className="row mt-5 mb-3">
-          //TODO: Add media queries for mobile size to reduce size of these headings
           <h1 className="tell-me-about-text">Tell me about...</h1>
         </div>
 
-        <div className="row mt-2 mb-3">
-
-          <input type="search" name="" id="" placeholder="Enter a location name..." />
-
-        </div>
-
-        <div className="row mt-1 justify-content-center">
-          <button type="submit">Search</button>
+        <div className="input-group">
+          <div className="container">
+            <div className="row mt-2 mb-3 d-flex justify-content-center align-items-center">
+    
+              <input className="search-input form-control" type="search" name="" id="" placeholder="Enter a location name..." />
+    
+            </div>
+    
+            <div className="row mt-1 justify-content-center">
+              <button className="btn btn-submit btn-lg" type="submit">Search</button>
+            </div>
+          </div>
         </div>
       </div>
 

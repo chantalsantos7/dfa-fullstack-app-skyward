@@ -14,6 +14,10 @@ div.day-forecast, div.weather-today {
     max-height: 75px;
 }
 
+.weather-today p {
+    margin: 0;
+}
+
 /* Extra small devices (phones, less than 576px) */
 @media (max-width: 575.98px) {
     body #root {
@@ -29,7 +33,7 @@ div.day-forecast, div.weather-today {
 @media (min-width: 576px) and (max-width: 767.98px) {
 
     body #root {
-        background-color: var(--apricot);
+        background-color: var(--sunset-cloud);
     }
 
     .day-forecast img {
