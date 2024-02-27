@@ -1,11 +1,3 @@
-/* :root {
-    --celadon: rgb(190, 229, 191);
-    --honeydew: rgb(164, 240, 180);
-    --apricot: rgb(255, 209, 186);
-    --thulian-pink: rgb(206, 125, 165);
-    --english-violet: rgb(73, 54, 87);
-} */
-
 div.day-forecast, div.weather-today {
     background-color: var(--apricot);
     border-radius: 5px;
@@ -14,16 +6,12 @@ div.day-forecast, div.weather-today {
     border-width: 2px;
 }
 
-div.day-forecast {
-    padding: 15px;
-}
-
 .day-forecast p {
     margin-bottom: 0.5rem;
 }
 
 .day-forecast img {
-    max-height: 100px;
+    max-height: 75px;
 }
 
 /* Extra small devices (phones, less than 576px) */

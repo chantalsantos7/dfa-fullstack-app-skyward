@@ -1,9 +1,7 @@
-import DayForecast from './DayForecast';
-import WeatherToday from './WeatherToday';
+import DayForecastBox from './DayForecastBox';
+import WeatherTodayBox from './WeatherTodayBox';
 
-//TODO: Convert this component to a Bootstrap card
-
-const WeatherForecast = ({ forecast }) => {
+const WeatherForecast = ({ weatherResponse }) => {
   return (
     <>
       <div className ="container mt-5">
@@ -12,20 +10,20 @@ const WeatherForecast = ({ forecast }) => {
           
         </div>
         <div className="row">
-          <WeatherToday  />
+          <WeatherTodayBox  />
         </div>
         <div className="row">
           <div className="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
-            <DayForecast />
+            <DayForecastBox />
           </div>
           <div className="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
-            <DayForecast />
+            <DayForecastBox />
           </div>
           <div className="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
-            <DayForecast />
+            <DayForecastBox />
           </div>
           <div className="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
-            <DayForecast />
+            <DayForecastBox />
           </div>
         </div>
       </div>
