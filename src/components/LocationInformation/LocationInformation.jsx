@@ -3,12 +3,10 @@ import React from 'react'; // Add the missing import statement for React
 import PropTypes from 'prop-types'
 import Footer from "../Footer"
 import Header from "../Header"
-import HotelInformation from "./HotelInformation"
-import Map from './Map'
 import WeatherForecast from "./WeatherForecast/WeatherForecast"
 import './css/location-information.css'
 import TellYouLocation from '../TellYouLocation'
-import FavouriteLocationButton from '../FavouriteLocations/FavouriteLocationButton'
+import FavouriteLocationButton from './FavouriteLocationButton'
 
 const LocationInformation = ({ location, weatherResponse }) => {
   return (

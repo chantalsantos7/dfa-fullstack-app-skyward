@@ -9,7 +9,7 @@ const FavouriteLocationButton = () => {
                 <button className='btn favourite-button' type='button'>
                 <i className="bi bi-bookmark-star"></i> 
                 </button>
-                <label htmlFor="favourite-button">Click to save as favourite location</label>
+                <label htmlFor="favourite-button" className='save-favourite-btn'>Click to save as favourite location</label>
             </div>
            
         </>

@@ -18,6 +18,10 @@ div.day-forecast, div.weather-today {
     margin: 0;
 }
 
+label.save-favourite-btn {
+    color: var(--engineering-orange)
+}
+
 /* Extra small devices (phones, less than 576px) */
 @media (max-width: 575.98px) {
     body #root {

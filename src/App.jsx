@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './css/site.css'
 import HomePage from './components/HomePage/HomePage';
 import LocationInformation from './components/LocationInformation/LocationInformation'
@@ -5,11 +6,14 @@ import FavouriteLocations from './components/FavouriteLocations/FavouriteLocatio
 
 
 const App = () => {
+    
+    const [searchBarText, setSearchBarText] = useState('');
+
     return(
     <>
-        <HomePage />
-        {/* <LocationInformation /> */}
-        {/* <FavouriteLocations /> */}
+        <HomePage searchData={{searchBarText}} updateSearch={{setSearchBarText}} />
+            {/* <LocationInformation />
+            <FavouriteLocations /> */}
     </>
     );
 };
