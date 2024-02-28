@@ -22,18 +22,11 @@ const LocationInformation = ({ location, weatherResponse }) => {
             <FavouriteLocationButton />
           </div>
           <div className="row">
-            <div className="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div className="col-12 col-sm-12 col-md-12 col-lg12 col-xl-12">
               <WeatherForecast />
-            </div>
-  
-            <div className="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-              <Map />
-            </div>
+            </div>      
           </div>
   
-          <div className="row">
-            <HotelInformation />
-          </div>
         </div>
       
 

@@ -24,6 +24,12 @@
     font-family: 'Thestral', 'Times New Roman', Times, serif;
     margin-top: 5px;
     font-size: 5rem;
+    margin-bottom: 0;
+}
+
+.thestral-header {
+    font-family: 'Thestral', 'Times New Roman', Times, serif;
+    font-size: 4rem;
 }
 
 nav {

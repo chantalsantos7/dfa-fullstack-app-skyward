@@ -8,7 +8,7 @@ const HomePage = () => {
   return (
     <>
       <Header />
-      <div className="container vh-100">
+      <div className="container home-page-container">
         <div className="row mb-5">
           <div className="d-flex justify-content-center align-items-center">
             <SearchBox />
@@ -16,9 +16,6 @@ const HomePage = () => {
         </div>   
       </div>
  <Footer />
-
-
-
     </>
   )
 }
