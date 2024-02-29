@@ -1,7 +1,15 @@
 import PropTypes from 'prop-types';
-const SearchBox = ({ searchData, updateSearch }) => {
+import { Link } from 'react-router-dom';
+
+const SearchBox = ({ searchData, updateSearch, submitLocation }) => {
   const { searchBarText } = searchData;
   const { setSearchBarText } = updateSearch;
+  const handleSubmit = event => {
+    event.preventDefault();
+    submitLocation(searchBarText);
+    setSearchBarText(``);
+  }
+
 
   return (
     <>
@@ -12,22 +20,25 @@ const SearchBox = ({ searchData, updateSearch }) => {
 
         <div className="input-group">
           <div className="container">
-            <div className="row mt-2 mb-3 d-flex justify-content-center align-items-center">
+            <form onSubmit={handleSubmit}>
+              <div className="row mt-2 mb-3 d-flex justify-content-center align-items-center">
 
-              <input
-                className="search-input form-control"
-                type="search"
-                name="search" 
-                id="search"
-                value={searchBarText}
-                onChange={(e) => setSearchBarText(e.target.value)}
-                placeholder="Enter a location name..." />
+                <input
+                  className="search-input form-control"
+                  type="search"
+                  name="search"
+                  id="search"
+                  value={searchBarText}
+                  onChange={(e) => setSearchBarText(e.target.value)}
+                  placeholder="Enter a location name..." />
 
-            </div>
+              </div>
 
-            <div className="row mt-1 justify-content-center">
-              <button className="btn btn-submit btn-lg" type="submit">Search</button>
-            </div>
+              <div className="row mt-1 justify-content-center">
+                <input type="submit" value="Search" className="btn btn-submit" />
+                {/* <button className="btn btn-submit btn-lg" type="submit">Search</button> */}
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -37,12 +48,13 @@ const SearchBox = ({ searchData, updateSearch }) => {
 }
 
 SearchBox.propTypes = {
-  searchData: PropTypes.exact( {
+  searchData: PropTypes.exact({
     searchBarText: PropTypes.string.isRequired
   }).isRequired,
-  updateSearch: PropTypes.exact( {
+  updateSearch: PropTypes.exact({
     setSearchBarText: PropTypes.func.isRequired
-  }).isRequired
+  }).isRequired,
+  submitLocation: PropTypes.func.isRequired
 };
 
 export default SearchBox;

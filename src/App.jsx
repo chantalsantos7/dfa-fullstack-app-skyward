@@ -13,12 +13,19 @@ const App = () => {
     const [weatherData, setWeatherData] = useState([]);
 
     const getWeatherData = async (location) => {
+        location = location.toLowerCase();
         const data = await getWeatherService(location);
         if (data instanceof Error) {
             return setWeatherData([]);
         }
+        console.log(data);
         setWeatherData(data);
     };
+
+    const submitLocation = (location) => {
+        console.log(`${location} is being searched for`);
+        getWeatherData(location);
+    }
 
     // useEffect(() => {
     //     console.log(`In useEffect`);
@@ -29,11 +36,22 @@ const App = () => {
 
     return (
         <Router>
-            <>
-                <HomePage searchData={{ searchBarText }} updateSearch={{ setSearchBarText }} />
-                <LocationInformation location={searchBarText} weatherData={weatherData} />
+            <Routes>
+                <Route
+                index
+                element={
+                     <HomePage searchData={{ searchBarText }} updateSearch={{ setSearchBarText }} submitLocation={submitLocation} />
+                }>
+                </Route>
+                <Route
+                path='search'
+                element={
+                    <LocationInformation location={searchBarText} weatherData={{ weatherData }} />
+                }>
+                    
+                </Route>
                 {/* <FavouriteLocations /> */}
-            </>
+            </Routes>
         </Router>
     );
 };
