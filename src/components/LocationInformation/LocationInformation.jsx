@@ -1,5 +1,4 @@
-import React from 'react'; // Add the missing import statement for React
-
+import { useState } from 'react';
 import PropTypes from 'prop-types'
 import Footer from "../Footer"
 import Header from "../Header"
@@ -8,20 +7,19 @@ import './css/location-information.css'
 import TellYouLocation from '../TellYouLocation'
 import FavouriteLocationButton from './FavouriteLocationButton'
 
-const LocationInformation = ({ location, weatherResponse }) => {
+const LocationInformation = ({ searchData: location, weatherData }) => {
+
   return (
     <>
       <Header />
-      
-
         <div className='container  mt-3 text-center'>
-          <TellYouLocation displayString={location} />
+          <TellYouLocation displayString={location.searchBarText}  />
           <div className='row text-center'>
             <FavouriteLocationButton />
           </div>
           <div className="row">
             <div className="col-12 col-sm-12 col-md-12 col-lg12 col-xl-12">
-              <WeatherForecast />
+              <WeatherForecast weatherData={weatherData} />
             </div>      
           </div>
   
@@ -34,11 +32,20 @@ const LocationInformation = ({ location, weatherResponse }) => {
 }
 
 LocationInformation.propTypes = {
-  location: PropTypes.string.isRequired,
+  searchData: PropTypes.exact( {
+    searchBarText: PropTypes.string.isRequired
+  }).isRequired,
+  weatherData: PropTypes.array
 };
 
 LocationInformation.defaultProps = {
-  location: "Default location"
+  searchData: {
+    searchBarText: "Default location"
+  },
+  weatherData: {
+    name: `Default`,
+    temp: 420
+  }
 }
 
 export default LocationInformation

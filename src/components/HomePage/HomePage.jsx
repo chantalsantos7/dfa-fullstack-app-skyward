@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import Footer from '../Footer'
 import Header from '../Header'
 import SearchBox from './SearchBox'
@@ -19,5 +20,14 @@ const HomePage = ( { searchData, updateSearch } ) => {
     </>
   )
 }
+
+HomePage.propTypes = {
+  searchData: PropTypes.exact( {
+    searchBarText: PropTypes.string.isRequired
+  }).isRequired,
+  updateSearch: PropTypes.exact( {
+    setSearchBarText: PropTypes.func.isRequired
+  }).isRequired
+};
 
 export default HomePage

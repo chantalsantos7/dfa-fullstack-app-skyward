@@ -7,8 +7,9 @@
 #### Stories
 
 * As a user I want to see a search bar on the home page in which I can search for a city or town name, so I can select a location to see the weather forecast data for.
-* I want the search bar to have a dropdown suggesting town and city names similar to what I am typing, so I can easily select a location without having to finish typing its name.
-* As the business layer of this Home View, I want to send a request to a weather API with the location I have been supplied by the user, and pass on the result I receive back to the WeatherForecast page for display
+* When I click on the submit button after typing in a location, I want to be taken to a page showing the 5-day forecast for this location.
+<!-- * I want the search bar to have a dropdown suggesting town and city names similar to what I am typing, so I can easily select a location without having to finish typing its name. -->
+* As the business layer of this Home View, I want to send a request to a weather API with the location I have been supplied by the user, and pass on the result I receive to the LocationInformation page for display
 
 ---
 
