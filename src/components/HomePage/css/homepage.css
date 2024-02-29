@@ -13,6 +13,8 @@ div.container {
     background-color: var(--olivine);
     border-color: var(--olivine);
     font-weight: 500;
+    font-size: 1.25rem;
+    max-width: 20%;
 }
 
 .btn-submit:hover, .btn-submit:focus {

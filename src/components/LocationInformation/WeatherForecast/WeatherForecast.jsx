@@ -1,7 +1,9 @@
+import PropTypes from 'prop-types';
 import DayForecastBox from './DayForecastBox';
 import WeatherTodayBox from './WeatherTodayBox';
 
-const WeatherForecast = ({ weatherResponse }) => {
+const WeatherForecast = ({ weatherData }) => {
+
   return (
     <>
       <div className ="container mt-5">
@@ -26,6 +28,10 @@ const WeatherForecast = ({ weatherResponse }) => {
       
     </>
   )
+}
+
+WeatherForecast.propTypes = {
+  weatherData: PropTypes.object.isRequired
 }
 
 export default WeatherForecast

@@ -6,12 +6,12 @@ import WeatherForecast from "./WeatherForecast/WeatherForecast"
 import './css/location-information.css'
 import TellYouLocation from '../TellYouLocation'
 import FavouriteLocationButton from './FavouriteLocationButton'
+import DayForecastBox from './WeatherForecast/DayForecastBox';
 
 const LocationInformation = ({ searchData: location, weatherData }) => {
 
   return (
     <>
-      <Header />
         <div className='container  mt-3 text-center'>
           <TellYouLocation displayString={location.searchBarText}  />
           <div className='row text-center'>
@@ -22,11 +22,8 @@ const LocationInformation = ({ searchData: location, weatherData }) => {
               <WeatherForecast weatherData={weatherData} />
             </div>      
           </div>
-  
         </div>
       
-
-      <Footer />
     </>
   )
 }
@@ -35,7 +32,7 @@ LocationInformation.propTypes = {
   searchData: PropTypes.exact( {
     searchBarText: PropTypes.string.isRequired
   }).isRequired,
-  weatherData: PropTypes.array
+  weatherData: PropTypes.object.isRequired
 };
 
 LocationInformation.defaultProps = {

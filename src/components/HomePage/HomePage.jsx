@@ -8,7 +8,6 @@ import "./css/homepage.css"
 const HomePage = ( { searchData, updateSearch, submitLocation } ) => {
   return (
     <>
-      <Header />
       <div className="container home-page-container">
         <div className="row mb-5">
           <div className="d-flex justify-content-center align-items-center">
@@ -16,7 +15,6 @@ const HomePage = ( { searchData, updateSearch, submitLocation } ) => {
           </div>
         </div>   
       </div>
- <Footer />
     </>
   )
 }

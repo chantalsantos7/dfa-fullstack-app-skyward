@@ -1,18 +1,23 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 const SearchBox = ({ searchData, updateSearch, submitLocation }) => {
+ 
+  const [submitted, setSubmitted] = useState(false);
+
   const { searchBarText } = searchData;
   const { setSearchBarText } = updateSearch;
   const handleSubmit = event => {
     event.preventDefault();
     submitLocation(searchBarText);
-    setSearchBarText(``);
+    setSubmitted(true);
   }
 
 
   return (
     <>
+      {submitted && <Navigate to="/weather" />}
       <div className="container mt-5 text-center">
         <div className="row mt-5 mb-3">
           <h1 className="tell-me-about-text thestral-header">Tell me about...</h1>
