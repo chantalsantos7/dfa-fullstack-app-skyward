@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import { formatDate } from '../../../utils/formatting'
 
 const WeatherTodayBox = ({ day: dayWeather }) => {
   return (
@@ -6,7 +7,7 @@ const WeatherTodayBox = ({ day: dayWeather }) => {
     <div className="card weather-today text-center">
       <div className="card-body">
         <h4 className="card-title">Today's Weather: </h4>
-        <p className="card-text">{dayWeather.date}</p>
+        <p className="card-text">{formatDate(dayWeather.date)}</p>
         <div className="row">
             <div className="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4"> 
             <img className="mx-auto d-block" src={`/assets/weather-icons/${dayWeather.icon}.svg`} alt="icon for current weather" />
@@ -32,7 +33,7 @@ WeatherTodayBox.propTypes = {
       date: PropTypes.string.isRequired,
       weather_desc: PropTypes.string.isRequired,
       icon: PropTypes.string.isRequired,
-      temp: PropTypes.string.isRequired
+      temp: PropTypes.number.isRequired
     }
   ).isRequired
 }

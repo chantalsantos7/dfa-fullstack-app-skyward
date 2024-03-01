@@ -12,16 +12,17 @@ import Footer from './components/Footer';
 const App = () => {
     
     const [searchBarText, setSearchBarText] = useState('');
-    const [weatherData, setWeatherData] = useState([]);
+    const [weatherData, setWeatherData] = useState({});
 
     const getWeatherData = async (location) => {
         location = location.toLowerCase();
         const data = await getWeatherService(location);
+        console.log(data);
         if (data instanceof Error) {
             //render an element saying can't find that city, could you type it again?
-            return setWeatherData([]);
+            return setWeatherData({});
         }
-        console.log(data);
+        // console.log(`from App.jsx: ` + data);
         setWeatherData(data);
     };
 
@@ -31,9 +32,10 @@ const App = () => {
         2. switch to the location information page (passing along the location information as a prop)
         */
         console.log(`${location} is being searched for`);
-        getWeatherData(location);
-       
+        getWeatherData(location); 
     }
+
+
 
     return (
         
@@ -51,7 +53,7 @@ const App = () => {
                     <Route
                     path='/weather'
                     element={
-                        <LocationInformation searchData={ { searchBarText }} weatherData={{ weatherData }} />
+                        <LocationInformation searchData={ { searchBarText }} weatherData={weatherData} />
                     }>
                         
                     </Route>

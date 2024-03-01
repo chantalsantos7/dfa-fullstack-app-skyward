@@ -24,7 +24,7 @@ DayForecastBox.propTypes = {
       date: PropTypes.string.isRequired,
       weather_desc: PropTypes.string.isRequired,
       icon: PropTypes.string.isRequired,
-      temp: PropTypes.string.isRequired
+      temp: PropTypes.number.isRequired
     }
   ).isRequired
 }
@@ -34,7 +34,7 @@ DayForecastBox.defaultProps = {
     date: new Date().toUTCString(),
     weather_desc: 'default description',
     icon: '01d',
-    temp: '420'
+    temp: 420
   }
 }
 

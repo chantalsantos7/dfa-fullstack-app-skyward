@@ -40,8 +40,7 @@ const SearchBox = ({ searchData, updateSearch, submitLocation }) => {
               </div>
 
               <div className="row mt-1 justify-content-center">
-                <input type="submit" value="Search" className="btn btn-submit" />
-                {/* <button className="btn btn-submit btn-lg" type="submit">Search</button> */}
+                <input type="submit" value="Search" className="btn btn-submit" disabled = {searchBarText === ''} />
               </div>
             </form>
           </div>
