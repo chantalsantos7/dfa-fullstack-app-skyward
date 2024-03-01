@@ -40,12 +40,14 @@ const App = () => {
     return (
         
         <>
-        <Header />
+       
             <Router>
+                <Header />
                 <Routes>
                     
                     <Route
                     index
+                    path='/'
                     element={
                          <HomePage searchData={{ searchBarText }} updateSearch={{ setSearchBarText }} submitLocation={submitLocation} />
                     }>

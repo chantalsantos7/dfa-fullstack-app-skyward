@@ -43,6 +43,7 @@ nav.navbar {
     background-color: var(--english-violet);
 }
 
+
 .navbar-brand img {
     max-width: 64px;
 }
@@ -51,16 +52,16 @@ a.nav-link {
     font-size: 1em;
 }
 
-a.nav-link, a.nav-link:visited {
+.navbar-nav a.nav-link.header-link,.navbar-nav a.nav-link:visited {
     color: white;
 }
 
-a.nav-link:active,
-a.nav-link:focus {
+.navbar-nav a.nav-link:active,
+.navbar-nav a.nav-link:focus, .navbar-nav .nav-link-active {
   color: var(--thulian-pink); /* Change this to your desired color */
 }
 
-a.nav-link:hover {
+.navbar-nav a.nav-link:hover {
     color: var(--thulian-pink);
 }
 
