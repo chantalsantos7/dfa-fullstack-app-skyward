@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { getWeatherService } from './utils/services';
 import './css/site.css'
 import HomePage from './components/HomePage/HomePage';
 import LocationInformation from './components/LocationInformation/LocationInformation'
 import FavouriteLocations from './components/FavouriteLocations/FavouriteLocations';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 
 const App = () => {
-
+    
     const [searchBarText, setSearchBarText] = useState('');
     const [weatherData, setWeatherData] = useState([]);
 
@@ -16,6 +18,7 @@ const App = () => {
         location = location.toLowerCase();
         const data = await getWeatherService(location);
         if (data instanceof Error) {
+            //render an element saying can't find that city, could you type it again?
             return setWeatherData([]);
         }
         console.log(data);
@@ -23,36 +26,46 @@ const App = () => {
     };
 
     const submitLocation = (location) => {
+        /*
+        1. get weather forecast for the location being searched for
+        2. switch to the location information page (passing along the location information as a prop)
+        */
         console.log(`${location} is being searched for`);
         getWeatherData(location);
+       
     }
 
-    // useEffect(() => {
-    //     console.log(`In useEffect`);
-    //     getWeatherData(searchBarText);
-    // }, [searchBarText]);
-
-
-
     return (
-        <Router>
-            <Routes>
-                <Route
-                index
-                element={
-                     <HomePage searchData={{ searchBarText }} updateSearch={{ setSearchBarText }} submitLocation={submitLocation} />
-                }>
-                </Route>
-                <Route
-                path='search'
-                element={
-                    <LocationInformation location={searchBarText} weatherData={{ weatherData }} />
-                }>
+        
+        <>
+        <Header />
+            <Router>
+                <Routes>
                     
-                </Route>
-                {/* <FavouriteLocations /> */}
-            </Routes>
-        </Router>
+                    <Route
+                    index
+                    element={
+                         <HomePage searchData={{ searchBarText }} updateSearch={{ setSearchBarText }} submitLocation={submitLocation} />
+                    }>
+                    </Route>
+                    <Route
+                    path='/weather'
+                    element={
+                        <LocationInformation searchData={ { searchBarText }} weatherData={{ weatherData }} />
+                    }>
+                        
+                    </Route>
+                   <Route
+                   path='/favourites'
+                   element={
+                    <FavouriteLocations />
+                   }>
+                     
+                   </Route>
+                </Routes>
+            </Router>
+            <Footer />
+        </>
     );
 };
 

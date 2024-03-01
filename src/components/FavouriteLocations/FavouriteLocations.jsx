@@ -6,7 +6,6 @@ import FavouriteLocationName from "./FavouriteLocationName"
 const FavouriteLocations = () => {
   return (
     <>
-      <Header />
       <div className="container">
         <TellYouLocation displayString="Favourite Locations" />
         <div className="container">
@@ -15,7 +14,6 @@ const FavouriteLocations = () => {
           <FavouriteLocationName location="a favourite" />
         </div>
       </div>
-      <Footer />
     </>
   )
 }
