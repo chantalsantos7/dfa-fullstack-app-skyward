@@ -58,7 +58,7 @@ a.nav-link {
 
 .navbar-nav a.nav-link:active,
 .navbar-nav a.nav-link:focus, .navbar-nav .nav-link-active {
-  color: var(--thulian-pink); /* Change this to your desired color */
+  color: var(--thulian-pink);
 }
 
 .navbar-nav a.nav-link:hover {

@@ -18,12 +18,12 @@ div.day-forecast, div.weather-today {
     margin: 0;
 }
 
-.save-favourite-btn-filled {
- color: var(--engineering-orange)
+.save-favourite-btn {
+    color: var(--engineering-orange)
 }
 
-label.save-favourite-btn {
-   
+.save-favourite-btn:hover {
+    border-color: var(--engineering-orange);
 }
 
 /* Extra small devices (phones, less than 576px) */

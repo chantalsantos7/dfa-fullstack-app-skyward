@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { getWeatherService } from './utils/services';
 import './css/site.css'
@@ -35,7 +35,9 @@ const App = () => {
         getWeatherData(location); 
     }
 
-
+    useEffect(() => {
+        document.title = "Weather Anywhere";
+    }, []);
 
     return (
         

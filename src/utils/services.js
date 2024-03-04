@@ -21,3 +21,14 @@ export const getWeatherService = async (location) => {
         return error.message ? error : new Error("Network Error");
     }
 };
+
+export const saveFavouriteLocationService = (location) => {
+    let savedLocations = JSON.parse(localStorage.getItem('favouriteLocations')) || [];
+    savedLocations.push(location);
+
+    localStorage.setItem('favouriteLocations', JSON.stringify(savedLocations));
+}
+
+export const getFavouriteLocationsService = () => {
+    return JSON.parse(localStorage.getItem('favouriteLocations'));
+}

@@ -15,7 +15,7 @@ const LocationInformation = ({ searchData: location, weatherData }) => {
         <div className='container  mt-3 text-center'>
           <TellYouLocation displayString={location.searchBarText}  />
           <div className='row text-center'>
-            <FavouriteLocationButton />
+            <FavouriteLocationButton location={location.searchBarText} />
           </div>
           <div className="row">
             <div className="col-12 col-sm-12 col-md-12 col-lg12 col-xl-12">
