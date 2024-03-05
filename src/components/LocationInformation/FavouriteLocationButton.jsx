@@ -3,17 +3,19 @@ import { useEffect, useState } from 'react';
 import { getFavouriteLocationsService, removeFromFavouriteLocationsService, saveFavouriteLocationService } from '../../utils/services';
 
 
-const FavouriteLocationButton = ({ location }) => {
+const FavouriteLocationButton = ({ location, checkHasSavedLocations }) => {
 
     const clickHandler = event => {
 
         if (!savedLocation) {
             saveFavouriteLocationService(location);
             setSavedLocation(true);
+            checkHasSavedLocations();
             return;
         }
         removeFromFavouriteLocationsService(location);
         setSavedLocation(false);
+        checkHasSavedLocations();
     }
 
     const [savedLocation, setSavedLocation] = useState(false);
@@ -29,21 +31,17 @@ const FavouriteLocationButton = ({ location }) => {
     // 
     return (
         <>
-            <div className='container'>
-                <button className='btn favourite-button save-favourite-btn ' type='button' onClick={clickHandler}>
-                    {!!!savedLocation && <i className="bi bi-bookmark-star "></i>}
-                    {!!savedLocation && <i className="bi bi-bookmark-star-fill "></i>}
-                </button>
-                {!!!savedLocation && <label htmlFor="favourite-button" className='save-favourite-btn'>Click to save as favourite location</label>}
-                {!!savedLocation && <label htmlFor="favourite-button" className='save-favourite-btn'>Click to remove from Favourite Locations</label>}
-            </div>
-
+            <button className='btn favourite-button save-favourite-btn ' type='button' onClick={clickHandler}>
+                {!!!savedLocation && <i className="bi bi-bookmark-star "></i>}
+                {!!savedLocation && <i className="bi bi-bookmark-star-fill "></i>}
+            </button>
         </>
     )
 }
 
 FavouriteLocationButton.propTypes = {
-    location: PropTypes.string.isRequired
+    location: PropTypes.string.isRequired,
+    checkHasSavedLocations: PropTypes.func.isRequired
 }
 
 FavouriteLocationButton.defaultProps = {

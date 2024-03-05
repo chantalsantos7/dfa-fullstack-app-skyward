@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { Children, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { getWeatherService } from './utils/services';
+import { getWeatherService, getFavouriteLocationsService } from './utils/services';
 import './css/site.css'
 import HomePage from './components/HomePage/HomePage';
 import LocationInformation from './components/LocationInformation/LocationInformation'
@@ -10,19 +10,30 @@ import Footer from './components/Footer';
 
 
 const App = () => {
-    
+
     const [searchBarText, setSearchBarText] = useState('');
     const [weatherData, setWeatherData] = useState({});
+
+    const [hasSavedLocations, setHasSavedLocations] = useState(false);
+
+    
+    const checkHasSavedLocations = () => {
+        const savedLocations = getFavouriteLocationsService();
+        if (savedLocations && savedLocations.length > 0) {
+            setHasSavedLocations(true);
+            console.log('hi! I was called!')
+            return;
+        }
+        setHasSavedLocations(false);
+    }
 
     const getWeatherData = async (location) => {
         location = location.toLowerCase();
         const data = await getWeatherService(location);
         console.log(data);
         if (data instanceof Error) {
-            //render an element saying can't find that city, could you type it again?
             return setWeatherData({});
         }
-        // console.log(`from App.jsx: ` + data);
         setWeatherData(data);
     };
 
@@ -31,43 +42,46 @@ const App = () => {
         1. get weather forecast for the location being searched for
         2. switch to the location information page (passing along the location information as a prop)
         */
-        console.log(`${location} is being searched for`);
-        getWeatherData(location); 
+        getWeatherData(location);
     }
 
     useEffect(() => {
         document.title = "Weather Anywhere";
     }, []);
 
+    useEffect(() => {
+        checkHasSavedLocations();
+    }, [hasSavedLocations]);
+
     return (
-        
+
         <>
-       
+
             <Router>
-                <Header />
+                <Header hasSavedLocations={hasSavedLocations} />
                 <Routes>
-                    
+
                     <Route
-                    index
-                    path='/'
-                    element={
-                         <HomePage searchData={{ searchBarText }} updateSearch={{ setSearchBarText }} submitLocation={submitLocation} />
-                    }>
+                        index
+                        path='/'
+                        element={
+                            <HomePage searchData={{ searchBarText }} updateSearch={{ setSearchBarText }} submitLocation={submitLocation} />
+                        }>
                     </Route>
                     <Route
-                    path='/weather'
-                    element={
-                        <LocationInformation searchData={ { searchBarText }} weatherData={weatherData} />
-                    }>
-                        
+                        path='/weather'
+                        element={
+                            <LocationInformation searchData={{ searchBarText }} weatherData={weatherData} checkHasSavedLocations={checkHasSavedLocations} />
+                        }>
+
                     </Route>
-                   <Route
-                   path='/favourites'
-                   element={
-                    <FavouriteLocations />
-                   }>
-                     
-                   </Route>
+                    <Route
+                        path='/favourites'
+                        element={
+                            <FavouriteLocations checkHasSavedLocations={checkHasSavedLocations} />
+                        }>
+
+                    </Route>
                 </Routes>
             </Router>
             <Footer />
