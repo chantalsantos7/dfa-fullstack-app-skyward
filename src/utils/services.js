@@ -24,11 +24,19 @@ export const getWeatherService = async (location) => {
 
 export const saveFavouriteLocationService = (location) => {
     let savedLocations = JSON.parse(localStorage.getItem('favouriteLocations')) || [];
-    savedLocations.push(location);
 
-    localStorage.setItem('favouriteLocations', JSON.stringify(savedLocations));
+    if (!savedLocations.includes(location)) {  
+        savedLocations.push(location);
+         localStorage.setItem('favouriteLocations', JSON.stringify(savedLocations));
+    }    
 }
 
 export const getFavouriteLocationsService = () => {
     return JSON.parse(localStorage.getItem('favouriteLocations'));
+}
+
+export const removeFromFavouriteLocationsService = (location) => {
+    let savedLocations = JSON.parse(localStorage.getItem('favouriteLocations'));
+    savedLocations = savedLocations.filter(savedLocation => savedLocation !== location);
+    localStorage.setItem('favouriteLocations', JSON.stringify(savedLocations));
 }

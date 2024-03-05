@@ -27,3 +27,4 @@ src/assets/fonts/santa-child-webfontkit/specimen_files/specimen_stylesheet.css
 src/assets/fonts/thestral-webfontkit/OFL.txt
 src/assets/fonts/thestral-webfontkit/readme.txt
 .env.development
+.env.testing
