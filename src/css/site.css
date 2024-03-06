@@ -76,7 +76,7 @@ a.navbar-brand {
     width: 2rem;
 }
 
-.save-favourite-btn {
+button.save-favourite-btn {
     color: var(--engineering-orange);
     width: 18px;
     height: 27px;
@@ -85,8 +85,8 @@ a.navbar-brand {
     align-items: center;
 }
 
-.save-favourite-btn i {
-
+label.save-favourite-btn {
+ margin-left: 3px;
 }
 
 .save-favourite-btn:hover {

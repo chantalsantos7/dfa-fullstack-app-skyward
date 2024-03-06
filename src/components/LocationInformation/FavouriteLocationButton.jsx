@@ -13,9 +13,12 @@ const FavouriteLocationButton = ({ location, checkHasSavedLocations }) => {
             checkHasSavedLocations();
             return;
         }
-        removeFromFavouriteLocationsService(location);
-        setSavedLocation(false);
-        checkHasSavedLocations();
+        if (confirm("Are you sure you want to remove this location from your favourites?")) {
+            removeFromFavouriteLocationsService(location);
+            setSavedLocation(false);
+            checkHasSavedLocations();
+        }
+
     }
 
     const [savedLocation, setSavedLocation] = useState(false);

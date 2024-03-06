@@ -50,8 +50,12 @@ const WeatherForecast = ({ weatherData }) => {
 
 
   useEffect(() => {
+    // console.log("I'm a useEffect hook! I am being triggered!");
+    // console.log(weatherData);
+    // console.log(weatherData.list);
     if (weatherData && weatherData.list) {
       const updatedDays = updateState(weatherData);
+      
       setDays(updatedDays);
 
     }

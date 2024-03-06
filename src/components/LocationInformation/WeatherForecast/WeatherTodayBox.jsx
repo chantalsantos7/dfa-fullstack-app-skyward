@@ -43,7 +43,7 @@ WeatherTodayBox.defaultProps = {
     date: new Date().toDateString(),
     weather_desc: 'default description',
     icon: '01d',
-    temp: '420'
+    temp: 420
   }
 }
 

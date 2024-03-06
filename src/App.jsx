@@ -21,7 +21,7 @@ const App = () => {
         const savedLocations = getFavouriteLocationsService();
         if (savedLocations && savedLocations.length > 0) {
             setHasSavedLocations(true);
-            console.log('hi! I was called!')
+            // console.log('hi! I was called!')
             return;
         }
         setHasSavedLocations(false);
@@ -78,7 +78,7 @@ const App = () => {
                     <Route
                         path='/favourites'
                         element={
-                            <FavouriteLocations checkHasSavedLocations={checkHasSavedLocations} />
+                            <FavouriteLocations checkHasSavedLocations={checkHasSavedLocations} setSearchBarText={setSearchBarText} submitLocation={submitLocation} />
                         }>
 
                     </Route>

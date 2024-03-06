@@ -7,21 +7,25 @@ import './css/location-information.css'
 import TellYouLocation from '../TellYouLocation'
 import FavouriteLocationButton from './FavouriteLocationButton'
 import DayForecastBox from './WeatherForecast/DayForecastBox';
+import { useLocation } from 'react-router-dom';
 
 const LocationInformation = ({ searchData: location, weatherData, checkHasSavedLocations }) => {
-
+  // const loc = useLocation();
+  // const { fromFave } = loc.state || {};
+  // const { searchBarText } = fromFave || {};
+  // console.log("fromFave: " + searchBarText);
   return (
     <>
         <div className='container  mt-3 text-center'>
           <TellYouLocation displayString={location.searchBarText}  />
-          <div className='row justify-content-center'>
-           <div className='col-1'>
+          <div className='row justify-content-center d-flex align-items-center'>
+           <div className='col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center'>
              <FavouriteLocationButton location={location.searchBarText} checkHasSavedLocations={checkHasSavedLocations} />
+           <label htmlFor='favourite-button' className='save-favourite-btn'>Click to save as favourite location</label>
            </div>
-          <div className="col-3 text-left">
-            <p className='save-favourite-btn text-left'>Click to save as favourite location</p>
-           {/* <label htmlFor="favourite-button" className='save-favourite-btn text-left'>Click to save as favourite location</label> */}
-          </div>
+          {/* <div className="col-3 ">
+            
+          </div> */}
             
           </div>
           <div className="row">
