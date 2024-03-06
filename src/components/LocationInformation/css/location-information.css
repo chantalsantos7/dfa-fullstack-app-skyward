@@ -22,6 +22,7 @@ div.day-forecast, div.weather-today {
 @media (max-width: 575.98px) {
     body #root {
         background-color: var(--sunset-cloud);
+        /* background-image: none; */
     }
 
     .day-forecast img {

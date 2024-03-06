@@ -3,6 +3,6 @@
 App component hierarchy:
 ![alt text](images/AppComponentHierarchyUpdated.png)
 
-State in components diagram:
+Diagram showing the initial state I had planned (has evolved in application):
 
 ![alt text](images/StateInComponentsDiagram.png)

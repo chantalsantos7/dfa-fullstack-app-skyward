@@ -21,7 +21,6 @@ const App = () => {
         const savedLocations = getFavouriteLocationsService();
         if (savedLocations && savedLocations.length > 0) {
             setHasSavedLocations(true);
-            // console.log('hi! I was called!')
             return;
         }
         setHasSavedLocations(false);
@@ -30,7 +29,6 @@ const App = () => {
     const getWeatherData = async (location) => {
         location = location.toLowerCase();
         const data = await getWeatherService(location);
-        console.log(data);
         if (data instanceof Error) {
             return setWeatherData({});
         }
@@ -43,6 +41,11 @@ const App = () => {
         2. switch to the location information page (passing along the location information as a prop)
         */
         getWeatherData(location);
+    }
+
+    const handleLocationLinkClick = (location) => {
+        setSearchBarText(location);
+        submitLocation(location);
     }
 
     useEffect(() => {
@@ -58,7 +61,7 @@ const App = () => {
         <>
 
             <Router>
-                <Header hasSavedLocations={hasSavedLocations} />
+                <Header hasSavedLocations={hasSavedLocations} handleLocationLinkClick={handleLocationLinkClick} />
                 <Routes>
 
                     <Route
@@ -78,7 +81,7 @@ const App = () => {
                     <Route
                         path='/favourites'
                         element={
-                            <FavouriteLocations checkHasSavedLocations={checkHasSavedLocations} setSearchBarText={setSearchBarText} submitLocation={submitLocation} />
+                            <FavouriteLocations checkHasSavedLocations={checkHasSavedLocations} handleLocationLinkClick={handleLocationLinkClick} />
                         }>
 
                     </Route>

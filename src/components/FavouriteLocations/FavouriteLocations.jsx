@@ -4,20 +4,18 @@ import FavouriteLocationName from "./FavouriteLocationName"
 import "./css/favourite-locations.css"
 import { getFavouriteLocationsService } from '../../utils/services'
 
-const FavouriteLocations = ( { checkHasSavedLocations, setSearchBarText, submitLocation } ) => {
+const FavouriteLocations = ( { checkHasSavedLocations,handleLocationLinkClick } ) => {
 
   const favouriteLocations = getFavouriteLocationsService();
   let favouriteLocationLinks = [];
   let i = 0;
   favouriteLocations.forEach(fave => {
-    console.log(fave);
     favouriteLocationLinks.push(
       <FavouriteLocationName
         key={i++}
         location={fave}
         checkHasSavedLocations={checkHasSavedLocations}
-        setSearchBarText={setSearchBarText}
-        submitLocation={submitLocation}
+        handleLocationLinkClick={handleLocationLinkClick}
       />
     );
   });
@@ -29,7 +27,7 @@ const FavouriteLocations = ( { checkHasSavedLocations, setSearchBarText, submitL
       <div className="container favourite-locations-container">
         <TellYouLocation displayString="Favourite Locations" />
         <div className="container">
-          <FavouriteLocationName checkHasSavedLocations={checkHasSavedLocations} />
+          {/* <FavouriteLocationName checkHasSavedLocations={checkHasSavedLocations} /> */}
           {favouriteLocationLinks.length > 0 && favouriteLocationLinks}
         </div>
       </div>
@@ -39,8 +37,7 @@ const FavouriteLocations = ( { checkHasSavedLocations, setSearchBarText, submitL
 
 FavouriteLocations.propTypes = {
   checkHasSavedLocations: PropTypes.func.isRequired,
-  setSearchBarText: PropTypes.func.isRequired,
-  submitLocation: PropTypes.func.isRequired
+  handleLocationLinkClick: PropTypes.func.isRequired
 }
 
 export default FavouriteLocations

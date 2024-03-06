@@ -41,6 +41,10 @@ button[type="submit"] {
     div.container.home-page-container {
         height: 90vh;
     }
+
+    input.btn-submit {
+        max-width: 50%;      
+    }
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -58,8 +62,14 @@ button[type="submit"] {
     div.container.home-page-container {
         height: 90vh;
     }
+
+    input.btn-submit {
+        max-width: 50%;      
+    }
+    
 }
 
+/* tablets */
 @media (min-width: 768px) and (max-width: 991.98px) {
     div.container.home-page-container {
         height: 90vh;

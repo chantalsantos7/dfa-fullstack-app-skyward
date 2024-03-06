@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types'
 import FavouriteLocationButton from '../LocationInformation/FavouriteLocationButton'
 import { Link } from 'react-router-dom'
-const FavouriteLocationName = ({ location, checkHasSavedLocations, setSearchBarText, submitLocation }) => {
+const FavouriteLocationName = ({ location, checkHasSavedLocations, handleLocationLinkClick }) => {
   
   const handleClick = () => {
     event.preventDefault();
-    setSearchBarText(location);
-    submitLocation(location);
+    handleLocationLinkClick(location);
   }
 
   return (
@@ -25,8 +24,7 @@ const FavouriteLocationName = ({ location, checkHasSavedLocations, setSearchBarT
 FavouriteLocationName.propTypes = {
   location: PropTypes.string.isRequired,
   checkHasSavedLocations: PropTypes.func.isRequired,
-  setSearchBarText: PropTypes.func.isRequired,
-  submitLocation: PropTypes.func.isRequired
+  handleLocationLinkClick: PropTypes.func.isRequired
 }
 
 FavouriteLocationName.defaultProps = {

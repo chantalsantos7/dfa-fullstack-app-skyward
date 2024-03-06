@@ -10,10 +10,7 @@ import DayForecastBox from './WeatherForecast/DayForecastBox';
 import { useLocation } from 'react-router-dom';
 
 const LocationInformation = ({ searchData: location, weatherData, checkHasSavedLocations }) => {
-  // const loc = useLocation();
-  // const { fromFave } = loc.state || {};
-  // const { searchBarText } = fromFave || {};
-  // console.log("fromFave: " + searchBarText);
+ 
   return (
     <>
         <div className='container  mt-3 text-center'>

@@ -24,7 +24,6 @@ export const getWeatherService = async (location) => {
 
 export const saveFavouriteLocationService = (location) => {
     let savedLocations = JSON.parse(localStorage.getItem('favouriteLocations')) || [];
-
     if (!savedLocations.includes(location)) {  
         savedLocations.push(location);
          localStorage.setItem('favouriteLocations', JSON.stringify(savedLocations));
