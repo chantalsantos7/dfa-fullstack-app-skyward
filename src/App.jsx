@@ -26,6 +26,7 @@ const App = () => {
             return;
         }
         setHasSavedLocations(false);
+        setSavedLocations([]);
     }
 
     const getWeatherData = async (location) => {

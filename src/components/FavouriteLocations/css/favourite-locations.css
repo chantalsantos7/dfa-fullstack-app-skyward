@@ -1,9 +1,8 @@
 .favourite-location-link {
     font-size: 1.25rem;
     font-weight: 500;
-    color: var(--celadon);
+    color: var(--engineering-orange);
 }
-
 /* body {
     background-image: url("src/assets/pexels-taryn-elliott-3889724.jpg");
     background-repeat: no-repeat;
@@ -12,6 +11,21 @@
     background-size: cover;
     background-attachment: scroll;
 } */
+
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 575.98px) {
+    body #root {
+        background-color: var(--sunset-cloud);
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+
+    body #root {
+        background-color: var(--sunset-cloud);
+    }
+}
 
 @media (min-width: 768px) and (max-width: 991.98px) {
     div.container.favourite-locations-container {

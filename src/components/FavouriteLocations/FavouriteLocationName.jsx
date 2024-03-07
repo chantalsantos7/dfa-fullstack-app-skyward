@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import FavouriteLocationButton from '../LocationInformation/FavouriteLocationButton'
-import { Link } from 'react-router-dom'
 const FavouriteLocationName = ({ location, checkHasSavedLocations, handleLocationLinkClick }) => {
   
   const handleClick = () => {

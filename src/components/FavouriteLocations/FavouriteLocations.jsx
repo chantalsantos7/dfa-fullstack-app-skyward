@@ -19,15 +19,12 @@ const FavouriteLocations = ( { checkHasSavedLocations,handleLocationLinkClick } 
       />
     );
   });
-
-  console.log(favouriteLocationLinks);
-  //TODO: strange behaviour rn, will not remove Links until first Item in array is removed
+  
   return (
     <>
       <div className="container favourite-locations-container">
         <TellYouLocation displayString="Favourite Locations" />
         <div className="container">
-          {/* <FavouriteLocationName checkHasSavedLocations={checkHasSavedLocations} /> */}
           {favouriteLocationLinks.length > 0 && favouriteLocationLinks}
         </div>
       </div>

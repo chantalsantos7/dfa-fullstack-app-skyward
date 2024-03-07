@@ -16,17 +16,10 @@ const Header = ({ savedLocations, handleLocationLinkClick }) => {
         onClick={(e) => {
           e.preventDefault();
           handleLocationLinkClick(location)
-          // navigate('/weather');
         }}
       >{location}</NavLink>
     );
   });
-
-  // useEffect(() => {
-  //   favouriteLocations = getFavouriteLocationsService();
-  // }, [favouriteLocations]);
-
-  //TODO: Does not update header links when the favourites change
 
   return (
     <>
@@ -52,7 +45,6 @@ const Header = ({ savedLocations, handleLocationLinkClick }) => {
               <li className="nav-item active">
                 <NavLink to='/' className="nav-link">Home</NavLink>
               </li>
-              {/* Add other links here */}
               {savedLocations.length > 0 &&
                 <>
                   <li className="nav-item dropdown">
@@ -64,7 +56,6 @@ const Header = ({ savedLocations, handleLocationLinkClick }) => {
                       data-bs-toggle="dropdown"
                       aria-haspopup="true"
                       aria-expanded="false"
-                      // onClick={(e) => e.preventDefault()}
                     >My Saved Locations</NavLink>
                     <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                       <NavLink
