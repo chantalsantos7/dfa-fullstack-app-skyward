@@ -1,5 +1,5 @@
-import { Children, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { getWeatherService, getFavouriteLocationsService } from './utils/services';
 import './css/site.css'
 import HomePage from './components/HomePage/HomePage';
@@ -15,12 +15,14 @@ const App = () => {
     const [weatherData, setWeatherData] = useState({});
 
     const [hasSavedLocations, setHasSavedLocations] = useState(false);
+    const [savedLocations, setSavedLocations] = useState([]);
+    const navigate = useNavigate();
 
-    
     const checkHasSavedLocations = () => {
-        const savedLocations = getFavouriteLocationsService();
-        if (savedLocations && savedLocations.length > 0) {
+        const savedFaves = getFavouriteLocationsService();
+        if (savedFaves && savedFaves.length > 0) {
             setHasSavedLocations(true);
+            setSavedLocations(savedFaves);
             return;
         }
         setHasSavedLocations(false);
@@ -44,12 +46,15 @@ const App = () => {
     }
 
     const handleLocationLinkClick = (location) => {
+        // If on the home page, it only sets the search bar text to the location, does not go to the location page
         setSearchBarText(location);
         submitLocation(location);
+        
+        navigate('/weather');
     }
 
     useEffect(() => {
-        document.title = "Weather Anywhere";
+        document.title = "Skyward";
     }, []);
 
     useEffect(() => {
@@ -60,8 +65,8 @@ const App = () => {
 
         <>
 
-            <Router>
-                <Header hasSavedLocations={hasSavedLocations} handleLocationLinkClick={handleLocationLinkClick} />
+            
+                <Header savedLocations={savedLocations} handleLocationLinkClick={handleLocationLinkClick} />
                 <Routes>
 
                     <Route
@@ -86,7 +91,7 @@ const App = () => {
 
                     </Route>
                 </Routes>
-            </Router>
+            
             <Footer />
         </>
     );

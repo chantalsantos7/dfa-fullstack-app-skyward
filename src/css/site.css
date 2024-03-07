@@ -75,6 +75,14 @@ a.nav-link {
     color: var(--thulian-pink);
 }
 
+a.dropdown-item:hover {
+    color: var(--thulian-pink);
+}
+
+a.dropdown-item:visited {
+    background-color: var(--english-violet);
+}
+
 a.navbar-brand {
     margin: 0 2rem 0 1em;
 }
