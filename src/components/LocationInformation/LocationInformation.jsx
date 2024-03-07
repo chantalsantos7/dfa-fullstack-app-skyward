@@ -1,13 +1,9 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types'
-import Footer from "../Footer"
-import Header from "../Header"
 import WeatherForecast from "./WeatherForecast/WeatherForecast"
 import './css/location-information.css'
 import TellYouLocation from '../TellYouLocation'
 import FavouriteLocationButton from './FavouriteLocationButton'
-import DayForecastBox from './WeatherForecast/DayForecastBox';
-import { useLocation } from 'react-router-dom';
+
 
 const LocationInformation = ({ searchData: location, weatherData, checkHasSavedLocations }) => {
  
