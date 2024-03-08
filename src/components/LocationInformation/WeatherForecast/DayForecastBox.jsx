@@ -6,7 +6,7 @@ const DayForecastBox = ({ day: dayWeather }) => {
   
   return (
     <>
-      <div className="card day-forecast text-center">
+      <div className="card day-forecast text-center" role='day-forecast'>
         <div className="card-body">
           <h5 className="card-title">{weekdays[new Date(dayWeather.date).getDay()]}</h5>
           <img  src={`/assets/weather-icons/${dayWeather.icon}.svg`} className="card-img mx-auto d-block" alt="icon for weather forecast" />

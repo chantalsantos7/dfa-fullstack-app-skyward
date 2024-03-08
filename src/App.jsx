@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { getWeatherService, getFavouriteLocationsService } from './utils/services';
+import { formatTemperature } from './utils/formatting';
 import './css/site.css'
 import HomePage from './components/HomePage/HomePage';
 import LocationInformation from './components/LocationInformation/LocationInformation'
@@ -10,13 +11,54 @@ import Footer from './components/Footer';
 
 
 const App = () => {
-
+    
+    const navigate = useNavigate();
     const [searchBarText, setSearchBarText] = useState('');
-    const [weatherData, setWeatherData] = useState({});
-
+    
     const [hasSavedLocations, setHasSavedLocations] = useState(false);
     const [savedLocations, setSavedLocations] = useState([]);
-    const navigate = useNavigate();
+    
+    const [weatherData, setWeatherData] = useState({});
+    
+
+    const initialiseDayData = (data) => {
+        const tempDays = [];
+        const dayIndices = getDayIndices(data);
+
+        dayIndices.forEach((index) => {
+            const currentData = data.list[index];
+            tempDays.push({
+                date: currentData.dt_txt,
+                weather_desc: currentData.weather[0].description,
+                icon: currentData.weather[0].icon,
+                temp: formatTemperature(currentData.main.temp)
+            });
+        });
+        // setDayData(true);
+        return tempDays;
+    }
+
+    const getDayIndices = (data) => {
+        let dayIndices = [0];
+        let currentDay = data.list[0].dt_txt.slice(8, 10);
+        // console.log('current day is: ' + currentDay);
+
+        for (let i = 0; i < data.list.length; i++) {
+            let day = data.list[i].dt_txt.slice(8, 10);
+            let hour = data.list[i].dt_txt.slice(11, 13);
+            if (day !== currentDay && hour === '15') {
+                dayIndices.push(i);
+                currentDay = day;
+
+                if (dayIndices.length === 5) {
+                    break;
+                }
+            }
+        }
+
+        return dayIndices;
+    }
+
 
     const checkHasSavedLocations = () => {
         const savedFaves = getFavouriteLocationsService();
@@ -33,9 +75,12 @@ const App = () => {
         location = location.toLowerCase();
         const data = await getWeatherService(location);
         if (data instanceof Error) {
+            console.log(`getWeatherData has an error`)
             return setWeatherData({});
         }
-        setWeatherData(data);
+
+        let dayData = initialiseDayData(data);
+        setWeatherData({dayData});
     };
 
     const submitLocation = (location) => {
@@ -50,7 +95,7 @@ const App = () => {
         // If on the home page, it only sets the search bar text to the location, does not go to the location page
         setSearchBarText(location);
         submitLocation(location);
-        
+
         navigate('/weather');
     }
 
@@ -66,33 +111,33 @@ const App = () => {
 
         <>
 
-            
-                <Header savedLocations={savedLocations} handleLocationLinkClick={handleLocationLinkClick} />
-                <Routes>
 
-                    <Route
-                        index
-                        path='/'
-                        element={
-                            <HomePage searchData={{ searchBarText }} updateSearch={{ setSearchBarText }} submitLocation={submitLocation} />
-                        }>
-                    </Route>
-                    <Route
-                        path='/weather'
-                        element={
-                            <LocationInformation searchData={{ searchBarText }} weatherData={weatherData} checkHasSavedLocations={checkHasSavedLocations} />
-                        }>
+            <Header savedLocations={savedLocations} handleLocationLinkClick={handleLocationLinkClick} />
+            <Routes>
 
-                    </Route>
-                    <Route
-                        path='/favourites'
-                        element={
-                            <FavouriteLocations checkHasSavedLocations={checkHasSavedLocations} handleLocationLinkClick={handleLocationLinkClick} />
-                        }>
+                <Route
+                    index
+                    path='/'
+                    element={
+                        <HomePage searchData={{ searchBarText }} updateSearch={{ setSearchBarText }} submitLocation={submitLocation} />
+                    }>
+                </Route>
+                <Route
+                    path='/weather'
+                    element={
+                        <LocationInformation searchData={{ searchBarText }} weatherData={weatherData} checkHasSavedLocations={checkHasSavedLocations} />
+                    }>
 
-                    </Route>
-                </Routes>
-            
+                </Route>
+                <Route
+                    path='/favourites'
+                    element={
+                        <FavouriteLocations checkHasSavedLocations={checkHasSavedLocations} handleLocationLinkClick={handleLocationLinkClick} />
+                    }>
+
+                </Route>
+            </Routes>
+
             <Footer />
         </>
     );

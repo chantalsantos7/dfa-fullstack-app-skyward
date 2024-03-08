@@ -7,56 +7,22 @@ import ErrorComponent from './ErrorComponent';
 
 const WeatherForecast = ({ weatherData }) => {
 
+  const { ...daysArray } = weatherData;
+
   const [hasDayData, setDayData] = useState(false);
   const [days, setDays] = useState(null);
-
-  const updateState = (data) => {
-    const tempDays = [];
-    const dayIndices = getDayIndices(data);
-
-    dayIndices.forEach((index) => {
-      const currentData = data.list[index];
-      tempDays.push({
-        date: currentData.dt_txt,
-        weather_desc: currentData.weather[0].description,
-        icon: currentData.weather[0].icon,
-        temp: formatTemperature(currentData.main.temp)
-      });
-    });
-    setDayData(true);
-    return tempDays;
-  }
-
-  const getDayIndices = (data) => {
-    let dayIndices = [0];
-    let currentDay = data.list[0].dt_txt.slice(8, 10);
-    // console.log('current day is: ' + currentDay);
-
-    for (let i = 0; i < data.list.length; i++) {
-      let day = data.list[i].dt_txt.slice(8, 10);
-      let hour = data.list[i].dt_txt.slice(11, 13);
-      if (day !== currentDay && hour === '15') {
-        dayIndices.push(i);
-        currentDay = day;
-
-        if (dayIndices.length === 5) {
-          break;
-        }
-      }
-    }
-
-    return dayIndices;
-  }
 
 
   useEffect(() => {
     // console.log("I'm a useEffect hook! I am being triggered!");
     // console.log(weatherData);
     // console.log(weatherData.list);
-    if (weatherData && weatherData.list) {
-      const updatedDays = updateState(weatherData);
-      
-      setDays(updatedDays);
+    if (daysArray) {
+      // console.log(`I'm the condition inside the effect hook!`)
+      // console.log(daysArray);
+      // const updatedDays = updateState(weatherData);
+      setDayData(true);
+      setDays(daysArray);
 
     }
   }, [weatherData]);
