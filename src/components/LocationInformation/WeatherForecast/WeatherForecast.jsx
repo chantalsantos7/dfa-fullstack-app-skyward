@@ -7,23 +7,16 @@ import ErrorComponent from './ErrorComponent';
 
 const WeatherForecast = ({ weatherData }) => {
 
-  const { ...daysArray } = weatherData;
+  const { dayData } = weatherData;
 
   const [hasDayData, setDayData] = useState(false);
   const [days, setDays] = useState(null);
 
 
   useEffect(() => {
-    // console.log("I'm a useEffect hook! I am being triggered!");
-    // console.log(weatherData);
-    // console.log(weatherData.list);
-    if (daysArray) {
-      // console.log(`I'm the condition inside the effect hook!`)
-      // console.log(daysArray);
-      // const updatedDays = updateState(weatherData);
+    if (dayData.length > 0) {
       setDayData(true);
-      setDays(daysArray);
-
+      setDays(dayData);
     }
   }, [weatherData]);
 
