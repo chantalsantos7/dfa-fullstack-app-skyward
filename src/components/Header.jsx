@@ -34,7 +34,7 @@ const Header = ({ savedLocations, handleLocationLinkClick }) => {
           <img src="src/assets/icons8-hamburger-menu.svg" alt="menu icon" />
         </button>
 
-        <div className="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
           <div className="offcanvas-header">
             <h5 className="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
             <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -58,6 +58,7 @@ const Header = ({ savedLocations, handleLocationLinkClick }) => {
                       aria-expanded="false"
                     >My Saved Locations</NavLink>
                     <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      {/* Additional link to all saved locations added as default dropdown behaviour by Bootstrap prevents the NavLink from routing to favourites as expected  */}
                       <NavLink
                       to='/favourites'
                       className='dropdown-item'>All Saved Locations</NavLink>
