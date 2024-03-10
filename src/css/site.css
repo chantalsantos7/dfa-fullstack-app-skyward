@@ -108,7 +108,7 @@ a.navbar-brand {
     background-size: contain;
     margin-left: 5px;
     border: none;
-    width: 30px; 
+    width: 30px;
     height: 30px;
 }
 
@@ -168,6 +168,30 @@ body.navbar-toggler:focus {
         margin-bottom: 0;
         font-size: 3rem;
     }
+
+    .footer {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+@media (max-width: 767.98px) and (min-height: 800px) and (max-height: 900px) {
+
+    /* .footer {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    } */
+    /* .footer {
+        position: relative;
+        right: auto;
+        left: auto;
+        bottom: auto;
+
+    } */
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -183,6 +207,14 @@ body.navbar-toggler:focus {
     .location-text {
         font-size: 3rem;
     }
+
+    .footer {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -190,6 +222,14 @@ body.navbar-toggler:focus {
     #root div.container {
         max-width: 890px;
     }
+
+    .footer {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -209,6 +249,12 @@ body.navbar-toggler:focus {
         bottom: 0;
         left: 0;
     }
+
+    .search-bar-container {
+        display: flex;
+        justify-content: flex-end;
+    }
+
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
@@ -229,4 +275,10 @@ body.navbar-toggler:focus {
         bottom: 0;
         left: 0;
     }
+
+    .search-bar-container {
+        display: flex;
+        justify-content: flex-end;
+    }
+
 }

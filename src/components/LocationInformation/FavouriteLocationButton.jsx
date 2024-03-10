@@ -18,7 +18,6 @@ const FavouriteLocationButton = ({ location, checkHasSavedLocations }) => {
             setSavedLocation(false);
             checkHasSavedLocations();
         }
-
     }
 
     const [savedLocation, setSavedLocation] = useState(false);
@@ -30,6 +29,7 @@ const FavouriteLocationButton = ({ location, checkHasSavedLocations }) => {
     }
 
     useEffect(checkLocationIsSaved, [savedLocation]);
+    useEffect(checkLocationIsSaved, []);
     // once added to favourites, render the bookmark-star-fill icon instead - state + apply new class to change colour
     // 
     return (

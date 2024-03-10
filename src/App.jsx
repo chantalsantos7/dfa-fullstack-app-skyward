@@ -84,6 +84,7 @@ const App = () => {
         1. get weather forecast for the location being searched for
         2. switch to the location information page (passing along the location information as a prop)
         */
+       checkHasSavedLocations();
         getWeatherData(location);
     }
 

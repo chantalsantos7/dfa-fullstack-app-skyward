@@ -33,7 +33,6 @@ const SearchBox = ({ searchData, updateSearch, submitLocation }) => {
                   type="search"
                   name="search"
                   id="search"
-                  value={searchBarText}
                   onChange={(e) => setSearchBarText(e.target.value)}
                   placeholder="Enter a location name..." />
 

@@ -10,18 +10,22 @@ const LocationInformation = ({ searchData: location, weatherData, checkHasSavedL
   const { searchBarText: displayString } = location;
   return (
     <>
-        <div className='container  mt-3 text-center'>
+        <div className='container mt-3 text-center location-container'>
           <TellYouLocation displayString={displayString}  />
           <div className='row justify-content-center d-flex align-items-center'>
-           <div className='col-12 col-sm-12 col-md-4 col-lg-4 d-flex align-items-center justify-content-center'>
-             <FavouriteLocationButton location={displayString} checkHasSavedLocations={checkHasSavedLocations} />
+           <div className='location-col col-12 col-sm-12 col-md-4 col-lg-4 d-flex align-items-center justify-content-center'>
+             <FavouriteLocationButton location={location.searchBarText} checkHasSavedLocations={checkHasSavedLocations} />
            <label htmlFor='favourite-button' className='save-favourite-btn'>Click to save as favourite location</label>
            </div>         
           </div>
           <div className="row">
-            <div className="col-12 col-sm-12 col-md-12 col-lg12 col-xl-12">
+            <div className="location-col col-12 col-sm-12 col-md-12 col-lg12 col-xl-12">
               <WeatherForecast weatherData={weatherData} />
             </div>      
+          </div>
+
+          <div className="row ">
+            <div className="col location-col mobile-buffer"></div>
           </div>
         </div>
       

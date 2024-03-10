@@ -12,7 +12,7 @@ const FavouriteLocationName = ({ location, checkHasSavedLocations, handleLocatio
     <>
       <div className="row favourite-location">
       <FavouriteLocationButton location={location} checkHasSavedLocations={checkHasSavedLocations} />
-        <div className="col-6">
+        <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
           <Link className='favourite-location-link' to='/weather'
           onClick={handleClick}>{location}</Link>
         </div>
