@@ -6,7 +6,7 @@
     --hunter-green: rgb(62, 86, 65);
     --apricot: rgb(255, 209, 186);
     --melon: rgb(231, 173, 153);
-    --sunset-cloud: #FDE1CC;
+    --sunset-cloud: rgb(253, 225, 204);
     --thulian-pink: rgb(206, 125, 165);
     --english-violet: rgb(73, 54, 87);
     --engineering-orange: rgb(184, 12, 9);
@@ -39,13 +39,14 @@ nav {
     font-style: normal;
 }
 
-nav.navbar, .offcanvas {
+nav.navbar,
+.offcanvas {
     background-color: var(--english-violet);
 }
 
 .dropdown-menu {
     background-color: var(--english-violet);
-    
+
 }
 
 .dropdown-item {
@@ -61,7 +62,8 @@ a.nav-link {
 }
 
 .navbar-nav a.nav-link.header-link,
-.navbar-nav a.nav-link:visited {
+.navbar-nav a.nav-link:visited,
+.offcanvas-title {
     color: white;
 }
 
@@ -102,7 +104,7 @@ button.save-favourite-btn {
 }
 
 label.save-favourite-btn {
- margin-left: 3px;
+    margin-left: 3px;
 }
 
 .save-favourite-btn:hover {
@@ -122,6 +124,7 @@ body {
     background-size: cover;
     background-attachment: scroll;
     font-family: 'Neue Regrade', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 450;
 }
 
 body.navbar-toggler:focus {
@@ -157,6 +160,7 @@ body.navbar-toggler:focus {
     .tell-me-about-text {
         font-size: 2rem;
     }
+
     .location-text {
         font-size: 3rem;
     }
@@ -175,9 +179,17 @@ body.navbar-toggler:focus {
     #root div.container {
         max-width: 1100px;
     }
+
     .dropdown:hover .dropdown-menu {
         display: block;
-      }
+    }
+
+    .footer {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
@@ -187,8 +199,15 @@ body.navbar-toggler:focus {
     #root div.container {
         max-width: 1480px;
     }
-    
+
     .dropdown:hover .dropdown-menu {
         display: block;
-      }
+    }
+
+    .footer {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
 }

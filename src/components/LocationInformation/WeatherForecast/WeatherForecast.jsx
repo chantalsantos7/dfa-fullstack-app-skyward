@@ -14,7 +14,7 @@ const WeatherForecast = ({ weatherData }) => {
 
 
   useEffect(() => {
-    if (dayData.length > 0) {
+    if (dayData && dayData.length > 0) {
       setDayData(true);
       setDays(dayData);
     }

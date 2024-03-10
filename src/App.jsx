@@ -34,15 +34,12 @@ const App = () => {
                 temp: formatTemperature(currentData.main.temp)
             });
         });
-        // setDayData(true);
         return tempDays;
     }
 
     const getDayIndices = (data) => {
         let dayIndices = [0];
         let currentDay = data.list[0].dt_txt.slice(8, 10);
-        // console.log('current day is: ' + currentDay);
-
         for (let i = 0; i < data.list.length; i++) {
             let day = data.list[i].dt_txt.slice(8, 10);
             let hour = data.list[i].dt_txt.slice(11, 13);
@@ -79,8 +76,8 @@ const App = () => {
             return setWeatherData({});
         }
 
-        let dayData = initialiseDayData(data);
-        setWeatherData({dayData});
+        let foundDayData = initialiseDayData(data);
+        setWeatherData({dayData : foundDayData});
     };
 
     const submitLocation = (location) => {
@@ -112,7 +109,7 @@ const App = () => {
         <>
 
 
-            <Header savedLocations={savedLocations} handleLocationLinkClick={handleLocationLinkClick} />
+            <Header savedLocations={savedLocations} handleLocationLinkClick={handleLocationLinkClick} searchData={{ searchBarText }} updateSearch={{ setSearchBarText }} submitLocation={submitLocation} />
             <Routes>
 
                 <Route

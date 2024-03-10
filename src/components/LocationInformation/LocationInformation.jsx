@@ -12,7 +12,7 @@ const LocationInformation = ({ searchData: location, weatherData, checkHasSavedL
         <div className='container  mt-3 text-center'>
           <TellYouLocation displayString={location.searchBarText}  />
           <div className='row justify-content-center d-flex align-items-center'>
-           <div className='col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center'>
+           <div className='col-12 col-sm-12 col-md-4 col-lg-4 d-flex align-items-center justify-content-center'>
              <FavouriteLocationButton location={location.searchBarText} checkHasSavedLocations={checkHasSavedLocations} />
            <label htmlFor='favourite-button' className='save-favourite-btn'>Click to save as favourite location</label>
            </div>         

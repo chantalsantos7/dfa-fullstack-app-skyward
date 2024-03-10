@@ -24,7 +24,7 @@ const FavouriteLocations = ( { checkHasSavedLocations,handleLocationLinkClick } 
     <>
       <div className="container favourite-locations-container">
         <TellYouLocation displayString="Favourite Locations" />
-        <div className="container">
+        <div className="container mt-4 location-links-container">
           {favouriteLocationLinks.length > 0 && favouriteLocationLinks}
         </div>
       </div>
