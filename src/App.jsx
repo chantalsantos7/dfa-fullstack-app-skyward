@@ -19,7 +19,6 @@ const App = () => {
     const [savedLocations, setSavedLocations] = useState([]);
     
     const [weatherData, setWeatherData] = useState({});
-    
 
     const initialiseDayData = (data) => {
         const tempDays = [];

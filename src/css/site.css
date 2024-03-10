@@ -94,6 +94,24 @@ a.navbar-brand {
     width: 2rem;
 }
 
+.header-search-bar {
+    max-width: 220px;
+    height: 36px;
+    border-radius: 5px;
+}
+
+.header-search-button {
+    background: none;
+    background-image: url('src/assets/search.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-left: 5px;
+    border: none;
+    width: 30px; 
+    height: 30px;
+}
+
 button.save-favourite-btn {
     color: var(--engineering-orange);
     width: 18px;
@@ -105,6 +123,7 @@ button.save-favourite-btn {
 
 label.save-favourite-btn {
     margin-left: 3px;
+    color: var(--english-violet);
 }
 
 .save-favourite-btn:hover {

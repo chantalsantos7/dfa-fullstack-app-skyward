@@ -14,15 +14,17 @@ const SearchBar = ({ searchData, updateSearch, submitLocation }) => {
 
     return (
         <>
-        {submitted && <Navigate to="/weather" />}
-            <div className="input-group">
-                <form onSubmit={handleSubmit}>
-                    <input type="search" name="header-search" id="header-search"
-                        onChange={(e) => setSearchBarText(e.target.value)}
-                        placeholder='Location search...' />
-
-                    <input type="submit" value="Search" />
-                </form>
+        {submitted && setSubmitted(false) && <Navigate to="/weather" />}
+            <div className="container ">
+                <div className="input-group d-flex justify-content-end">
+                    <form onSubmit={handleSubmit}>
+                        <input type="search" name="header-search" id="header-search" className="header-search-bar"
+                            onChange={(e) => setSearchBarText(e.target.value)}
+                            placeholder='Location search...' />
+    
+                        <input type="submit" value="" className="header-search-button" />
+                    </form>
+                </div>
             </div>
         </>
     )

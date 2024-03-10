@@ -7,13 +7,14 @@ import FavouriteLocationButton from './FavouriteLocationButton'
 
 const LocationInformation = ({ searchData: location, weatherData, checkHasSavedLocations }) => {
  
+  const { searchBarText: displayString } = location;
   return (
     <>
         <div className='container  mt-3 text-center'>
-          <TellYouLocation displayString={location.searchBarText}  />
+          <TellYouLocation displayString={displayString}  />
           <div className='row justify-content-center d-flex align-items-center'>
            <div className='col-12 col-sm-12 col-md-4 col-lg-4 d-flex align-items-center justify-content-center'>
-             <FavouriteLocationButton location={location.searchBarText} checkHasSavedLocations={checkHasSavedLocations} />
+             <FavouriteLocationButton location={displayString} checkHasSavedLocations={checkHasSavedLocations} />
            <label htmlFor='favourite-button' className='save-favourite-btn'>Click to save as favourite location</label>
            </div>         
           </div>
