@@ -1,0 +1,59 @@
+.favourite-location-link {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--english-violet);
+}
+
+.favourite-location {
+    padding: 7px;
+}
+
+.location-links-container {
+    background-color: rgba(253, 225, 204, 0.75);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 575.98px) {
+    body #root {
+        background-color: var(--sunset-cloud);
+    }
+
+    div.container.favourite-locations-container {
+        height:100%;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+
+    body #root {
+        background-color: var(--sunset-cloud);
+    }
+
+    div.container.favourite-locations-container {
+        height: 90vh;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    div.container.favourite-locations-container {
+        height: 90vh;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    div.container.favourite-locations-container {
+        height: 90vh;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    
+    div.container.favourite-locations-container {
+        height: 80vh;
+    }
+}

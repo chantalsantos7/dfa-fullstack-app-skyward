@@ -1,0 +1,77 @@
+div.day-forecast, div.weather-today {
+    background-color: var(--apricot);
+    border-radius: 5px;
+    margin: 1rem 0 1rem 0;
+    border-color: var(--melon);
+    border-width: 2px;
+}
+
+.day-forecast p {
+    margin-bottom: 0.5rem;
+}
+
+.day-forecast img {
+    max-height: 75px;
+}
+
+.weather-today p {
+    margin: 0;
+}
+
+/* Android phones */
+@media (min-width: 400px) and (max-width: 767.98px) and (min-height: 800px) and (max-height: 900px) {
+    div.container.location-container {
+        height: 95vh;
+    }
+}
+
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 575.98px) {
+    body .container.location-container {
+        background-color: var(--sunset-cloud);
+        height: 90vh;
+    }
+
+    .day-forecast img {
+        max-height: 75px;
+    }
+
+    div.mobile-buffer {
+        height: 75px;
+    }
+
+    div.location-col {
+        background-color: var(--sunset-cloud);
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+
+    body .container.location-container {
+        background-color: var(--sunset-cloud);
+        height: 90vh;
+    }
+
+    .day-forecast img {
+        max-height: 75px;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    body .container.location-container {
+        /* background-color: var(--sunset-cloud); */
+        height: 90vh;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+   
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    
+}

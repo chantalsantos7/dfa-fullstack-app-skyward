@@ -1,0 +1,92 @@
+div.container {
+    margin: auto;
+}
+
+.search-input {
+    max-width: 75%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.btn-submit {
+    color: #fff;
+    background-color: var(--olivine);
+    border-color: var(--olivine);
+    font-weight: 500;
+    font-size: 1.25rem;
+    max-width: 20%;
+}
+
+.btn-submit:hover, .btn-submit:focus {
+    background-color: var(--hunter-green);
+    color: #fff;
+}
+
+button[type="submit"] {
+    text-align: center;
+    width: 130px;
+    padding: 0.25em 0.75rem 0.25em 0.75rem;
+}
+
+@media (max-width: 575.98px) {
+    body #root {
+        background-image: url("src/assets/lerone-pieters-new-york-sunset.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 100%;
+        background-size: cover;
+        background-attachment: scroll;
+    }
+
+    div.container.home-page-container {
+        height: 90vh;
+    }
+
+    input.btn-submit {
+        max-width: 50%;      
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+
+    body #root {
+        background-image: url("src/assets/lerone-pieters-new-york-sunset.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 100%;
+        background-size: cover;
+        background-attachment: scroll;
+    }
+
+    div.container.home-page-container {
+        height: 90vh;
+    }
+
+    input.btn-submit {
+        max-width: 50%;      
+    }
+    
+}
+
+/* tablets */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    div.container.home-page-container {
+        height: 90vh;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    div.container.home-page-container {
+        height: 90vh;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    
+    div.container.home-page-container {
+        height: 80vh;
+    }
+}
