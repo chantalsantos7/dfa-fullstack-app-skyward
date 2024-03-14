@@ -13,9 +13,6 @@ describe('signupServices tests', () => {
         it(`Should encrypt a user's password`, async () => {
             const plaintext = "encryptThis!1"
             const password = await encryptPassword(plaintext);
-            console.log(plaintext);
-            console.log(password);
-            // sinon.assert.calledOnce(encryptPasswordSpy);
             expect(password).to.not.equal(plaintext);
         });
     })

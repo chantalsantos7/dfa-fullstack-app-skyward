@@ -14,7 +14,7 @@ dotenv.config({
 const { request } = chai.use(chaiHttp);
 
 describe("Authentication tests", () => {
-    describe("User signup tests", () => {
+    describe("User signup route tests", () => {
 
         const ENDPOINT_PATH = "/auth/signup";
 
@@ -41,8 +41,8 @@ describe("Authentication tests", () => {
                         "password": "6WAD7q40hcocNa9"
                     }
                 )
-                
-            expect(response.status).to.equal(200);
+
+            expect(response.status).to.equal(201);
             expect(response.body.email).to.equal("haven.leuschke@gmail.com");
         });
     })
