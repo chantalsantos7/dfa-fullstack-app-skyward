@@ -1,19 +1,5 @@
 import bcrypt from 'bcrypt';
-
-// const encryptPassword = async (next) => {
-
-//     const saltRounds = 10;
-//     try {
-//         console.log(`am I being reached?`);
-//         if (this.isModified('password')) {
-//             this.password = await bcrypt.hash(this.password, saltRounds);
-//         }
-//         next();
-//     }
-//     catch (e) {
-//         throw new Error(e.message);
-//     }
-// }
+import User from '../models/user.model.js';
 
 const encryptPassword = async (password) => {
     const saltRounds = 10;
@@ -26,6 +12,22 @@ const encryptPassword = async (password) => {
     }
 }
 
-const signupServices = { encryptPassword };
+const checkDuplicateEmail = async (req, res, next) => {
+    console.log(`reached checkDuplicateEmail`);
+    try {
+        const user = await User.findOne({ email: req.body.email }).exec();
+        console.log(user);
+        if (user) {
+            res.status(400).send({ message: `Email already in use` });
+            return;
+        }
+    }
+    catch (err) {
+        return res.status(500).send({ message: err });
+    }
+    next();
+}
+
+const signupServices = { encryptPassword, checkDuplicateEmail };
 
 export default signupServices;

@@ -38,5 +38,9 @@ const signup = async (req, res) => {
     }
 }
 
-const authControllers = { signup };
+const login = async (req, res) => {
+
+}
+
+const authControllers = { signup, login };
 export default authControllers;

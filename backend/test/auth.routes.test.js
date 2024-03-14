@@ -45,5 +45,9 @@ describe("Authentication tests", () => {
             expect(response.status).to.equal(201);
             expect(response.body.email).to.equal("haven.leuschke@gmail.com");
         });
+
+        it("should not allow a user to be created if email is already in database", async () => {
+            
+        })
     })
 })
