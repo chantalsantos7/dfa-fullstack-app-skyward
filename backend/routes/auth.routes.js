@@ -22,9 +22,9 @@ authRouter.post('/signup', [
     signupServices.checkDuplicateEmail
 ], signup);
 
-// authRouter.post('/login', [
-//     body(`email`).notEmpty().normalizeEmail({ gmail_remove_dots: false}).escape().isEmail(),
-//     body(`password`).notEmpty().escape()
-// ], login);
+authRouter.post('/login', [
+    body(`email`).notEmpty().normalizeEmail({ gmail_remove_dots: false}).escape().isEmail(),
+    body(`password`).notEmpty().escape()
+], login);
 
 export default authRouter;
