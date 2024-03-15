@@ -5,7 +5,7 @@ import authMiddleware from '../middlewares/authMiddleware.js';
 
 const authRouter = express.Router();
 
-const { signup, login } = authControllers;
+const { signupController, loginController } = authControllers;
 const { signupServices } = authMiddleware;
 
 authRouter.use((req, res, next) => {
@@ -20,11 +20,11 @@ authRouter.post('/signup', [
     body(`email`).notEmpty().normalizeEmail({ gmail_remove_dots: false}).escape().isEmail(),
     body(`password`).notEmpty().escape(),
     signupServices.checkDuplicateEmail
-], signup);
+], signupController);
 
 authRouter.post('/login', [
     body(`email`).notEmpty().normalizeEmail({ gmail_remove_dots: false}).escape().isEmail(),
     body(`password`).notEmpty().escape()
-], login);
+], loginController);
 
 export default authRouter;

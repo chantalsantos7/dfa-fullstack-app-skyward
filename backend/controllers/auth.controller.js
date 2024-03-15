@@ -2,10 +2,12 @@ import bcrypt from 'bcrypt';
 import { validationResult } from 'express-validator';
 import configDotenvPath from '../helpers/dotenv-config.js';
 import User from '../models/user.model.js';
-import signupServices from '../middlewares/signupServices.js';
+import authMiddleware from '../middlewares/authMiddleware.js';
+import { signupUserService } from '../services/signup.services.js';
 
 configDotenvPath();
-const { encryptPassword } = signupServices;
+const { loginServices } = authMiddleware;
+const { generateJWT } = loginServices;
 
 
 const validateRequest = (req, res) => {
@@ -23,28 +25,21 @@ const validateRequest = (req, res) => {
     return;
 }
 
-const signup = async (req, res) => {
+const signupController = async (req, res) => {
     
     validateRequest(req, res);
-
-    const user = new User({
-        email: req.body.email,
-        password: await encryptPassword( req.body.password)
-    })
-
     try {
-        user.save();
-        res.status(201).send({ email: user.email, message: `User was successfully created`});
+        const user = await signupUserService(req.body);
+        res.status(201).send({ message: `User was successfully created`});
         return;
     }
-
     catch (err) {
         res.status(500).send({message: `internal error is blocking user signup`, error: err});
         return;
     }
 }
 
-const login = async (req, res) => {
+const loginController = async (req, res) => {
 
     validateRequest(req, res);
 
@@ -58,12 +53,16 @@ const login = async (req, res) => {
         const passwordMatches = await bcrypt.compare(req.body.password, user.password);
         if (!passwordMatches) {
             return res.status(401).send( {
-                message: `Unauthorised Access: Invalid password/email combination`
+                message: `Unauthorised Access: Invalid password/email combination`,
+                authToken: null
             })
         }
 
+        const token = generateJWT(user);
+
         res.status(200).send({
-            message: `Login successful`
+            message: `Login successful`,
+            authToken: token
         });
     }
     catch (err) {
@@ -72,5 +71,5 @@ const login = async (req, res) => {
 
 }
 
-const authControllers = { signup, login };
+const authControllers = { signupController, loginController };
 export default authControllers;

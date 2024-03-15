@@ -15,5 +15,11 @@ describe('signupServices tests', () => {
             const password = await encryptPassword(plaintext);
             expect(password).to.not.equal(plaintext);
         });
-    })
+    });
+
+    describe('checkDuplicateEmail tests', () => { 
+        it ("Should fail the sign up if the user account already exists", async () => {
+            
+        })
+     })
 })
