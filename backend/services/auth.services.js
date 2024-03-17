@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt';
 import User from "../models/user.model.js";
-import configDotenvPath from "../helpers/dotenv-config.js";
 import authMiddleware from '../middlewares/authMiddleware.js';
 
 const { signupServices, loginServices } = authMiddleware;
@@ -53,8 +52,10 @@ export const changePasswordAuthenticatorService = async (userData) => {
 }
 
 export const changePasswordService = async (userId, newPassword) => {
+    const updatedPass = await encryptPassword(newPassword);
+    
     try {
-        const user = await User.findOneAndUpdate({_id: userId}, {password: newPassword}, { new: true });
+        const user = await User.findOneAndUpdate({_id: userId}, {password: updatedPass}, { new: true });
         // console.log(user);
         return;
     }

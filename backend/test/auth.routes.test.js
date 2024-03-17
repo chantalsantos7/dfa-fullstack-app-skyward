@@ -1,12 +1,9 @@
 import * as chai from 'chai';
 import { expect } from 'chai';
 import chaiHttp from 'chai-http';
-import bcrypt from 'bcrypt';
-import mongoose from 'mongoose';
 import server from '../server.js';
-import { before, after, describe, it, beforeEach } from 'mocha';
+import {describe, it, beforeEach, afterEach } from 'mocha';
 import User from '../models/user.model.js';
-import sinon from 'sinon';
 import configDotenvPath from '../helpers/dotenv-config.js';
 
 configDotenvPath();
@@ -14,103 +11,86 @@ configDotenvPath();
 const { request } = chai.use(chaiHttp);
 
 describe("Authentication tests", () => {
+    const SIGNUP_ENDPOINT_PATH = "/auth/signup";
+    const LOGIN_ENDPOINT_PATH = '/auth/login';
     describe("User signup route tests", () => {
 
-        const ENDPOINT_PATH = "/auth/signup";
-
-        let saveStub;
-        before(() => {
-            saveStub = sinon.stub(User.prototype.base.Model, 'save');
-        });
-
-        after(() => {
-            saveStub.restore();
-        })
-
-        it("should allow the user to sign up to the website with a valid email and password", async () => {
-            saveStub.resolves({
+        
+        let testSignupRequest;
+        before(async () => {
+            await User.deleteMany({});
+            testSignupRequest = {
                 "email": "haven.leuschke@gmail.com",
                 "password": "6WAD7q40hcocNa9"
-            });
+            };
+        });
 
+        it("should allow the user to sign up to the website with a valid email and password", async () => {
             const response = await request(server)
-                .post(ENDPOINT_PATH)
-                .send(
-                    {
-                        "email": "haven.leuschke@gmail.com",
-                        "password": "6WAD7q40hcocNa9"
-                    }
-                )
+                .post(SIGNUP_ENDPOINT_PATH)
+                .send(testSignupRequest)
 
             expect(response.status).to.equal(201);
-            expect(response.body.email).to.equal("haven.leuschke@gmail.com");
+            expect(response.body.message).to.equal("User was successfully created");
         });
+
+        it("should not allow user to sign up if the email is already in use", async () => {
+            // const response = await request(server).post(ENDPOINT_PATH).send(testSignupRequest);
+            const response = await request(server).post(SIGNUP_ENDPOINT_PATH).send(testSignupRequest);
+
+            expect(response.status).to.equal(400);
+            expect(response.body.message).to.equal("Email already in use");
+        })
 
     })
 
     describe('User login route tests', () => {
-        const ENDPOINT_PATH = '/auth/login';
+        
         const testLoginRequest = {
             "email": "kaitlyn.baumbach@hotmail.com",
             "password": "WL4rSLQ_11Nj02B"
         }
 
-        let mockFind;
-        beforeEach(() => {
-            mockFind = sinon.stub(User, `findOne`);
-        });
-
-        afterEach(() => {
-            mockFind.restore();
-        });
-
         it("Should deny log in attempt if it can't find email in database", async () => {
             //Arrange
-            // mockFind.resolves(null);
-
+            
             //Act
             const response = await request(server)
-            .post(ENDPOINT_PATH)
+            .post(LOGIN_ENDPOINT_PATH)
             .send(testLoginRequest);
 
-            console.log(response.message);
-            console.log(response.error);
             //Assert
-            expect(response.status).to.equal(500);
-            // expect(response.body.message).to.be(`User not found`);
+            expect(response.status).to.equal(404);
+            expect(response.body.message).to.equal(`User not found`);
 
         
         })
 
         it("Should allow log in if the user is found in database and password matches", async () => {
-            mockFind.resolves(
-                {
-                    _id: new mongoose.Types.ObjectId(),
-                    email: "haven.leuschke@gmail.com",
-                    password: await bcrypt.hash("WL4rSLQ_11Nj02B", 10)
-                }
-            );
-            
-            const response = await request(server).post(ENDPOINT_PATH).send(testLoginRequest);
+            //Arrange
+            await request(server).post(SIGNUP_ENDPOINT_PATH).send(testLoginRequest);
+
+            const response = await request(server).post(LOGIN_ENDPOINT_PATH).send(testLoginRequest);
 
             expect(response.status).to.equal(200);
-            expect(response.body.message).to.be(`Login successful`);
+            expect(response.body.message).to.equal(`Login successful`);
         });
 
         it("should deny login attempt if password doesn't match what's stored in the database", async () => {
+            //Arrange
+            const testFailData = {
+                email: testLoginRequest.email,
+                password: "wrongPass"
+            }
 
+            const response = await request(server).post(LOGIN_ENDPOINT_PATH).send(testFailData);
+            expect(response.status).to.equal(401);
+            expect(response.body.message).to.equal(`Unauthorised Access: Invalid password/email combination`);
         });
 
         it("Should return a JWT containing the user's id from the database", async () => {
-            mockFind.resolves(
-                {
-                    _id: new mongoose.Types.ObjectId(),
-                    email: "haven.leuschke@gmail.com",
-                    password: await bcrypt.hash("WL4rSLQ_11Nj02B", 10)
-                }
-            );
             
-            const response = await request(server).post(ENDPOINT_PATH).send(testLoginRequest);
+            const response = await request(server).post(LOGIN_ENDPOINT_PATH).send(testLoginRequest);
 
             expect(response.status).to.equal(200);
             expect(response.body.authToken).to.not.be.null;
