@@ -37,3 +37,28 @@ export const loginUserService = async (userData) => {
     const token = generateJWT(user);
     return token;
 }
+
+export const changePasswordAuthenticatorService = async (userData) => {
+    try {
+        const user = await User.findOne({ email: userData.email }).exec();
+        if (!user) {
+            throw new Error(`User not found`);
+        }
+
+        return user.id;
+    }
+    catch (err) {
+        throw err;
+    }    
+}
+
+export const changePasswordService = async (userId, newPassword) => {
+    try {
+        const user = await User.findOneAndUpdate({_id: userId}, {password: newPassword}, { new: true });
+        // console.log(user);
+        return;
+    }
+    catch (err) {
+        throw err;
+    }
+}

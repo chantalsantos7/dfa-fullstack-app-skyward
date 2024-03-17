@@ -5,7 +5,7 @@ import authMiddleware from '../middlewares/authMiddleware.js';
 
 const authRouter = express.Router();
 
-const { signupController, loginController } = authControllers;
+const { signupController, loginController, changePasswordController, changePasswordAuthenticatorController } = authControllers;
 const { signupServices } = authMiddleware;
 
 authRouter.use((req, res, next) => {
@@ -26,5 +26,14 @@ authRouter.post('/login', [
     body(`email`).notEmpty().normalizeEmail({ gmail_remove_dots: false}).escape().isEmail(),
     body(`password`).notEmpty().escape()
 ], loginController);
+
+//First need to authenticate the user email and get their id, to update the password
+authRouter.post(`/password-change`, [
+    body(`email`).notEmpty().normalizeEmail({ gmail_remove_dots: false}).escape().isEmail()
+], changePasswordAuthenticatorController);
+
+authRouter.patch(`/password-change/user/:id`, [
+    body(`newPassword`).notEmpty().escape()
+], changePasswordController);
 
 export default authRouter;

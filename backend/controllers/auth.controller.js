@@ -1,6 +1,6 @@
 import { validationResult } from 'express-validator';
 import configDotenvPath from '../helpers/dotenv-config.js';
-import { loginUserService, signupUserService, } from '../services/auth.services.js';
+import { changePasswordAuthenticatorService, changePasswordService, loginUserService, signupUserService, } from '../services/auth.services.js';
 
 configDotenvPath();
 const validateRequest = (req, res) => {
@@ -60,5 +60,30 @@ const loginController = async (req, res) => {
 
 }
 
-const authControllers = { signupController, loginController };
+const changePasswordAuthenticatorController = async (req, res) => {
+try {
+        const userId = await changePasswordAuthenticatorService(req.body);
+        return res.status(200).send({ message: "User found", id: userId });
+    }
+    catch (err) {
+        if (err.message === "User not found") {
+            return res.status(404).send({ error: err.message });
+        }
+    }
+}
+
+const changePasswordController = async (req, res) => {
+    validateRequest(req, res);
+    const userId = req.params.id;
+    console.log(`Simme's id: ${userId}`)
+    try {
+        await changePasswordService(userId, req.body.newPassword);
+        return res.status(200).send({ message: `Password successfully updated` });
+    }
+    catch (err) {
+        return res.status(500).send({ error: err });
+    }
+}
+
+const authControllers = { signupController, loginController, changePasswordController, changePasswordAuthenticatorController };
 export default authControllers;
