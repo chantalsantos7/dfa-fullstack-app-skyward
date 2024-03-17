@@ -13,9 +13,10 @@ const { request } = chai.use(chaiHttp);
 describe("Authentication tests", () => {
     const SIGNUP_ENDPOINT_PATH = "/auth/signup";
     const LOGIN_ENDPOINT_PATH = '/auth/login';
+    const VERIFICATION_ENDPOINT_PATH = "/auth/check-verification"
+
     describe("User signup route tests", () => {
 
-        
         let testSignupRequest;
         before(async () => {
             await User.deleteMany({});
@@ -96,4 +97,8 @@ describe("Authentication tests", () => {
             expect(response.body.authToken).to.not.be.null;
         })
     })
+
+    describe('Verify user authentication tests', () => { 
+        
+     })
 })

@@ -5,8 +5,8 @@ import authMiddleware from '../middlewares/authMiddleware.js';
 
 const authRouter = express.Router();
 
-const { signupController, loginController, changePasswordController, changePasswordAuthenticatorController } = authControllers;
-const { signupServices } = authMiddleware;
+const { signupController, loginController, changePasswordController, changePasswordAuthenticatorController, authenticateTokenController } = authControllers;
+const { signupServices, verificationMiddleware } = authMiddleware;
 
 authRouter.use((req, res, next) => {
     res.header(
@@ -35,5 +35,10 @@ authRouter.post(`/password-change`, [
 authRouter.patch(`/password-change/user/:id`, [
     body(`newPassword`).notEmpty().escape()
 ], changePasswordController);
+
+authRouter.post(`/check-verification`, [
+    body(`authToken`).notEmpty(),
+    verificationMiddleware.checkTokenFollowsFormat
+], authenticateTokenController);
 
 export default authRouter;

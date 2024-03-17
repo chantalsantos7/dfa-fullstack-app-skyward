@@ -1,6 +1,6 @@
 import { validationResult } from 'express-validator';
 import configDotenvPath from '../helpers/dotenv-config.js';
-import { changePasswordAuthenticatorService, changePasswordService, loginUserService, signupUserService, } from '../services/auth.services.js';
+import { authenticateTokenService, changePasswordAuthenticatorService, changePasswordService, loginUserService, signupUserService,  } from '../services/auth.services.js';
 
 configDotenvPath();
 const validateRequest = (req, res) => {
@@ -85,5 +85,17 @@ const changePasswordController = async (req, res) => {
     }
 }
 
-const authControllers = { signupController, loginController, changePasswordController, changePasswordAuthenticatorController };
+const authenticateTokenController = async (req, res) => {
+    // console.log("Route successful!");
+    try {
+        authenticateTokenService(req.body.authToken);
+        return res.status(200).send({ message: "Token authenticated"});
+    }
+    catch (err) {
+        return res.status(400).send({ error: err.message });
+    }
+
+}
+
+const authControllers = { signupController, loginController, changePasswordController, changePasswordAuthenticatorController, authenticateTokenController };
 export default authControllers;

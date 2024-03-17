@@ -2,9 +2,10 @@ import bcrypt from 'bcrypt';
 import User from "../models/user.model.js";
 import authMiddleware from '../middlewares/authMiddleware.js';
 
-const { signupServices, loginServices } = authMiddleware;
+const { signupServices, loginServices, verificationMiddleware } = authMiddleware;
 const { encryptPassword } = signupServices;
 const { generateJWT } = loginServices;
+const { verifyToken } = verificationMiddleware;
 
 export const signupUserService = async (userData) => {
 
@@ -55,9 +56,17 @@ export const changePasswordService = async (userId, newPassword) => {
     const updatedPass = await encryptPassword(newPassword);
     
     try {
-        const user = await User.findOneAndUpdate({_id: userId}, {password: updatedPass}, { new: true });
-        // console.log(user);
+        await User.findOneAndUpdate({_id: userId}, {password: updatedPass}, { new: true });
         return;
+    }
+    catch (err) {
+        throw err;
+    }
+}
+
+export const authenticateTokenService = async (token) => {
+    try {
+        verifyToken(token);
     }
     catch (err) {
         throw err;
