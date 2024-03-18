@@ -1,22 +1,11 @@
 import { validationResult } from 'express-validator';
 import configDotenvPath from '../helpers/dotenv-config.js';
+import helperFunctions from '../helpers/helpers.js';
 import { authenticateTokenService, changePasswordAuthenticatorService, changePasswordService, loginUserService, signupUserService,  } from '../services/auth.services.js';
 
+const { validateRequest } = helperFunctions;
+
 configDotenvPath();
-const validateRequest = (req, res) => {
-    try {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            const err = new Error(`Request validation failed`);
-            err.data = errors.array();
-            throw err;
-        }
-    }
-    catch (err) {
-        return res.status(422).send({ message: `Request validation failed` });
-    }
-    return;
-}
 
 const signupController = async (req, res) => {
 
@@ -88,8 +77,9 @@ const changePasswordController = async (req, res) => {
 const authenticateTokenController = async (req, res) => {
     // console.log("Route successful!");
     try {
-        authenticateTokenService(req.body.authToken);
-        return res.status(200).send({ message: "Token authenticated"});
+        const token = await authenticateTokenService(req.body.authToken);
+        // console.log(token.payload.id);
+        return res.status(200).send({ message: "Token authenticated", userId: token.payload.id});
     }
     catch (err) {
         return res.status(400).send({ error: err.message });

@@ -66,7 +66,7 @@ export const changePasswordService = async (userId, newPassword) => {
 
 export const authenticateTokenService = async (token) => {
     try {
-        verifyToken(token);
+        return verifyToken(token);
     }
     catch (err) {
         throw err;
