@@ -4,10 +4,10 @@ import { connectDb } from './db/db.connection.js';
 import configDotenvPath from './helpers/dotenv-config.js';
 import authRouter from './routes/auth.routes.js';
 import morgan from 'morgan';
+import favouriteLocationsRouter from './routes/favouriteLocations.routes.js';
 
 const app = express();
 configDotenvPath();
-console.log(`Node env: ${process.env.NODE_ENV}`);
 
 app.use(cors());
 app.use(express.json());
@@ -17,6 +17,7 @@ connectDb();
 
 //Routers
 app.use(`/auth`, authRouter);
+app.use(`/favourite-locations`, favouriteLocationsRouter);
 
 
 const { PORT } = process.env; 
