@@ -4,10 +4,18 @@ import favouriteLocationsControllers from "../controllers/favouriteLocations.con
 
 const favouriteLocationsRouter = express.Router();
 
-const { fetchFavouritesController } = favouriteLocationsControllers;
+const { fetchFavouritesController, addFavouritesController } = favouriteLocationsControllers;
 
 favouriteLocationsRouter.post('/fetch-all', [
     body(`userId`).notEmpty()
 ], fetchFavouritesController);
+
+//route for when there is initially no favourites
+favouriteLocationsRouter.post('/add-favourites', [
+    body(`userId`).notEmpty(),
+    body(`favourites`).isArray()
+], addFavouritesController );
+
+favouriteLocationsRouter.patch('/add-location', [], );
 
 export default favouriteLocationsRouter;
