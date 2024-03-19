@@ -8,6 +8,7 @@ import LocationInformation from './components/LocationInformation/LocationInform
 import FavouriteLocations from './components/FavouriteLocations/FavouriteLocations';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import SignUpPage from './components/AuthForms/SignUpPage';
 
 
 const App = () => {
@@ -131,6 +132,14 @@ const App = () => {
                     element={
                         <FavouriteLocations checkHasSavedLocations={checkHasSavedLocations} handleLocationLinkClick={handleLocationLinkClick} />
                     }>
+
+                </Route>
+                <Route
+                    path='/signup'
+                    element={
+                        <SignUpPage />
+                    }
+                >
 
                 </Route>
             </Routes>

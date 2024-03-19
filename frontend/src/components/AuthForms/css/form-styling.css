@@ -1,0 +1,17 @@
+.auth-form-card {
+    background-color: var(--apricot);
+    border-radius: 5px;
+}
+
+.form-header {
+    font-family: 'Thestral', 'Times New Roman', Times, serif;
+    color: var(--olivine);
+    text-align: center;
+    margin: 5px;
+    font-size: 3rem;
+}
+
+.auth-form-btn {
+    background-color: var(--olivine);
+    color: white;
+}
