@@ -10,6 +10,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import SignUpPage from './components/AuthForms/SignUpPage';
 import LoginPage from './components/AuthForms/LoginPage';
+import PasswordChangePage from './components/AuthForms/PasswordChangePage';
 
 
 const App = () => {
@@ -146,6 +147,14 @@ const App = () => {
                     path='/login'
                     element={
                         <LoginPage />
+                    }
+                >
+                </Route>
+
+                <Route
+                    path='/password-change'
+                    element={
+                        <PasswordChangePage />
                     }
                 >
                 </Route>

@@ -1,6 +1,10 @@
 import "./css/form-styling.css";
 
 const SignUpPage = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
+    }
     return (
         <>
             <div className="container mt-3 d-flex align-items-center justify-content-center">
@@ -9,7 +13,7 @@ const SignUpPage = () => {
                     <div className="card  d-flex justify-content-center">
                         <div className="card-body auth-form-card">
                         <h1 className=" card-title form-header">Create An Account</h1>
-                            <form action="" className="signup-form">
+                            <form action="" className="signup-form" onSubmit={handleSubmit}>
                                 <div className="form-outline mb-3">
                                     <input type="text" name="email" id="email" className="form-control"  placeholder="email@address.com" />
                                 </div>
