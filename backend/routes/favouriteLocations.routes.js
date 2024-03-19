@@ -4,7 +4,7 @@ import favouriteLocationsControllers from "../controllers/favouriteLocations.con
 
 const favouriteLocationsRouter = express.Router();
 
-const { fetchFavouritesController, addFavouritesController, addNewLocationToFavouritesController } = favouriteLocationsControllers;
+const { fetchFavouritesController, addFavouritesController, addNewLocationToFavouritesController, deleteLocationFromFavouritesController } = favouriteLocationsControllers;
 
 favouriteLocationsRouter.post('/fetch-all', [
     body(`userId`).notEmpty()
@@ -17,14 +17,16 @@ favouriteLocationsRouter.post('/add-favourites', [
         .custom((value) => {
             return value.every((item) => typeof item === 'string');
         }).withMessage('All favourites must be strings')
-], addFavouritesController );
+], addFavouritesController);
 
 favouriteLocationsRouter.patch('/add-location', [
     body(`userId`).notEmpty(),
     body(`location`).notEmpty().isString(),
 ], addNewLocationToFavouritesController);
 
-favouriteLocationsRouter.patch('/delete-location', [],
-);
+favouriteLocationsRouter.patch('/delete-location', [
+    body(`userId`).notEmpty(),
+    body(`location`).notEmpty().isString(),
+], deleteLocationFromFavouritesController);
 
 export default favouriteLocationsRouter;

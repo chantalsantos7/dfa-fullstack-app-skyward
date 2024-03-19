@@ -1,6 +1,6 @@
 import configDotenvPath from '../helpers/dotenv-config.js';
 import helperFunctions from '../helpers/helpers.js';
-import { addFavouritesService, addNewLocationService, fetchFavouritesService } from '../services/favourites.services.js';
+import { addFavouritesService, addNewLocationService, deleteLocationService, fetchFavouritesService } from '../services/favourites.services.js';
 
 const { validateRequest } = helperFunctions;
 configDotenvPath();
@@ -52,12 +52,34 @@ const addNewLocationToFavouritesController = async (req, res) => {
             });
     }
     catch (err) {
+
+        if (err.message == `Could not find a favourites entry for that user`)
+        {
+            return res.status(404).send({ message: err.message });
+        }
         res.status(500).send({ message: `internal error is blocking add to favourites`, error: err });
         return;
     }
 }
 
+const deleteLocationFromFavouritesController = async (req, res) => {
+    validateRequest(req, res);
 
-const favouriteLocationsControllers = { fetchFavouritesController, addFavouritesController, addNewLocationToFavouritesController };
+    try {
+        const updatedFavourites = await deleteLocationService(req);
+        return res.status(200).send({ message: `Successfully deleted location from favourites`, favourites: updatedFavourites.favourites })
+    }
+    catch (err) {
+        if (err.message === `That locations was not in the user's favourites` ||
+            err.message === "No favourites entry found for that user id") {
+            return res.status(404).send({ message: err.message });
+        }
+        return res.status(500).send({ message: `internal error is blocking delete from favourites`, error: err });
+
+    }
+}
+
+
+const favouriteLocationsControllers = { fetchFavouritesController, addFavouritesController, addNewLocationToFavouritesController, deleteLocationFromFavouritesController };
 
 export default favouriteLocationsControllers;
