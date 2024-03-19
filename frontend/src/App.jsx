@@ -9,16 +9,17 @@ import FavouriteLocations from './components/FavouriteLocations/FavouriteLocatio
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SignUpPage from './components/AuthForms/SignUpPage';
+import LoginPage from './components/AuthForms/LoginPage';
 
 
 const App = () => {
-    
+
     const navigate = useNavigate();
     const [searchBarText, setSearchBarText] = useState('');
-    
+
     const [hasSavedLocations, setHasSavedLocations] = useState(false);
     const [savedLocations, setSavedLocations] = useState([]);
-    
+
     const [weatherData, setWeatherData] = useState({});
 
     const initialiseDayData = (data) => {
@@ -77,7 +78,7 @@ const App = () => {
         }
 
         let foundDayData = initialiseDayData(data);
-        setWeatherData({dayData : foundDayData});
+        setWeatherData({ dayData: foundDayData });
     };
 
     const submitLocation = (location) => {
@@ -85,7 +86,7 @@ const App = () => {
         1. get weather forecast for the location being searched for
         2. switch to the location information page (passing along the location information as a prop)
         */
-       checkHasSavedLocations();
+        checkHasSavedLocations();
         getWeatherData(location);
     }
 
@@ -140,7 +141,13 @@ const App = () => {
                         <SignUpPage />
                     }
                 >
-
+                </Route>
+                <Route
+                    path='/login'
+                    element={
+                        <LoginPage />
+                    }
+                >
                 </Route>
             </Routes>
 
