@@ -3,10 +3,14 @@ import TellYouLocation from "../TellYouLocation"
 import FavouriteLocationName from "./FavouriteLocationName"
 import "./css/favourite-locations.css"
 import { getFavouriteLocationsService } from '../../utils/services'
+import { useFaves } from '../../contexts/FavesContext'
 
-const FavouriteLocations = ({ checkHasSavedLocations, handleLocationLinkClick }) => {
+// { checkHasSavedLocations, handleLocationLinkClick }
+const FavouriteLocations = () => {
 
-  const favouriteLocations = getFavouriteLocationsService();
+  const { favouriteLocations } = useFaves();
+
+  // const favouriteLocations = getFavouriteLocationsService();
   let favouriteLocationLinks = [];
   let i = 0;
   favouriteLocations.forEach(fave => {
@@ -15,8 +19,8 @@ const FavouriteLocations = ({ checkHasSavedLocations, handleLocationLinkClick })
         <FavouriteLocationName
           key={i++}
           location={fave}
-          checkHasSavedLocations={checkHasSavedLocations}
-          handleLocationLinkClick={handleLocationLinkClick}
+          // checkHasSavedLocations={checkHasSavedLocations}
+          // handleLocationLinkClick={handleLocationLinkClick}
         />
       </div>
     );
@@ -50,8 +54,8 @@ const FavouriteLocations = ({ checkHasSavedLocations, handleLocationLinkClick })
 }
 
 FavouriteLocations.propTypes = {
-  checkHasSavedLocations: PropTypes.func.isRequired,
-  handleLocationLinkClick: PropTypes.func.isRequired
+  // checkHasSavedLocations: PropTypes.func.isRequired,
+  // handleLocationLinkClick: PropTypes.func.isRequired
 }
 
 export default FavouriteLocations

@@ -98,7 +98,6 @@ const App = () => {
     return (
 
         <>
-{/* savedLocations={savedLocations}  */}
 
             <AuthProvider>
                 <FavesProvider>
@@ -119,13 +118,14 @@ const App = () => {
                             }>
     
                         </Route>
-                        {/* <Route
+                        <Route
                             path='/favourites'
                             element={
-                                <FavouriteLocations checkHasSavedLocations={checkHasSavedLocations} handleLocationLinkClick={handleLocationLinkClick} />
+                                <FavouriteLocations  />
+                                
                             }>
     
-                        </Route> */}
+                        </Route>
                         <Route
                             path='/signup'
                             element={

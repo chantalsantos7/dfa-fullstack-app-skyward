@@ -15,23 +15,6 @@ const Header = ({ handleLocationLinkClick, searchData, updateSearch, submitLocat
   let favouriteLocationLinks = [];
   let i = 0;
 
-  useEffect(() => {
-    console.log(`FavouriteLocations: ${favouriteLocations}`)
-    favouriteLocations.forEach(location => {
-      favouriteLocationLinks.push(
-        <NavLink
-          key={i++}
-          to={'/weather'}
-          className={'dropdown-item'}
-          onClick={(e) => {
-            e.preventDefault();
-            //TODO: handleLocationLinkClick needs to be able to navigate to the locationInformation page, passing in the location name so we can request the API for it
-            // handleLocationLinkClick(location)
-          }}
-        >{location}</NavLink>
-      );
-    });
-  }, [favouriteLocations]);
 
   const handleLogoutLink = (e) => {
     handleLogout();

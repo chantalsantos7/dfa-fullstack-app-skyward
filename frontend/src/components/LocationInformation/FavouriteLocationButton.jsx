@@ -1,14 +1,20 @@
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react';
 import { getFavouriteLocationsService, removeFromFavouriteLocationsService, saveFavouriteLocationService } from '../../utils/services';
+import { useFaves } from '../../contexts/FavesContext';
+import { useAuth } from '../../contexts/AuthContext';
 
-
-const FavouriteLocationButton = ({ location, checkHasSavedLocations }) => {
-
-    const clickHandler = event => {
+// , checkHasSavedLocations
+const FavouriteLocationButton = ({ location }) => {
+    const { authToken } = useAuth();
+    const { favouriteLocations, addLocationToFavourites, checkHasSavedLocations } = useFaves();
+    const [savedLocation, setSavedLocation] = useState(false);
+    
+    const clickHandler = async () => {
 
         if (!savedLocation) {
-            saveFavouriteLocationService(location);
+            // saveFavouriteLocationService(location);
+            addLocationToFavourites( location);
             setSavedLocation(true);
             checkHasSavedLocations();
             return;
@@ -16,14 +22,14 @@ const FavouriteLocationButton = ({ location, checkHasSavedLocations }) => {
         if (confirm("Are you sure you want to remove this location from your favourites?")) {
             removeFromFavouriteLocationsService(location);
             setSavedLocation(false);
-            checkHasSavedLocations();
+            // checkHasSavedLocations();
         }
     }
 
-    const [savedLocation, setSavedLocation] = useState(false);
+    
     const checkLocationIsSaved = () => {
-        const savedLocations = getFavouriteLocationsService();
-        if (savedLocations && savedLocations.includes(location)) {
+        // const savedLocations = getFavouriteLocationsService();
+        if (favouriteLocations && favouriteLocations.includes(location)) {
             setSavedLocation(true);
         }
     }
@@ -44,7 +50,7 @@ const FavouriteLocationButton = ({ location, checkHasSavedLocations }) => {
 
 FavouriteLocationButton.propTypes = {
     location: PropTypes.string.isRequired,
-    checkHasSavedLocations: PropTypes.func.isRequired
+    // checkHasSavedLocations: PropTypes.func.isRequired
 }
 
 FavouriteLocationButton.defaultProps = {

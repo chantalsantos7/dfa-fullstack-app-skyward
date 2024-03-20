@@ -23,8 +23,8 @@ const FavouriteLocationName = ({ location, checkHasSavedLocations, handleLocatio
 
 FavouriteLocationName.propTypes = {
   location: PropTypes.string.isRequired,
-  checkHasSavedLocations: PropTypes.func.isRequired,
-  handleLocationLinkClick: PropTypes.func.isRequired
+  // checkHasSavedLocations: PropTypes.func.isRequired,
+  // handleLocationLinkClick: PropTypes.func.isRequired
 }
 
 FavouriteLocationName.defaultProps = {
