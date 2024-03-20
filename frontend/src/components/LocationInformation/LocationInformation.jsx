@@ -38,7 +38,7 @@ LocationInformation.propTypes = {
     searchBarText: PropTypes.string.isRequired
   }).isRequired,
   weatherData: PropTypes.object.isRequired,
-  checkHasSavedLocations: PropTypes.func.isRequired
+  // checkHasSavedLocations: PropTypes.func.isRequired
 };
 
 LocationInformation.defaultProps = {

@@ -31,6 +31,8 @@ export const saveFavouriteLocationService = (location) => {
 }
 
 export const getFavouriteLocationsService = () => {
+    //get favourite locations from the server if user is logged in
+
     return JSON.parse(localStorage.getItem('favouriteLocations'));
 }
 

@@ -12,15 +12,13 @@ import SignUpPage from './components/AuthForms/SignUpPage';
 import LoginPage from './components/AuthForms/LoginPage';
 import PasswordChangePage from './components/AuthForms/PasswordChangePage';
 import { AuthProvider } from './contexts/AuthContext';
+import { FavesProvider } from './contexts/FavesContext';
 
 
 const App = () => {
 
     const navigate = useNavigate();
     const [searchBarText, setSearchBarText] = useState('');
-
-    const [hasSavedLocations, setHasSavedLocations] = useState(false);
-    const [savedLocations, setSavedLocations] = useState([]);
 
     const [weatherData, setWeatherData] = useState({});
 
@@ -60,16 +58,7 @@ const App = () => {
     }
 
 
-    const checkHasSavedLocations = () => {
-        const savedFaves = getFavouriteLocationsService();
-        if (savedFaves && savedFaves.length > 0) {
-            setHasSavedLocations(true);
-            setSavedLocations(savedFaves);
-            return;
-        }
-        setHasSavedLocations(false);
-        setSavedLocations([]);
-    }
+    
 
     const getWeatherData = async (location) => {
         location = location.toLowerCase();
@@ -88,7 +77,7 @@ const App = () => {
         1. get weather forecast for the location being searched for
         2. switch to the location information page (passing along the location information as a prop)
         */
-        checkHasSavedLocations();
+        // checkHasSavedLocations();
         getWeatherData(location);
     }
 
@@ -104,65 +93,65 @@ const App = () => {
         document.title = "Skyward";
     }, []);
 
-    useEffect(() => {
-        checkHasSavedLocations();
-    }, [hasSavedLocations]);
+    
 
     return (
 
         <>
-
+{/* savedLocations={savedLocations}  */}
 
             <AuthProvider>
-                <Header savedLocations={savedLocations} handleLocationLinkClick={handleLocationLinkClick} searchData={{ searchBarText }} updateSearch={{ setSearchBarText }} submitLocation={submitLocation} />
-                <Routes>
-
-                    <Route
-                        index
-                        path='/'
-                        element={
-                            <HomePage searchData={{ searchBarText }} updateSearch={{ setSearchBarText }} submitLocation={submitLocation} />
-                        }>
-                    </Route>
-                    <Route
-                        path='/weather'
-                        element={
-                            <LocationInformation searchData={{ searchBarText }} weatherData={weatherData} checkHasSavedLocations={checkHasSavedLocations} />
-                        }>
-
-                    </Route>
-                    <Route
-                        path='/favourites'
-                        element={
-                            <FavouriteLocations checkHasSavedLocations={checkHasSavedLocations} handleLocationLinkClick={handleLocationLinkClick} />
-                        }>
-
-                    </Route>
-                    <Route
-                        path='/signup'
-                        element={
-                            <SignUpPage />
-                        }
-                    >
-                    </Route>
-                    <Route
-                        path='/login'
-                        element={
-                            <LoginPage />
-                        }
-                    >
-                    </Route>
-
-                    <Route
-                        path='/password-change'
-                        element={
-                            <PasswordChangePage />
-                        }
-                    >
-                    </Route>
-                </Routes>
-
-                <Footer />
+                <FavesProvider>
+                    <Header handleLocationLinkClick={handleLocationLinkClick} searchData={{ searchBarText }} updateSearch={{ setSearchBarText }} submitLocation={submitLocation} />
+                    <Routes>
+    
+                        <Route
+                            index
+                            path='/'
+                            element={
+                                <HomePage searchData={{ searchBarText }} updateSearch={{ setSearchBarText }} submitLocation={submitLocation} />
+                            }>
+                        </Route>
+                        <Route
+                            path='/weather'
+                            element={
+                                <LocationInformation searchData={{ searchBarText }} weatherData={weatherData} />
+                            }>
+    
+                        </Route>
+                        {/* <Route
+                            path='/favourites'
+                            element={
+                                <FavouriteLocations checkHasSavedLocations={checkHasSavedLocations} handleLocationLinkClick={handleLocationLinkClick} />
+                            }>
+    
+                        </Route> */}
+                        <Route
+                            path='/signup'
+                            element={
+                                <SignUpPage />
+                            }
+                        >
+                        </Route>
+                        <Route
+                            path='/login'
+                            element={
+                                <LoginPage />
+                            }
+                        >
+                        </Route>
+    
+                        <Route
+                            path='/password-change'
+                            element={
+                                <PasswordChangePage />
+                            }
+                        >
+                        </Route>
+                    </Routes>
+    
+                    <Footer />
+                </FavesProvider>
             </AuthProvider>
         </>
     );

@@ -3,7 +3,6 @@ import { loginService } from "../services/authServices.js";
 
 const AuthContext = createContext();
 
-
 export const AuthProvider = ({ children }) => {
     const [authToken, setAuthToken] = useState(null);
 
@@ -14,7 +13,9 @@ export const AuthProvider = ({ children }) => {
         // const { email, password } = credentials;
         try {
             const response = await loginService(credentials);
+            console.log(`logged in from authContext`);
             setAuthToken(response.data.authToken);
+            return response;            
         }
         catch (err) {
             console.log(err.message);

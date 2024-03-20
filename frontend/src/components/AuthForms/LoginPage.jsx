@@ -2,14 +2,19 @@ import "./css/form-styling.css";
 import { useAuth } from "../../contexts/AuthContext";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
+import { useFaves } from "../../contexts/FavesContext";
 
 const LoginPage = () => {
     const { authToken, handleLogin } = useAuth();
+    const { getSavedFavourites } = useFaves();
     const [loginCredentials, setLoginCredentials] = useState({ email: "", password: ""});
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        handleLogin(loginCredentials);
+        await handleLogin(loginCredentials);
+        // if (authToken) {
+        //     getSavedFavourites(authToken);
+        // }
     }
 
     const handleChange = (e) => {
