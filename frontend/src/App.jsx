@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import SignUpPage from './components/AuthForms/SignUpPage';
 import LoginPage from './components/AuthForms/LoginPage';
 import PasswordChangePage from './components/AuthForms/PasswordChangePage';
+import { AuthProvider } from './contexts/AuthContext';
 
 
 const App = () => {
@@ -112,55 +113,57 @@ const App = () => {
         <>
 
 
-            <Header savedLocations={savedLocations} handleLocationLinkClick={handleLocationLinkClick} searchData={{ searchBarText }} updateSearch={{ setSearchBarText }} submitLocation={submitLocation} />
-            <Routes>
+            <AuthProvider>
+                <Header savedLocations={savedLocations} handleLocationLinkClick={handleLocationLinkClick} searchData={{ searchBarText }} updateSearch={{ setSearchBarText }} submitLocation={submitLocation} />
+                <Routes>
 
-                <Route
-                    index
-                    path='/'
-                    element={
-                        <HomePage searchData={{ searchBarText }} updateSearch={{ setSearchBarText }} submitLocation={submitLocation} />
-                    }>
-                </Route>
-                <Route
-                    path='/weather'
-                    element={
-                        <LocationInformation searchData={{ searchBarText }} weatherData={weatherData} checkHasSavedLocations={checkHasSavedLocations} />
-                    }>
+                    <Route
+                        index
+                        path='/'
+                        element={
+                            <HomePage searchData={{ searchBarText }} updateSearch={{ setSearchBarText }} submitLocation={submitLocation} />
+                        }>
+                    </Route>
+                    <Route
+                        path='/weather'
+                        element={
+                            <LocationInformation searchData={{ searchBarText }} weatherData={weatherData} checkHasSavedLocations={checkHasSavedLocations} />
+                        }>
 
-                </Route>
-                <Route
-                    path='/favourites'
-                    element={
-                        <FavouriteLocations checkHasSavedLocations={checkHasSavedLocations} handleLocationLinkClick={handleLocationLinkClick} />
-                    }>
+                    </Route>
+                    <Route
+                        path='/favourites'
+                        element={
+                            <FavouriteLocations checkHasSavedLocations={checkHasSavedLocations} handleLocationLinkClick={handleLocationLinkClick} />
+                        }>
 
-                </Route>
-                <Route
-                    path='/signup'
-                    element={
-                        <SignUpPage />
-                    }
-                >
-                </Route>
-                <Route
-                    path='/login'
-                    element={
-                        <LoginPage />
-                    }
-                >
-                </Route>
+                    </Route>
+                    <Route
+                        path='/signup'
+                        element={
+                            <SignUpPage />
+                        }
+                    >
+                    </Route>
+                    <Route
+                        path='/login'
+                        element={
+                            <LoginPage />
+                        }
+                    >
+                    </Route>
 
-                <Route
-                    path='/password-change'
-                    element={
-                        <PasswordChangePage />
-                    }
-                >
-                </Route>
-            </Routes>
+                    <Route
+                        path='/password-change'
+                        element={
+                            <PasswordChangePage />
+                        }
+                    >
+                    </Route>
+                </Routes>
 
-            <Footer />
+                <Footer />
+            </AuthProvider>
         </>
     );
 };
