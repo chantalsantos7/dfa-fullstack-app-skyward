@@ -3,9 +3,11 @@
 import PropTypes from 'prop-types';
 import { NavLink, useLocation } from "react-router-dom";
 import SearchBar from './SearchBar';
+import { useAuth } from '../contexts/AuthContext';
 
 const Header = ({ savedLocations, handleLocationLinkClick, searchData, updateSearch, submitLocation }) => {
 
+  const { authToken, handleLogout } = useAuth();
   const location = useLocation();
   let favouriteLocationLinks = [];
   let i = 0;
@@ -22,6 +24,10 @@ const Header = ({ savedLocations, handleLocationLinkClick, searchData, updateSea
       >{location}</NavLink>
     );
   });
+
+  const handleLogoutLink = (e) => {
+    handleLogout();
+  }
 
   return (
     <>
@@ -68,6 +74,8 @@ const Header = ({ savedLocations, handleLocationLinkClick, searchData, updateSea
                     </div>
                   </li>
                 </>}
+                {(authToken === null && location.pathname !== '/login') && <NavLink to="/login" className='nav-link'>Login</NavLink>}
+                {(authToken !== null && location.pathname !== '/login') && <NavLink to="/login" className='nav-link' onClick={handleLogoutLink}>Logout</NavLink>}
                 {location.pathname !== '/' && <SearchBar searchData={searchData} updateSearch={updateSearch} submitLocation={submitLocation} />}
             </ul>
           </div>

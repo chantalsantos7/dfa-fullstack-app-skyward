@@ -1,9 +1,10 @@
 import "./css/form-styling.css";
 import { useAuth } from "../../contexts/AuthContext";
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 const LoginPage = () => {
-    const { handleLogin } = useAuth();
+    const { authToken, handleLogin } = useAuth();
     const [loginCredentials, setLoginCredentials] = useState({ email: "", password: ""});
 
     const handleSubmit = (e) => {
@@ -18,7 +19,7 @@ const LoginPage = () => {
     //TODO: navigate to HomePage if logged in/authToken has been set
     return (
         <>
-        
+            {!!authToken && <Navigate to='/'/>}
             <div className="container mt-3 d-flex align-items-center justify-content-center">
 
                 <div className="container">
