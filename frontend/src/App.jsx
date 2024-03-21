@@ -148,6 +148,7 @@ const App = () => {
                             }
                         >
                         </Route>
+
                     </Routes>
     
                     <Footer />

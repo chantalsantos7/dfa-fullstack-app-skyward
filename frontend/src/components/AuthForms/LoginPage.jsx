@@ -12,9 +12,6 @@ const LoginPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await handleLogin(loginCredentials);
-        // if (authToken) {
-        //     getSavedFavourites(authToken);
-        // }
     }
 
     const handleChange = (e) => {
@@ -27,7 +24,7 @@ const LoginPage = () => {
             <div className="container mt-3 d-flex align-items-center justify-content-center">
 
                 <div className="container">
-                    <div className="card  d-flex justify-content-center">
+                    <div className="card d-flex justify-content-center">
                         <div className="card-body auth-form-card text-center">
                             <h1 className=" card-title form-header">Login</h1>
                             <form action="" className="login-form" onSubmit={handleSubmit}>
@@ -53,7 +50,9 @@ const LoginPage = () => {
                                         onChange={handleChange}
                                     />
                                 </div>
-                               
+                                {/* <div className="d-flex justify-content-start">
+                                    <Link to='password-change-auth'>forgot your password?</Link>
+                                </div> */}
                                 <div className="d-flex justify-content-center">
                                     <input 
                                         type="submit" 

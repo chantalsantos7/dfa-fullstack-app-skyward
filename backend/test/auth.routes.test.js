@@ -97,8 +97,4 @@ describe("Authentication tests", () => {
             expect(response.body.authToken).to.not.be.null;
         })
     })
-
-    describe('Verify user authentication tests', () => { 
-        
-     })
 })
