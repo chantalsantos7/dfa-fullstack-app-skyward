@@ -7,13 +7,10 @@ export const getFavouriteLocationsFromDbService = async (authToken) => {
     //send a verification request for the authToken before getting the saved locations;
     try {
         const verifyTokenResponse = await verifyTokenService(authToken);
-        if (verifyTokenResponse.status === 422) 
-        {
-            throw new Error(`cannot verify request`);
-        }
+    
         //get back userId from the verified token
         const fetchLocationsReq = {
-            userId: verifyTokenResponse.data.userId
+            userId: verifyTokenResponse.userId
         };
 
         const allLocationsResponse = await axios.post(FETCH_FAVES_ROUTE, fetchLocationsReq, {
@@ -21,12 +18,36 @@ export const getFavouriteLocationsFromDbService = async (authToken) => {
                 'Content-Type': 'application/json'
             }
         });
-        return allLocationsResponse.data.favourites;
+        return allLocationsResponse.data;
     }
     catch (err) {
         console.log(err.message)
         throw err;
     }
+}
+
+export const addNewUserFavouritesToDbService = async (authToken, favourites) => {
+    const CREATE_FAVES_ROUTE = "http://localhost:5000/favourite-locations/add-favourites";
+    try {
+        const verifyTokenResponse = await verifyTokenService(authToken);
+
+        const createFavouritesEntryReq = {
+            userId: verifyTokenResponse.userId,
+            favourites: favourites
+        }
+
+        const createFavesEntryResponse = await axios.post(CREATE_FAVES_ROUTE, createFavouritesEntryReq, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        return createFavesEntryResponse.data.favourites;
+    }
+    catch (err) {
+        console.log(err);
+    }
+
 }
 
 export const addFavouriteLocationToDbService = async (authToken, location) => {
@@ -35,14 +56,11 @@ export const addFavouriteLocationToDbService = async (authToken, location) => {
     //send a verification request for the authToken before getting the saved locations;
     try {
         const verifyTokenResponse = await verifyTokenService(authToken);
-        if (verifyTokenResponse.status === 422) 
-        {
-            throw new Error(`cannot verify request`);
-        }
-        // console.log(verifyTokenResponse.data.userId);
+        
+        console.log("id from response is: " + verifyTokenResponse.userId);
         //get back userId from the verified token
         const addLocationReq = {
-            userId: verifyTokenResponse.data.userId,
+            userId: verifyTokenResponse.userId,
             location: location
         };
 
@@ -69,12 +87,9 @@ export const deleteFavouriteLocationFromDbService = async (authToken, location) 
     //send a verification request for the authToken before getting the saved locations;
     try {
         const verifyTokenResponse = await verifyTokenService(authToken);
-        if (verifyTokenResponse.status === 422) 
-        {
-            throw new Error(`cannot verify request`);
-        }
+       
         const deleteLocationReq = {
-            userId: verifyTokenResponse.data.userId,
+            userId: verifyTokenResponse.userId,
             location: location
         };
 

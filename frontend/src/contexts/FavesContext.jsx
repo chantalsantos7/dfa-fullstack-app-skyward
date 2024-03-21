@@ -1,6 +1,6 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { useAuth } from "./AuthContext";
-import { addFavouriteLocationToDbService, deleteFavouriteLocationFromDbService, getFavouriteLocationsFromDbService } from "../services/favesServices";
+import { addFavouriteLocationToDbService, addNewUserFavouritesToDbService, deleteFavouriteLocationFromDbService, getFavouriteLocationsFromDbService } from "../services/favesServices";
 
 const FavesContext = createContext();
 
@@ -11,10 +11,11 @@ export const FavesProvider = ({ children }) => {
 
     const updateSavedLocations = async () => {
 
-        const savedFaves = await getSavedFavourites(authToken);
-        if (savedFaves && savedFaves.length > 0) {
+        const getFavesResponse = await getSavedFavourites(authToken);
+        console.log(getFavesResponse);
+        if (getFavesResponse.favourites && getFavesResponse.favourites.length > 0) {
             setHasSavedLocations(true);
-            setFavouriteLocations(savedFaves);
+            setFavouriteLocations(getFavesResponse.favourites);
             return;
         }
         setHasSavedLocations(false);
@@ -30,8 +31,22 @@ export const FavesProvider = ({ children }) => {
     }
 
     const getSavedFavourites = async () => {
-        const favourites = await getFavouriteLocationsFromDbService(authToken);
-        return favourites;
+        const getResponse = await getFavouriteLocationsFromDbService(authToken);
+        
+        return getResponse;
+
+        // if (getResponse.favourites.length > 0) {
+        //     const favourites = getResponse.favourites;
+        //     return favourites;
+        // } else {
+        //     return getResponse.message;
+        // }
+        
+    }
+
+    const createNewFavouritesEntry = async (favourites) => {
+        const newFavouritesEntry = await addNewUserFavouritesToDbService(authToken, favourites);
+        return newFavouritesEntry;
     }
 
     const addLocationToFavourites = async (location) => {
@@ -64,7 +79,7 @@ export const FavesProvider = ({ children }) => {
 
     return (
         <FavesContext.Provider
-            value={{ favouriteLocations, getSavedFavourites, addLocationToFavourites, updateSavedLocations, deleteLocationFromFavourites }}>
+            value={{ favouriteLocations, getSavedFavourites, createNewFavouritesEntry, addLocationToFavourites, updateSavedLocations, deleteLocationFromFavourites }}>
             {children}
         </FavesContext.Provider>
     );

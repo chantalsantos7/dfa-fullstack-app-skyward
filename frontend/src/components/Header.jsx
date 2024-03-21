@@ -5,20 +5,37 @@ import { NavLink, useLocation } from "react-router-dom";
 import SearchBar from './SearchBar';
 import { useAuth } from '../contexts/AuthContext';
 import { useFaves } from '../contexts/FavesContext';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const Header = ({ handleLocationLinkClick, searchData, updateSearch, submitLocation }) => {
 
   const { loggedIn, handleLogout } = useAuth();
-  const { favouriteLocations } = useFaves();
+  const { favouriteLocations, getSavedFavourites } = useFaves();
   const location = useLocation();
+  const [headerSavedLocations, setHeaderSavedLocations] = useState([]);
+
   let favouriteLocationLinks = [];
   let i = 0;
 
+  // let savedLocations = [];
 
   const handleLogoutLink = (e) => {
     handleLogout();
   }
+
+  const obtainFavourites = async () => {
+    const { favourites } = await getSavedFavourites();
+    setHeaderSavedLocations(favourites);
+    console.log(`savedLocations from Header: ${headerSavedLocations}`);
+  }
+
+  useEffect(() => {
+    obtainFavourites();
+  }, [favouriteLocations]);
+
+  useEffect(() => {
+    obtainFavourites();
+  }, []);
 
   return (
     <>
@@ -44,7 +61,7 @@ const Header = ({ handleLocationLinkClick, searchData, updateSearch, submitLocat
               <li className="nav-item active">
                 <NavLink to='/' className="nav-link">Home</NavLink>
               </li>
-              {favouriteLocations.length > 0 &&
+              {headerSavedLocations.length > 0 &&
                 <>
                   <li className="nav-item dropdown">
                     <NavLink
@@ -61,7 +78,7 @@ const Header = ({ handleLocationLinkClick, searchData, updateSearch, submitLocat
                       <NavLink
                         to='/favourites'
                         className='dropdown-item'>All Saved Locations</NavLink>
-                      {favouriteLocations.map((location, index) => (
+                      {headerSavedLocations.map((location, index) => (
                         <NavLink
                           key={index}
                           to={'/weather'}
@@ -88,7 +105,7 @@ const Header = ({ handleLocationLinkClick, searchData, updateSearch, submitLocat
 }
 
 Header.propTypes = {
-  // favouriteLocations: PropTypes.array.isRequired,
+  // savedLocations: PropTypes.array.isRequired,
   handleLocationLinkClick: PropTypes.func.isRequired
 }
 
