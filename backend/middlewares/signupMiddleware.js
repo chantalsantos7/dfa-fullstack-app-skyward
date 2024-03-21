@@ -13,7 +13,6 @@ const encryptPassword = async (password) => {
 }
 
 const checkDuplicateEmail = async (req, res, next) => {
-    console.log(`reached checkDuplicateEmail`);
     try {
         const user = await User.findOne({ email: req.body.email }).exec();
         console.log(user);

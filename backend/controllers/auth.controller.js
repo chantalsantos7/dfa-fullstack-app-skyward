@@ -63,8 +63,7 @@ try {
 
 const changePasswordController = async (req, res) => {
     validateRequest(req, res);
-    const userId = req.params.id;
-    console.log(`Simme's id: ${userId}`)
+    const userId = req.params.id
     try {
         await changePasswordService(userId, req.body.newPassword);
         return res.status(200).send({ message: `Password successfully updated` });
