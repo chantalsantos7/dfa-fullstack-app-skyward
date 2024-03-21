@@ -1,6 +1,7 @@
 import * as chai from 'chai';
 import { expect } from 'chai';
 import chaiHttp from 'chai-http';
+import supertest from 'supertest';
 import server from '../server.js';
 import {describe, it, beforeEach, afterEach } from 'mocha';
 import User from '../models/user.model.js';
@@ -8,7 +9,8 @@ import configDotenvPath from '../helpers/dotenv-config.js';
 
 configDotenvPath();
 
-const { request } = chai.use(chaiHttp);
+chai.use(chaiHttp);
+const request = supertest(server);
 
 describe("Authentication tests", () => {
     const SIGNUP_ENDPOINT_PATH = "/auth/signup";
@@ -27,7 +29,7 @@ describe("Authentication tests", () => {
         });
 
         it("should allow the user to sign up to the website with a valid email and password", async () => {
-            const response = await request(server)
+            const response = await request
                 .post(SIGNUP_ENDPOINT_PATH)
                 .send(testSignupRequest)
 
@@ -36,8 +38,8 @@ describe("Authentication tests", () => {
         });
 
         it("should not allow user to sign up if the email is already in use", async () => {
-            // const response = await request(server).post(ENDPOINT_PATH).send(testSignupRequest);
-            const response = await request(server).post(SIGNUP_ENDPOINT_PATH).send(testSignupRequest);
+            // const response = await request.post(ENDPOINT_PATH).send(testSignupRequest);
+            const response = await request.post(SIGNUP_ENDPOINT_PATH).send(testSignupRequest);
 
             expect(response.status).to.equal(400);
             expect(response.body.message).to.equal("Email already in use");
@@ -56,7 +58,7 @@ describe("Authentication tests", () => {
             //Arrange
             
             //Act
-            const response = await request(server)
+            const response = await request
             .post(LOGIN_ENDPOINT_PATH)
             .send(testLoginRequest);
 
@@ -69,9 +71,9 @@ describe("Authentication tests", () => {
 
         it("Should allow log in if the user is found in database and password matches", async () => {
             //Arrange
-            await request(server).post(SIGNUP_ENDPOINT_PATH).send(testLoginRequest);
+            await request.post(SIGNUP_ENDPOINT_PATH).send(testLoginRequest);
 
-            const response = await request(server).post(LOGIN_ENDPOINT_PATH).send(testLoginRequest);
+            const response = await request.post(LOGIN_ENDPOINT_PATH).send(testLoginRequest);
 
             expect(response.status).to.equal(200);
             expect(response.body.message).to.equal(`Login successful`);
@@ -84,14 +86,14 @@ describe("Authentication tests", () => {
                 password: "wrongPass"
             }
 
-            const response = await request(server).post(LOGIN_ENDPOINT_PATH).send(testFailData);
+            const response = await request.post(LOGIN_ENDPOINT_PATH).send(testFailData);
             expect(response.status).to.equal(401);
             expect(response.body.message).to.equal(`Unauthorised Access: Invalid password/email combination`);
         });
 
         it("Should return a JWT containing the user's id from the database", async () => {
             
-            const response = await request(server).post(LOGIN_ENDPOINT_PATH).send(testLoginRequest);
+            const response = await request.post(LOGIN_ENDPOINT_PATH).send(testLoginRequest);
 
             expect(response.status).to.equal(200);
             expect(response.body.authToken).to.not.be.null;
