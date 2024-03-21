@@ -12,8 +12,6 @@ export const FavesProvider = ({ children }) => {
     const updateSavedLocations = async () => {
 
         const getFavesResponse = await getSavedFavourites(authToken);
-        console.log("does it reach updateSavedLocations?");
-        console.log(`response from getSavedFavourites in updateSavedLocation: ${JSON.stringify(getFavesResponse)}`)
         if (getFavesResponse.favourites) {
             setHasSavedLocations(true);
             setFavouriteLocations(getFavesResponse.favourites);
@@ -21,28 +19,12 @@ export const FavesProvider = ({ children }) => {
         }
         setHasSavedLocations(false);
         setFavouriteLocations([]);
-        // const savedFaves = getSavedFavourites(authToken);
-        // if (savedFaves && savedFaves.length > 0) {
-        //     setHasSavedLocations(true);
-        //     setFavouriteLocations(savedFaves);
-        //     return;
-        // }
-        // setHasSavedLocations(false);
-        // setFavouriteLocations([]);
     }
 
     const getSavedFavourites = async () => {
         const getResponse = await getFavouriteLocationsFromDbService(authToken);
         
-        return getResponse;
-
-        // if (getResponse.favourites.length > 0) {
-        //     const favourites = getResponse.favourites;
-        //     return favourites;
-        // } else {
-        //     return getResponse.message;
-        // }
-        
+        return getResponse;       
     }
 
     const createNewFavouritesEntry = async (favourites) => {
@@ -53,7 +35,6 @@ export const FavesProvider = ({ children }) => {
 
     const addLocationToFavourites = async (location) => {
         const updatedFavourites = await addFavouriteLocationToDbService(authToken, location);
-        // setFavouriteLocations(updatedFavourites);
         setFavouriteLocations(updatedFavourites);
         return updatedFavourites;
     }
@@ -64,26 +45,26 @@ export const FavesProvider = ({ children }) => {
         return updatedFavourites;
     }
 
+    const clearFavouritesForLogout = () => {
+        setHasSavedLocations(false);
+        setFavouriteLocations([]);
+    }
+
 
     useEffect(() => {
         const fetchFavourites = async () => {
             if (loggedIn) {
                 const favourites = await getSavedFavourites(authToken);
-                // setFavouriteLocations(favourites);
                 updateSavedLocations();
             }
         }
         fetchFavourites();
     }, [loggedIn])
 
-    // useEffect(() => {
-    //     checkHasSavedLocations();
-    // }, [hasSavedLocations]);
-
 
     return (
         <FavesContext.Provider
-            value={{ favouriteLocations, getSavedFavourites, createNewFavouritesEntry, addLocationToFavourites, updateSavedLocations, deleteLocationFromFavourites }}>
+            value={{ favouriteLocations, getSavedFavourites, createNewFavouritesEntry, addLocationToFavourites, updateSavedLocations, deleteLocationFromFavourites, clearFavouritesForLogout }}>
             {children}
         </FavesContext.Provider>
     );

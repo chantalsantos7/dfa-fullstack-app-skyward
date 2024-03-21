@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 const Header = ({ handleLocationLinkClick, searchData, updateSearch, submitLocation }) => {
 
   const { loggedIn, handleLogout } = useAuth();
-  const { favouriteLocations, getSavedFavourites } = useFaves();
+  const { favouriteLocations, getSavedFavourites, clearFavouritesForLogout } = useFaves();
   const location = useLocation();
   const [headerSavedLocations, setHeaderSavedLocations] = useState([]);
 
@@ -19,6 +19,7 @@ const Header = ({ handleLocationLinkClick, searchData, updateSearch, submitLocat
 
   const handleLogoutLink = (e) => {
     setHeaderSavedLocations([]);
+    clearFavouritesForLogout();
     handleLogout();
   }
 
