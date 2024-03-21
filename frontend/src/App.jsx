@@ -61,15 +61,15 @@ const App = () => {
     
 
     const getWeatherData = async (location) => {
-        location = location.toLowerCase();
-        const data = await getWeatherService(location);
+        // const locationString = location;
+        const data = await getWeatherService(location.toLowerCase());
         if (data instanceof Error) {
             console.log(`getWeatherData has an error`)
             return setWeatherData({});
         }
 
         let foundDayData = initialiseDayData(data);
-        setWeatherData({ dayData: foundDayData });
+        setWeatherData({ location: location, dayData: foundDayData });
     };
 
     const submitLocation = (location) => {

@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import FavouriteLocationButton from '../LocationInformation/FavouriteLocationButton'
-const FavouriteLocationName = ({ location, checkHasSavedLocations, handleLocationLinkClick }) => {
+const FavouriteLocationName = ({ location }) => {
   
-  const handleClick = () => {
-    event.preventDefault();
-    handleLocationLinkClick(location);
+  const handleClick = (e) => {
+    e.preventDefault();
+    // handleLocationLinkClick(location);
   }
 
   return (
     <>
       <div className="row favourite-location">
-      <FavouriteLocationButton location={location} checkHasSavedLocations={checkHasSavedLocations} />
+      <FavouriteLocationButton location={location} />
         <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
           <Link className='favourite-location-link' to='/weather'
           onClick={handleClick}>{location}</Link>

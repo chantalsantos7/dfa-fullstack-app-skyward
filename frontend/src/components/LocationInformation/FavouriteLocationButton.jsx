@@ -6,31 +6,63 @@ import { useAuth } from '../../contexts/AuthContext';
 
 // , checkHasSavedLocations
 const FavouriteLocationButton = ({ location }) => {
-    const { authToken } = useAuth();
-    const { favouriteLocations, addLocationToFavourites, checkHasSavedLocations } = useFaves();
+    const { loggedIn } = useAuth();
+    const { favouriteLocations, addLocationToFavourites, updateSavedLocations, deleteLocationFromFavourites } = useFaves();
     const [savedLocation, setSavedLocation] = useState(false);
-    
+
+    //FaveLocationButton is not being rerendered when the location changes
     const clickHandler = async () => {
 
-        if (!savedLocation) {
-            // saveFavouriteLocationService(location);
-            addLocationToFavourites( location);
-            setSavedLocation(true);
-            checkHasSavedLocations();
-            return;
+        //if logged in, use the database services
+        if (loggedIn) {
+            if (!savedLocation) {
+                try {
+                    addLocationToFavourites(location);
+                    setSavedLocation(true);
+                    updateSavedLocations();
+                    return;
+                }
+                catch (err) {
+                    console.log(err.message);
+                    return;
+                }
+
+            }
+
         }
-        if (confirm("Are you sure you want to remove this location from your favourites?")) {
-            removeFromFavouriteLocationsService(location);
-            setSavedLocation(false);
-            // checkHasSavedLocations();
+
+        if (loggedIn) {
+            if (confirm("Are you sure you want to remove this location from your favourites?")) {
+                // removeFromFavouriteLocationsService(location);
+                try {
+                    deleteLocationFromFavourites(location);
+                    setSavedLocation(false);
+                    updateSavedLocations();
+                    return;
+                }
+                catch (err) {
+                    console.error(err);
+                }
+            }
         }
+        alert("Please log in to save locations");
+
+
+
+
+
     }
 
-    
+
     const checkLocationIsSaved = () => {
         // const savedLocations = getFavouriteLocationsService();
+        console.log(favouriteLocations);
+        console.log(favouriteLocations.includes(location))
         if (favouriteLocations && favouriteLocations.includes(location)) {
             setSavedLocation(true);
+        }
+        else {
+            setSavedLocation(false);
         }
     }
 

@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 
 const Header = ({ handleLocationLinkClick, searchData, updateSearch, submitLocation }) => {
 
-  const { authToken, handleLogout } = useAuth();
+  const { loggedIn, handleLogout } = useAuth();
   const { favouriteLocations } = useFaves();
   const location = useLocation();
   let favouriteLocationLinks = [];
@@ -75,8 +75,8 @@ const Header = ({ handleLocationLinkClick, searchData, updateSearch, submitLocat
                     </div>
                   </li>
                 </>}
-              {(authToken === null && location.pathname !== '/login') && <NavLink to="/login" className='nav-link'>Login</NavLink>}
-              {(authToken !== null && location.pathname !== '/login') && <NavLink to="/login" className='nav-link' onClick={handleLogoutLink}>Logout</NavLink>}
+              {(!loggedIn && location.pathname !== '/login') && <NavLink to="/login" className='nav-link'>Login</NavLink>}
+              {(loggedIn && location.pathname !== '/login') && <NavLink to="/login" className='nav-link' onClick={handleLogoutLink}>Logout</NavLink>}
               {location.pathname !== '/' && <SearchBar searchData={searchData} updateSearch={updateSearch} submitLocation={submitLocation} />}
             </ul>
           </div>

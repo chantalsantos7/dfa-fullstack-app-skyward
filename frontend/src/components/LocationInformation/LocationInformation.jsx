@@ -5,16 +5,15 @@ import TellYouLocation from '../TellYouLocation'
 import FavouriteLocationButton from './FavouriteLocationButton'
 
 
-const LocationInformation = ({ searchData: location, weatherData, checkHasSavedLocations }) => {
+const LocationInformation = ({ weatherData }) => {
  
-  const { searchBarText: displayString } = location;
   return (
     <>
         <div className='container mt-3 text-center location-container'>
-          <TellYouLocation displayString={displayString}  />
+          <TellYouLocation displayString={weatherData.location}  />
           <div className='row justify-content-center d-flex align-items-center'>
            <div className='location-col col-12 col-sm-12 col-md-4 col-lg-4 d-flex align-items-center justify-content-center'>
-             <FavouriteLocationButton location={location.searchBarText} checkHasSavedLocations={checkHasSavedLocations} />
+             <FavouriteLocationButton location={weatherData.location}  />
            <label htmlFor='favourite-button' className='save-favourite-btn'>Click to save as favourite location</label>
            </div>         
           </div>
@@ -34,9 +33,6 @@ const LocationInformation = ({ searchData: location, weatherData, checkHasSavedL
 }
 
 LocationInformation.propTypes = {
-  searchData: PropTypes.exact( {
-    searchBarText: PropTypes.string.isRequired
-  }).isRequired,
   weatherData: PropTypes.object.isRequired,
   // checkHasSavedLocations: PropTypes.func.isRequired
 };

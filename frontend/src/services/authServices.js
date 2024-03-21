@@ -19,9 +19,13 @@ export const loginService = async (credentials) => {
 
 export const verifyTokenService = async (authToken) => {
     const VERIFICATION_ROUTE = `http://localhost:5000/auth/check-verification`;
-
+    
+    const authRequest = {
+        authToken: authToken
+    }
+    // console.log(`authToken at point of verifyTokenService is ${authRequest.authToken}`);
     try {
-        const response = await axios.post(VERIFICATION_ROUTE, authToken, {
+        const response = await axios.post(VERIFICATION_ROUTE, authRequest, {
             headers: {
                 'Content-Type': 'application/json'
             }

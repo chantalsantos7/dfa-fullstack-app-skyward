@@ -1,7 +1,7 @@
 import "./css/form-styling.css";
 import { useAuth } from "../../contexts/AuthContext";
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useFaves } from "../../contexts/FavesContext";
 
 const LoginPage = () => {
@@ -21,7 +21,6 @@ const LoginPage = () => {
         setLoginCredentials({ ...loginCredentials, [e.target.name]: e.target.value});
     }
 
-    //TODO: navigate to HomePage if logged in/authToken has been set
     return (
         <>
             {!!authToken && <Navigate to='/'/>}
@@ -29,7 +28,7 @@ const LoginPage = () => {
 
                 <div className="container">
                     <div className="card  d-flex justify-content-center">
-                        <div className="card-body auth-form-card">
+                        <div className="card-body auth-form-card text-center">
                             <h1 className=" card-title form-header">Login</h1>
                             <form action="" className="login-form" onSubmit={handleSubmit}>
                                 <div className="form-outline mb-3">
@@ -63,6 +62,9 @@ const LoginPage = () => {
                                     />
                                 </div>
                             </form>
+                            <div className="container mt-3">
+                                <Link to={"/signup"} >Sign up for an account</Link>
+                            </div>
                         </div>
                     </div>
                 </div>

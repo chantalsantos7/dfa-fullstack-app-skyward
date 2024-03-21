@@ -1,15 +1,15 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { useAuth } from "./AuthContext";
-import { addFavouriteLocationToDbService, getFavouriteLocationsFromDbService } from "../services/favesServices";
+import { addFavouriteLocationToDbService, deleteFavouriteLocationFromDbService, getFavouriteLocationsFromDbService } from "../services/favesServices";
 
 const FavesContext = createContext();
 
 export const FavesProvider = ({ children }) => {
-    const { authToken } = useAuth();
+    const { loggedIn, authToken } = useAuth();
     const [favouriteLocations, setFavouriteLocations] = useState([]);
     const [hasSavedLocations, setHasSavedLocations] = useState(false);
 
-    const checkHasSavedLocations = async (authToken) => {
+    const updateSavedLocations = async () => {
 
         const savedFaves = await getSavedFavourites(authToken);
         if (savedFaves && savedFaves.length > 0) {
@@ -29,7 +29,7 @@ export const FavesProvider = ({ children }) => {
         // setFavouriteLocations([]);
     }
 
-    const getSavedFavourites = async (authToken) => {
+    const getSavedFavourites = async () => {
         const favourites = await getFavouriteLocationsFromDbService(authToken);
         return favourites;
     }
@@ -40,17 +40,22 @@ export const FavesProvider = ({ children }) => {
         return updatedFavourites;
     }
 
+    const deleteLocationFromFavourites = async (location) => {
+        const updatedFavourites = await deleteFavouriteLocationFromDbService(authToken, location);
+        return updatedFavourites;
+    }
+
 
     useEffect(() => {
         const fetchFavourites = async () => {
-            if (authToken) {
+            if (loggedIn) {
                 const favourites = await getSavedFavourites(authToken);
                 // setFavouriteLocations(favourites);
-                checkHasSavedLocations(authToken);
+                updateSavedLocations();
             }
         }
         fetchFavourites();
-    }, [authToken])
+    }, [loggedIn])
 
     // useEffect(() => {
     //     checkHasSavedLocations();
@@ -59,7 +64,7 @@ export const FavesProvider = ({ children }) => {
 
     return (
         <FavesContext.Provider
-            value={{ favouriteLocations, getSavedFavourites, addLocationToFavourites, checkHasSavedLocations }}>
+            value={{ favouriteLocations, getSavedFavourites, addLocationToFavourites, updateSavedLocations, deleteLocationFromFavourites }}>
             {children}
         </FavesContext.Provider>
     );
