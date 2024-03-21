@@ -69,6 +69,7 @@ export const addFavouriteLocationToDbService = async (authToken, location) => {
                 'Content-Type': 'application/json'
             }
         });
+        console.log(addLocationResponse.data.favourites);
         //returns updated favourites list
         return addLocationResponse.data.favourites;
     }

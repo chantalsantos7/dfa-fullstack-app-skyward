@@ -17,16 +17,15 @@ const Header = ({ handleLocationLinkClick, searchData, updateSearch, submitLocat
   let favouriteLocationLinks = [];
   let i = 0;
 
-  // let savedLocations = [];
-
   const handleLogoutLink = (e) => {
+    setHeaderSavedLocations([]);
     handleLogout();
   }
 
   const obtainFavourites = async () => {
     const { favourites } = await getSavedFavourites();
     setHeaderSavedLocations(favourites);
-    console.log(`savedLocations from Header: ${headerSavedLocations}`);
+    // console.log(`savedLocations from Header: ${headerSavedLocations}`);
   }
 
   useEffect(() => {

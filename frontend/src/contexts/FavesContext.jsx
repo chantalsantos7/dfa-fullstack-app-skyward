@@ -12,8 +12,9 @@ export const FavesProvider = ({ children }) => {
     const updateSavedLocations = async () => {
 
         const getFavesResponse = await getSavedFavourites(authToken);
-        console.log(getFavesResponse);
-        if (getFavesResponse.favourites && getFavesResponse.favourites.length > 0) {
+        console.log("does it reach updateSavedLocations?");
+        console.log(`response from getSavedFavourites in updateSavedLocation: ${JSON.stringify(getFavesResponse)}`)
+        if (getFavesResponse.favourites) {
             setHasSavedLocations(true);
             setFavouriteLocations(getFavesResponse.favourites);
             return;
@@ -46,17 +47,20 @@ export const FavesProvider = ({ children }) => {
 
     const createNewFavouritesEntry = async (favourites) => {
         const newFavouritesEntry = await addNewUserFavouritesToDbService(authToken, favourites);
+        setFavouriteLocations(newFavouritesEntry);
         return newFavouritesEntry;
     }
 
     const addLocationToFavourites = async (location) => {
         const updatedFavourites = await addFavouriteLocationToDbService(authToken, location);
         // setFavouriteLocations(updatedFavourites);
+        setFavouriteLocations(updatedFavourites);
         return updatedFavourites;
     }
 
     const deleteLocationFromFavourites = async (location) => {
         const updatedFavourites = await deleteFavouriteLocationFromDbService(authToken, location);
+        setFavouriteLocations(updatedFavourites);
         return updatedFavourites;
     }
 

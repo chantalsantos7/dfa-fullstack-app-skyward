@@ -30,64 +30,57 @@ const FavouriteLocationButton = ({ location }) => {
             //4. setSavedLocationToFalse
             //5. update savedLocations
 
+        if (loggedIn === true) {
+            if (!savedLocation) {
+                const getFavesResponse = await getSavedFavourites();
+                if (getFavesResponse.message === "No favourites saved yet") {
+                    const newFavesReq = [`${location}`];
+                    try {
+                        const createNewFavesResponse = await createNewFavouritesEntry(newFavesReq);
+                        console.log(createNewFavesResponse);
+                    }
+                    catch (err) {
+                        console.error(err);
+                        return;
+                    }
+                }
+                else if (getFavesResponse.favourites) {
+                    try {
+                        await addLocationToFavourites(location);
+                    }
+                    catch (err) {
+                        console.error(err);
+                        return;
+                    }
+                }
+                console.log("reached here, after the favourite has been added");                
+                setSavedLocation(true);
+                // await updateSavedLocations();
+                return;
+            }
 
-
-
-
-
-        
-        // if (loggedIn) {
-        //     const faves = await getSavedFavourites();
-        //     // console.log(`faves is: ${faves}`);
-        //     if (faves.length === 0) {
-        //         //favourites haven't been created for this user yet, so add a new entry entirely
-        //         const newFavesArray = [`${location}`];
-        //         const newFavouritesEntry = createNewFavouritesEntry(newFavesArray);
-        //     }
-
-        //     if (!savedLocation) {
-        //         try {
-        //             addLocationToFavourites(location);
-        //             setSavedLocation(true);
-        //             updateSavedLocations();
-        //             return;
-        //         }
-        //         catch (err) {
-        //             console.log(err.message);
-        //             return;
-        //         }
-
-        //     }
-
-        // }
-
-        // if (loggedIn) {
-        //     if (confirm("Are you sure you want to remove this location from your favourites?")) {
-        //         // removeFromFavouriteLocationsService(location);
-        //         try {
-        //             deleteLocationFromFavourites(location);
-        //             setSavedLocation(false);
-        //             updateSavedLocations();
-        //             return;
-        //         }
-        //         catch (err) {
-        //             console.error(err);
-        //         }
-        //     }
-        // }
-        // alert("Please log in to save locations");
-
-
-
-
+            if (confirm("Are you sure you want to remove this location from your favourites?")) {
+                try {
+                    const deleteResponse = await deleteLocationFromFavourites(location);
+                    console.log(deleteResponse);
+                }
+                catch (err)
+                {
+                    console.error(err);
+                    return;
+                }
+                setSavedLocation(false);
+                // await updateSavedLocations();
+                return;
+            }
+        }
+        alert("Please log in to save a location");
+        return;
 
     }
 
 
     const checkLocationIsSaved = () => {
-        // const savedLocations = getFavouriteLocationsService();
-        console.log(favouriteLocations);
-        console.log(favouriteLocations.includes(location))
         if (favouriteLocations && favouriteLocations.includes(location)) {
             setSavedLocation(true);
         }
@@ -96,7 +89,8 @@ const FavouriteLocationButton = ({ location }) => {
         }
     }
 
-    useEffect(checkLocationIsSaved, [savedLocation, location]);
+    useEffect(checkLocationIsSaved, [savedLocation]);
+    useEffect(checkLocationIsSaved, [location]);
     useEffect(checkLocationIsSaved, []);
     // once added to favourites, render the bookmark-star-fill icon instead - state + apply new class to change colour
     // 
