@@ -30,7 +30,12 @@ export const verifyTokenService = async (authToken) => {
                 'Content-Type': 'application/json'
             }
         });
-        return response;
+
+        if (response.status === 422) 
+        {
+            throw new Error(`cannot verify request`);
+        }
+        return response.data;
     }
     catch (err) {
         throw err;
