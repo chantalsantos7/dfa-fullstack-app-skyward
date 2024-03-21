@@ -6,11 +6,11 @@ import { getFavouriteLocationsService } from '../../utils/services'
 import { useFaves } from '../../contexts/FavesContext'
 
 // { checkHasSavedLocations, handleLocationLinkClick }
-const FavouriteLocations = () => {
+const FavouriteLocations = ({ handleLocationLinkClick }) => {
 
   const { favouriteLocations } = useFaves();
 
-  // const favouriteLocations = getFavouriteLocationsService();
+
   let favouriteLocationLinks = [];
   let i = 0;
   favouriteLocations.forEach(fave => {
@@ -19,8 +19,7 @@ const FavouriteLocations = () => {
         <FavouriteLocationName
           key={i++}
           location={fave}
-          // checkHasSavedLocations={checkHasSavedLocations}
-          // handleLocationLinkClick={handleLocationLinkClick}
+          handleLocationLinkClick={handleLocationLinkClick}
         />
       </div>
     );

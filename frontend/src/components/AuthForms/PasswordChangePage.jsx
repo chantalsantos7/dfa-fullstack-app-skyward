@@ -1,7 +1,7 @@
 const PasswordChangePage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+        //TODO: password change functionality - connect to backend
     }
     return (
         <div className="container mt-3 d-flex align-items-center justify-content-center">

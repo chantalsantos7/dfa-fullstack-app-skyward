@@ -83,7 +83,7 @@ const App = () => {
 
     const handleLocationLinkClick = (location) => {
         // If on the home page, it only sets the search bar text to the location, does not go to the location page
-        setSearchBarText(location);
+        // setSearchBarText(location);
         submitLocation(location);
 
         navigate('/weather');
@@ -121,7 +121,7 @@ const App = () => {
                         <Route
                             path='/favourites'
                             element={
-                                <FavouriteLocations  />
+                                <FavouriteLocations handleLocationLinkClick={handleLocationLinkClick} />
                                 
                             }>
     

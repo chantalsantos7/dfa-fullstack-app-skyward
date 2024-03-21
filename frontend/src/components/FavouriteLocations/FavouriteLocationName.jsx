@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import FavouriteLocationButton from '../LocationInformation/FavouriteLocationButton'
-const FavouriteLocationName = ({ location }) => {
+const FavouriteLocationName = ({ location, handleLocationLinkClick }) => {
   
   const handleClick = (e) => {
     e.preventDefault();
-    // handleLocationLinkClick(location);
+    handleLocationLinkClick(location);
   }
+
+  //navigate to the weather page, submitting the location to it
 
   return (
     <>
@@ -23,8 +25,6 @@ const FavouriteLocationName = ({ location }) => {
 
 FavouriteLocationName.propTypes = {
   location: PropTypes.string.isRequired,
-  // checkHasSavedLocations: PropTypes.func.isRequired,
-  // handleLocationLinkClick: PropTypes.func.isRequired
 }
 
 FavouriteLocationName.defaultProps = {

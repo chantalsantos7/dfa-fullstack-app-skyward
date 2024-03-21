@@ -23,7 +23,6 @@ export const verifyTokenService = async (authToken) => {
     const authRequest = {
         authToken: authToken
     }
-    // console.log(`authToken at point of verifyTokenService is ${authRequest.authToken}`);
     try {
         const response = await axios.post(VERIFICATION_ROUTE, authRequest, {
             headers: {

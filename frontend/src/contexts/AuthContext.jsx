@@ -8,10 +8,6 @@ export const AuthProvider = ({ children }) => {
     const [loggedIn, setLoggedIn] = useState(false);
 
     const handleLogin = async (credentials) => {
-        //make an axios request to the server to login
-        //if the request succeeds and we get back a token, set authToken to that token
-
-        // const { email, password } = credentials;
         try {
             const response = await loginService(credentials);
             setLoggedIn(true);
