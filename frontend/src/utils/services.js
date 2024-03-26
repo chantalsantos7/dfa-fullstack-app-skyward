@@ -9,10 +9,11 @@ import dotenv from 'dotenv';
 
 
 export const getWeatherService = async (location) => {
+    const encodedLocation = encodeURIComponent(location);
     try {
-        const WEATHER_API_KEY = '9289f7156337cd9fc1dfd709ac9e441f';
-        const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${WEATHER_API_KEY}`);
-        return response.data;
+        const response = await axios.get(`http://localhost:5000/weather/get-location-weather/${encodedLocation}`);
+        // console.log(response.data);
+        return response.data.data;
     } 
     catch (error) {
         console.error(`There was a problem with your fetch operation: `,

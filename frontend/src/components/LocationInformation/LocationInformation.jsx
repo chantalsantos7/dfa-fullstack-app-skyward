@@ -3,18 +3,23 @@ import WeatherForecast from "./WeatherForecast/WeatherForecast"
 import './css/location-information.css'
 import TellYouLocation from '../TellYouLocation'
 import FavouriteLocationButton from './FavouriteLocationButton'
+import { useAuth } from '../../contexts/AuthContext'
 
 
 const LocationInformation = ({ weatherData }) => {
- 
+  const { loggedIn } = useAuth();
+
   return (
     <>
         <div className='container mt-3 text-center location-container'>
           <TellYouLocation displayString={weatherData.location}  />
           <div className='row justify-content-center d-flex align-items-center'>
            <div className='location-col col-12 col-sm-12 col-md-4 col-lg-4 d-flex align-items-center justify-content-center'>
-             <FavouriteLocationButton location={weatherData.location}  />
-           <label htmlFor='favourite-button' className='save-favourite-btn'>Click to save as favourite location</label>
+             {!!loggedIn && <>
+              <FavouriteLocationButton location={weatherData.location}  />
+              <label htmlFor='favourite-button' className='save-favourite-btn'>Click to save as favourite location</label>
+             </>}
+           
            </div>         
           </div>
           <div className="row">

@@ -1,8 +1,4 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
-// import { configDotenvPath } from '../utils/helpers.js';
-
-// configDotenvPath();
 
 export const useSignup = async (credentials) => {
     const { email, password } = credentials;

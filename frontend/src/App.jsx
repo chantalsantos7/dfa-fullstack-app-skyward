@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
-import { getWeatherService, getFavouriteLocationsService } from './utils/services';
+import { getWeatherService } from './utils/services';
 import { formatTemperature } from './utils/formatting';
 import './css/site.css'
 import HomePage from './components/HomePage/HomePage';
@@ -150,7 +150,7 @@ const App = () => {
                         </Route>
 
                     </Routes>
-    
+                    
                     <Footer />
                 </FavesProvider>
             </AuthProvider>
