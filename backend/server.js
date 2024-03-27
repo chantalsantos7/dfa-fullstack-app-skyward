@@ -7,13 +7,14 @@ import authRouter from './routes/auth.routes.js';
 import morgan from 'morgan';
 import favouriteLocationsRouter from './routes/favouriteLocations.routes.js';
 import weatherRouter from './routes/weather.routes.js';
+import placesRouter from './routes/places.routes.js';
 
 const app = express();
 configDotenvPath();
 
 app.use(cors());
 app.use(express.json());
-app.use(morgan(`tiny`));
+app.use(morgan(`combined`));
 app.use(express.urlencoded({ extended: true }));
 connectDb();
 
@@ -21,6 +22,7 @@ connectDb();
 app.use(`/auth`, authRouter);
 app.use(`/favourite-locations`, favouriteLocationsRouter);
 app.use(`/weather`, weatherRouter);
+app.use("/places", placesRouter);
 
 
 const { PORT } = process.env; 
