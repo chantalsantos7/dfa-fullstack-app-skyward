@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { getWeatherService } from './services/weatherServices';
 import { formatTemperature } from './utils/formatting';
 import './css/site.css'
@@ -18,6 +18,8 @@ import { FavesProvider } from './contexts/FavesContext';
 const App = () => {
 
     const navigate = useNavigate();
+    const appLocation = useLocation();
+    // const footerStyle = appLocation.pathname === '/weather' ? { marginTop: 'auto' } : {};
     const [searchBarText, setSearchBarText] = useState('');
 
     const [weatherData, setWeatherData] = useState({});
@@ -58,16 +60,16 @@ const App = () => {
     }
 
     const getWeatherData = async (location) => {
-        console.log("Am I failing at getWeatherData?")
         // const locationString = location;
         const data = await getWeatherService(location.toLowerCase());
         if (data instanceof Error) {
             console.log(`getWeatherData has an error`)
             return setWeatherData({});
         }
-
+        // console.log(data);
         let foundDayData = initialiseDayData(data);
-        setWeatherData({ location: location, dayData: foundDayData });
+        const {lat, lon } = data.city.coord;
+        setWeatherData({coords: {lat: lat, lon: lon}, location: location, dayData: foundDayData });
     };
 
     const submitLocation = (location) => {

@@ -4,10 +4,11 @@ import './css/location-information.css'
 import TellYouLocation from '../TellYouLocation'
 import FavouriteLocationButton from './FavouriteLocationButton'
 import { useAuth } from '../../contexts/AuthContext'
+import PlacesOfInterestMap from './PlacesOfInterestMap'
 
 const LocationInformation = ({ weatherData, updateWeatherData }) => {
   const { loggedIn } = useAuth();
-
+  // console.log(`Coords: are ${{ weatherData.coords}}`);
   return (
     <>
         <div className='container mt-3 text-center location-container'>
@@ -26,7 +27,9 @@ const LocationInformation = ({ weatherData, updateWeatherData }) => {
               <WeatherForecast weatherData={weatherData} />
             </div>      
           </div>
-
+            <div className="row">
+              <PlacesOfInterestMap coordinates={weatherData.coords} />
+            </div>
           <div className="row ">
             <div className="col location-col mobile-buffer"></div>
           </div>
