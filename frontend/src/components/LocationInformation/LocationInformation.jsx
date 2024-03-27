@@ -5,8 +5,7 @@ import TellYouLocation from '../TellYouLocation'
 import FavouriteLocationButton from './FavouriteLocationButton'
 import { useAuth } from '../../contexts/AuthContext'
 
-
-const LocationInformation = ({ weatherData }) => {
+const LocationInformation = ({ weatherData, updateWeatherData }) => {
   const { loggedIn } = useAuth();
 
   return (
@@ -39,6 +38,7 @@ const LocationInformation = ({ weatherData }) => {
 
 LocationInformation.propTypes = {
   weatherData: PropTypes.object.isRequired,
+  updateWeatherData: PropTypes.func.isRequired
   // checkHasSavedLocations: PropTypes.func.isRequired
 };
 

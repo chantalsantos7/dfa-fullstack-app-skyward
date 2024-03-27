@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
-import { getWeatherService } from './utils/services';
+import { getWeatherService } from './services/weatherServices';
 import { formatTemperature } from './utils/formatting';
 import './css/site.css'
 import HomePage from './components/HomePage/HomePage';
@@ -57,10 +57,8 @@ const App = () => {
         return dayIndices;
     }
 
-
-    
-
     const getWeatherData = async (location) => {
+        console.log("Am I failing at getWeatherData?")
         // const locationString = location;
         const data = await getWeatherService(location.toLowerCase());
         if (data instanceof Error) {
@@ -78,12 +76,11 @@ const App = () => {
         2. switch to the location information page (passing along the location information as a prop)
         */
         // checkHasSavedLocations();
+        console.log(location);
         getWeatherData(location);
     }
 
     const handleLocationLinkClick = (location) => {
-        // If on the home page, it only sets the search bar text to the location, does not go to the location page
-        // setSearchBarText(location);
         submitLocation(location);
 
         navigate('/weather');
@@ -93,7 +90,17 @@ const App = () => {
         document.title = "Skyward";
     }, []);
 
-    
+    useEffect(() => {
+        getWeatherData(weatherData.location);
+
+        const intervalId = setInterval(() => {
+            console.log("called the interval")
+            getWeatherData(weatherData.location);
+            //does successfully call it, it's just that it returns a 304 which causes error eventually
+        }, 600000);
+
+        return () => clearInterval(intervalId);
+    }, [weatherData.location]);
 
     return (
 
@@ -103,7 +110,7 @@ const App = () => {
                 <FavesProvider>
                     <Header handleLocationLinkClick={handleLocationLinkClick} searchData={{ searchBarText }} updateSearch={{ setSearchBarText }} submitLocation={submitLocation} />
                     <Routes>
-    
+
                         <Route
                             index
                             path='/'
@@ -114,17 +121,17 @@ const App = () => {
                         <Route
                             path='/weather'
                             element={
-                                <LocationInformation searchData={{ searchBarText }} weatherData={weatherData} />
+                                <LocationInformation searchData={{ searchBarText }} weatherData={weatherData} updateWeatherData={getWeatherData} />
                             }>
-    
+
                         </Route>
                         <Route
                             path='/favourites'
                             element={
                                 <FavouriteLocations handleLocationLinkClick={handleLocationLinkClick} />
-                                
+
                             }>
-    
+
                         </Route>
                         <Route
                             path='/signup'
@@ -140,7 +147,7 @@ const App = () => {
                             }
                         >
                         </Route>
-    
+
                         <Route
                             path='/password-change'
                             element={
@@ -150,7 +157,7 @@ const App = () => {
                         </Route>
 
                     </Routes>
-                    
+
                     <Footer />
                 </FavesProvider>
             </AuthProvider>
