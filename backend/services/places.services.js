@@ -8,7 +8,7 @@ export const getPoIForLocationService = async (lon, lat) => {
     //https://api.geoapify.com/v2/places?categories=tourism.attractions&filter=circle:${lon},${lat},3000&bias=proximity:-0.07071648508463113,51.50848194136378&limit=20&apiKey=${process.env.PLACES_API_KEY}
     try {
         //TODO: Implement geolocating API to get better coordinates for this search
-        //pass the coordinates I get to reverse geolocating API, then use a "near this address" filter on the places API call
+        //pass the coordinates I get to reverse geolocating API to get a placeID for the city, can then set the city boundaries as a filter for the Places API
         const radiusMetres = 10000;
        
         // const response = await axios.get(`https://api.geoapify.com/v2/places?categories=tourism.attraction&filter=circle:${lon},${lat},${radiusMetres}&bias=proximity:9.1896346,45.4641943&limit=20&apiKey=${process.env.PLACES_API_KEY}`);
