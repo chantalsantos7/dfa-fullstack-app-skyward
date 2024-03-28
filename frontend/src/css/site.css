@@ -250,6 +250,16 @@ body.navbar-toggler:focus {
         left: 0;
     }
 
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    
+    .footer {
+        margin-top: auto;
+    }
+
     .search-bar-container {
         display: flex;
         justify-content: flex-end;
@@ -274,7 +284,18 @@ body.navbar-toggler:focus {
         right: 0;
         bottom: 0;
         left: 0;
+        width: 100%;
     }
+    /* body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    
+    .footer {
+        margin-top: auto;
+    }
+ */
 
     .search-bar-container {
         display: flex;

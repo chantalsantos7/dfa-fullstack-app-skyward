@@ -7,11 +7,11 @@ configDotenvPath();
 
 const getPoIForLocationController = async (req, res) => {
     validateRequest(req, res);
-
+    const { lat, lon } = req.params;
     try {
-        const response = await getPoIForLocationService(req.params.location);
-        console.log(response);
-        return res.status(200).send();
+        const response = await getPoIForLocationService(lat, lon);
+        // console.log(response);
+        return res.status(200).send({ features: response.data.features});
     }
     catch (err) {
         return res.status(500).send({ error: err });

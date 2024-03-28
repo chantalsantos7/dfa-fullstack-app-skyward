@@ -35,7 +35,7 @@ describe('Integration tests on requests to the /auth route', () => {
         await User.deleteMany({});
     });
 
-    xdescribe('tests on /auth/signup', () => {
+    describe('tests on /auth/signup', () => {
 
 
         it("should successfully create an account for the request", async () => {
@@ -44,12 +44,11 @@ describe('Integration tests on requests to the /auth route', () => {
                 .send(validSignupRequest);
 
             expect(response).to.have.status(201);
-            // console.log(response);
             expect(response.body.message).to.equal("User was successfully created");
         });
     });
 
-    xdescribe('tests on /auth/login', () => {
+    describe('tests on /auth/login', () => {
 
 
         beforeEach(async () => {

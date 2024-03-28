@@ -1,4 +1,3 @@
-import { validationResult } from 'express-validator';
 import configDotenvPath from '../helpers/dotenv-config.js';
 import helperFunctions from '../helpers/helpers.js';
 import { authenticateTokenService, changePasswordAuthenticatorService, changePasswordService, loginUserService, signupUserService,  } from '../services/auth.services.js';
@@ -11,7 +10,7 @@ const signupController = async (req, res) => {
 
     validateRequest(req, res);
     try {
-        const user = await signupUserService(req.body);
+        await signupUserService(req.body);
         res.status(201).send({ message: `User was successfully created` });
         return;
     }
@@ -49,6 +48,17 @@ const loginController = async (req, res) => {
 
 }
 
+const authenticateTokenController = async (req, res) => {
+    try {
+        const token = await authenticateTokenService(req.body.authToken);
+        return res.status(200).send({ message: "Token authenticated", userId: token.payload.id});
+    }
+    catch (err) {
+        return res.status(400).send({ error: err.message });
+    }
+
+}
+
 const changePasswordAuthenticatorController = async (req, res) => {
 try {
         const userId = await changePasswordAuthenticatorService(req.body);
@@ -73,18 +83,7 @@ const changePasswordController = async (req, res) => {
     }
 }
 
-const authenticateTokenController = async (req, res) => {
-    // console.log("Route successful!");
-    try {
-        const token = await authenticateTokenService(req.body.authToken);
-        // console.log(token.payload.id);
-        return res.status(200).send({ message: "Token authenticated", userId: token.payload.id});
-    }
-    catch (err) {
-        return res.status(400).send({ error: err.message });
-    }
 
-}
 
 const authControllers = { signupController, loginController, changePasswordController, changePasswordAuthenticatorController, authenticateTokenController };
 export default authControllers;
