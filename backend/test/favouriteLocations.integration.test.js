@@ -32,7 +32,6 @@ describe("Integration tests on requests to the /favourite-locations route", () =
         const authRequest = { "authToken": loginToken };
         const verifyTokenResponse = await request.post(`/auth/check-verification`).send(authRequest);
         validUserId = verifyTokenResponse.body.userId;
-        // console.log(`validUserId: ${validUserId}`)
 
     });
 
@@ -53,29 +52,25 @@ describe("Integration tests on requests to the /favourite-locations route", () =
         });
         it("should return successful response w/ empty array if user does not have favourites yet", async () => {
 
-            const response = await request
-                .post(FETCH_LOCATIONS_ROUTE).send(validFetchFavouritesRequest);
+            const response = await request.post(FETCH_LOCATIONS_ROUTE).send(validFetchFavouritesRequest);
 
             expect(response).to.have.status(200);
             expect(response.body.message).to.equal("No favourites saved yet");
         });
 
         it("should return the favourites entry of the requested user if it exists", async () => {
-            //message: "Found favourites"
             //Arrange
             const newFavourite = {
                 userId: validUserId,
                 favourites: ['Orlando', 'Los Angeles']
             }
-            // console.log(newFavourite);
+      
             const newFaveEntry = new User_Favourite(newFavourite);
-            // console.log(newFaveEntry);
             await newFaveEntry.save();
 
 
             //Act
-            const response = await request
-                .post(FETCH_LOCATIONS_ROUTE).send(validFetchFavouritesRequest);
+            const response = await request.post(FETCH_LOCATIONS_ROUTE).send(validFetchFavouritesRequest);
 
             //Assert
             expect(response).to.have.status(200);
@@ -88,14 +83,11 @@ describe("Integration tests on requests to the /favourite-locations route", () =
     describe('tests on /add-favourites', () => {
 
         it("should create a new favourites entry for the user", async () => {
-            // message: `Successfully created favourite locations`,
-
             const newFavouritesRequest = {
                 userId: validUserId,
                 favourites: ['Gothenburg']
             };
-            const response = await request
-                .post(ADD_FAVOURITES_ROUTE).send(newFavouritesRequest);
+            const response = await request.post(ADD_FAVOURITES_ROUTE).send(newFavouritesRequest);
 
             expect(response).to.have.status(201);
             expect(response.body.message).to.equal(`Successfully created favourite locations`);
@@ -104,8 +96,25 @@ describe("Integration tests on requests to the /favourite-locations route", () =
     });
 
     describe('tests on /add-location', () => {
-        it("should return the newly updated favourites entry if successful", () => {
-            
+
+        it("should return the newly updated favourites entry if successful", async () => {
+            //Arrange
+            const newFavouritesRequest = {
+                userId: validUserId,
+                favourites: ['Gothenburg']
+            };
+            await request.post(ADD_FAVOURITES_ROUTE).send(newFavouritesRequest);
+
+            const addNewLocationRequest = {
+                userId: validUserId,
+                location: 'London'
+            };
+
+            const response = await request.patch(ADD_NEW_FAVOURITE_ROUTE).send(addNewLocationRequest);
+            // console.log(response);
+            expect(response).to.have.status(200);
+            expect(response.body.message).to.equal(`Successfully added new location to favourites`);
+            expect(response.body.favourites).to.include(addNewLocationRequest.location);
         });
 
         //TODO: add test + code for attempting to add a duplicate entry
@@ -113,8 +122,15 @@ describe("Integration tests on requests to the /favourite-locations route", () =
 
         // })
 
-        it("should return a 404 error if attempting to add to an empty entry", () => {
+        it("should return a 404 error if attempting to add to an entry that does not exist", async () => {
+            const addNewLocationRequest = {
+                userId: validUserId,
+                location: 'London'
+            };
 
+            const response = await request.patch(ADD_NEW_FAVOURITE_ROUTE).send(addNewLocationRequest);
+            expect(response).to.have.status(404);
+            expect(response.body.message).to.equal(`Could not find a favourites entry for that user`);
         });
 
 
@@ -122,16 +138,53 @@ describe("Integration tests on requests to the /favourite-locations route", () =
 
     describe('tests on /delete-location', () => {
 
-        it("should delete specified location from user favourites", () => {
-            //message: `Successfully deleted location from favourites`
+        it("should delete specified location from user favourites", async () => {
+            const newFavouritesRequest = {
+                userId: validUserId,
+                favourites: ['Gothenburg', 'Milan']
+            };
+            await request.post(ADD_FAVOURITES_ROUTE).send(newFavouritesRequest);
+            
+            const deleteLocationRequest = {
+                userId: validUserId,
+                location: "Gothenburg"
+            }
+
+            const response = await request.patch(DELETE_FAVOURITE_ROUTE).send(deleteLocationRequest);
+
+            expect(response).to.have.status(200);
+            expect(response.body.message).to.equal(`Successfully deleted location from favourites`);
+            expect(response.body.favourites).to.not.include(deleteLocationRequest.location);
         })
 
-        it("should return 404 error if location is not in user's favourites", () => {
-            //message: `That locations was not in the user's favourites`
+        it("should return 404 error if location is not in user's favourites", async () => {
+            const newFavouritesRequest = {
+                userId: validUserId,
+                favourites: ['Gothenburg', 'Milan']
+            };
+            await request.post(ADD_FAVOURITES_ROUTE).send(newFavouritesRequest);
+            
+            const deleteLocationRequest = {
+                userId: validUserId,
+                location: "Vienna"
+            }
+
+            const response = await request.patch(DELETE_FAVOURITE_ROUTE).send(deleteLocationRequest);
+            
+            expect(response).to.have.status(404);
+            expect(response.body.message).to.equal(`That location was not in the user's favourites`);
         })
 
-        it("should return 404 error if a favourites entry is not found for that user", () => {
-            //message: `"No favourites entry found for that user id"
+        it("should return 404 error if a favourites entry is not found for that user", async () => {
+            const deleteLocationRequest = {
+                userId: validUserId,
+                location: "Vienna"
+            }
+
+            const response = await request.patch(DELETE_FAVOURITE_ROUTE).send(deleteLocationRequest);
+            
+            expect(response).to.have.status(404);
+            expect(response.body.message).to.equal(`No favourites entry found for that user id`);
         })
     })
 

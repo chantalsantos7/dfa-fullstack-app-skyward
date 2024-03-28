@@ -59,7 +59,7 @@ export const deleteLocationService = async (req) => {
         );
 
         if (originalFavourites.favourites.length === updatedFavourites.favourites.length) {
-            throw new Error(`That locations was not in the user's favourites`);
+            throw new Error(`That location was not in the user's favourites`);
         }
 
         return updatedFavourites;

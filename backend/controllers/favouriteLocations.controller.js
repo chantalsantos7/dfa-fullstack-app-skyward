@@ -70,7 +70,7 @@ const deleteLocationFromFavouritesController = async (req, res) => {
         return res.status(200).send({ message: `Successfully deleted location from favourites`, favourites: updatedFavourites.favourites })
     }
     catch (err) {
-        if (err.message === `That locations was not in the user's favourites` ||
+        if (err.message === `That location was not in the user's favourites` ||
             err.message === "No favourites entry found for that user id") {
             return res.status(404).send({ message: err.message });
         }
