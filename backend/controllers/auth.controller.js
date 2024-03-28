@@ -1,6 +1,6 @@
 import configDotenvPath from '../helpers/dotenv-config.js';
 import helperFunctions from '../helpers/helpers.js';
-import { authenticateTokenService, changePasswordAuthenticatorService, changePasswordService, loginUserService, signupUserService,  } from '../services/auth.services.js';
+import { authenticateTokenService, loginUserService, signupUserService,  } from '../services/auth.services.js';
 
 const { validateRequest } = helperFunctions;
 
@@ -59,5 +59,5 @@ const authenticateTokenController = async (req, res) => {
 
 }
 
-const authControllers = { signupController, loginController, changePasswordController, changePasswordAuthenticatorController, authenticateTokenController };
+const authControllers = { signupController, loginController, authenticateTokenController };
 export default authControllers;

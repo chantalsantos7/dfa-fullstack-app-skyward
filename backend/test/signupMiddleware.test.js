@@ -5,7 +5,7 @@ import authMiddleware from "../middlewares/authMiddleware.js";
 const { signupServices } = authMiddleware;
 const { encryptPassword } = signupServices;
 
-describe('signupServices tests', () => {
+describe('signupMiddleware tests', () => {
 
     describe('encryptPassword tests', () => {
         it(`Should encrypt a user's password`, async () => {
@@ -14,4 +14,8 @@ describe('signupServices tests', () => {
             expect(password).to.not.equal(plaintext);
         });
     });
+
+    describe('checkDuplicateEmail tests', () => { 
+        
+     });
 })

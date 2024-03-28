@@ -5,7 +5,7 @@ import authMiddleware from '../middlewares/authMiddleware.js';
 
 const authRouter = express.Router();
 
-const { signupController, loginController, changePasswordController, changePasswordAuthenticatorController, authenticateTokenController } = authControllers;
+const { signupController, loginController, authenticateTokenController } = authControllers;
 const { signupServices, verificationMiddleware } = authMiddleware;
 
 authRouter.post('/signup', [

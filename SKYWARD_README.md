@@ -6,7 +6,7 @@ Features:
 
 - Able to search for a location from home page, view:
     - 5 day weather forecast
-    - Places of interest
+    - WIP: Places of interest
 - Account signup & login
 - Saving favourite locations for later viewing
 
@@ -17,6 +17,11 @@ Backend services:
 - User authentication with JSON Web Tokens
 - Favourite locations
 - Proxy service for weather information
+
+## Potential Improvements
+
+- Refine location requests, allow user to select from a dropdown
+- Severe weather alert feature 
 
 ## External APIs used
 

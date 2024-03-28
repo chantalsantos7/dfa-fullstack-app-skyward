@@ -38,32 +38,6 @@ export const loginUserService = async (userData) => {
     return token;
 }
 
-export const changePasswordAuthenticatorService = async (userData) => {
-    try {
-        const user = await User.findOne({ email: userData.email }).exec();
-        if (!user) {
-            throw new Error(`User not found`);
-        }
-
-        return user.id;
-    }
-    catch (err) {
-        throw err;
-    }    
-}
-
-export const changePasswordService = async (userId, newPassword) => {
-    const updatedPass = await encryptPassword(newPassword);
-    
-    try {
-        await User.findOneAndUpdate({_id: userId}, {password: updatedPass}, { new: true });
-        return;
-    }
-    catch (err) {
-        throw err;
-    }
-}
-
 export const authenticateTokenService = async (token) => {
     try {
         return verifyToken(token);
