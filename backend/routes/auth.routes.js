@@ -19,15 +19,6 @@ authRouter.post('/login', [
     body(`password`).notEmpty().escape()
 ], loginController);
 
-//First need to authenticate the user email and get their id, to update the password
-authRouter.post(`/password-change`, [
-    body(`email`).notEmpty().normalizeEmail({ gmail_remove_dots: false}).escape().isEmail()
-], changePasswordAuthenticatorController);
-
-authRouter.patch(`/password-change/user/:id`, [
-    body(`newPassword`).notEmpty().escape()
-], changePasswordController);
-
 authRouter.post(`/check-verification`, [
     body(`authToken`).notEmpty(),
     verificationMiddleware.checkTokenFollowsFormat

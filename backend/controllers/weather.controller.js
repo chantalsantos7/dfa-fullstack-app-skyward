@@ -7,7 +7,6 @@ configDotenvPath();
 
 const getWeatherController = async (req, res) => {
     validateRequest(req, res);
-    console.log(`Weather request: ${req.params.location}`)
     try {
         const weatherData = await getLocationWeatherService(req.params.location);
         return res.status(200).send({ data: weatherData.data });
