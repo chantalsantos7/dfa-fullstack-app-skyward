@@ -46,6 +46,8 @@ describe('Integration tests on requests to the /auth route', () => {
             expect(response).to.have.status(201);
             expect(response.body.message).to.equal("User was successfully created");
         });
+
+        //TODO: add test for email already in use
     });
 
     describe('tests on /auth/login', () => {
@@ -94,7 +96,7 @@ describe('Integration tests on requests to the /auth route', () => {
 
         it("should return the userId if authToken is valid", async () => {
             //Arrange
-            const signupRes = await request.post(SIGNUP_ENDPOINT).send(validSignupRequest);
+            await request.post(SIGNUP_ENDPOINT).send(validSignupRequest);
             const loginRes = await request.post(LOGIN_ENDPOINT).send(validLoginRequest);
             const authToken = loginRes._body.authToken;
             const userEntry = await User.findOne({ email: "simoneriksson@gmail.com" }).exec();
