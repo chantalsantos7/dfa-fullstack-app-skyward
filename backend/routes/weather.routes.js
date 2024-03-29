@@ -6,7 +6,6 @@ const weatherRouter = express.Router();
 
 const { getWeatherController } = weatherControllers;
 
-weatherRouter.get('/get-location-weather/:location', [
-], getWeatherController);
+weatherRouter.get('/get-location-weather/:location', [], getWeatherController);
 
 export default weatherRouter;
