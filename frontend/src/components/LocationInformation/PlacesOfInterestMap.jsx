@@ -1,37 +1,62 @@
 import { useRef, useState, useEffect, Children } from 'react';
 import PropTypes from 'prop-types';
-import tt from '@tomtom-international/web-sdk-maps'; // npm i @tomtom-international/web-sdk-maps
+import tt from '@tomtom-international/web-sdk-maps';
 import "@tomtom-international/web-sdk-maps/dist/maps.css";
+import { getPoIForLocationService } from '../../services/placesService';
 
-//{[long, lat]: center}
-const PlacesOfInterestMap = ( { coordinates } ) => {
+const PlacesOfInterestMap = ({ coordinates }) => {
     const mapElement = useRef();
     const { lon, lat } = coordinates;
-    // console.log(`lon: ${lon} & lat: ${lat}`);
     const mapLongitude = lon;
-    const mapLatitude =  lat;
-    const mapZoom = 10;
-    const [map, setMap] = useState({});
+    const mapLatitude = lat;
+    const mapZoom = 11;
+    const [map, setMap] = useState(null);
+    // const [placesOfInterestArray, setPlacesOfInterestArray] = useState([]);
 
-    //TODO: only allow api call when on this page somehow
     useEffect(() => {
-        let map = tt.map({
+        const mapInstance = tt.map({
             key: "njW4ZCADzcu7S4kziEXCbmzhdkoQVbmq",
             container: mapElement.current,
             center: [mapLongitude, mapLatitude],
             zoom: mapZoom,
         });
-        setMap(map);
-        return () => map.remove();
+        setMap(mapInstance);
+
+
+
+        return () => mapInstance.remove();
     }, [coordinates]);
+
+    useEffect(() => {
+        const fetchPlacesOfInterest = async () => {
+            const placesOfInterestArray = await getPoIForLocationService(mapLongitude, mapLatitude);
+            console.log(placesOfInterestArray);
+            if (placesOfInterestArray && placesOfInterestArray.length > 0) {
+                const markers = placesOfInterestArray.map(place => {
+                    return new tt.Marker().setLngLat([place.lon, place.lat]);
+                });
+    
+                markers.forEach(marker => {
+                    marker.addTo(map);
+                });
+            }
+        };
+        if (map) {
+            fetchPlacesOfInterest();
+        }
+        
+       
+    }, [map, mapLongitude, mapLatitude]);
 
     return (
         <>
             <div
                 ref={mapElement}
                 className="mapDiv"
-                style={{ height: "500px" }} /* This height value can be set to whatever you need} */
+                style={{ height: "450px" }} /* This height value can be set to whatever you need} */
             />
+
+            <div style={{ height: "100px" }}></div>
         </>
     );
 }
