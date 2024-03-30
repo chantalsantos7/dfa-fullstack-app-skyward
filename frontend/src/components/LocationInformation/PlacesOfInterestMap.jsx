@@ -2,6 +2,7 @@ import { useRef, useState, useEffect, Children } from 'react';
 import PropTypes from 'prop-types';
 import tt from '@tomtom-international/web-sdk-maps';
 import "@tomtom-international/web-sdk-maps/dist/maps.css";
+
 import { getPoIForLocationService } from '../../services/placesService';
 
 const PlacesOfInterestMap = ({ coordinates }) => {
@@ -9,7 +10,7 @@ const PlacesOfInterestMap = ({ coordinates }) => {
     const { lon, lat } = coordinates;
     const mapLongitude = lon;
     const mapLatitude = lat;
-    const mapZoom = 11;
+    const mapZoom = 13;
     const [map, setMap] = useState(null);
     // const [placesOfInterestArray, setPlacesOfInterestArray] = useState([]);
 
@@ -35,9 +36,36 @@ const PlacesOfInterestMap = ({ coordinates }) => {
                 const markers = placesOfInterestArray.map(place => {
                     return new tt.Marker().setLngLat([place.lon, place.lat]);
                 });
-    
+
+                // markers.forEach(() => {
+
+                // });
+                //get name and address from places of interest array
+                let poiArrayIndex = 0;
                 markers.forEach(marker => {
                     marker.addTo(map);
+                    var popupOffsets = {
+
+                        top: [0, 0],
+                      
+                        bottom: [0, -70],
+                      
+                        "bottom-right": [0, -70],
+                      
+                        "bottom-left": [0, -70],
+                      
+                        left: [25, -35],
+                      
+                        right: [-25, -35],
+                      
+                      }
+                      
+                      var popup = new tt.Popup({ offset: popupOffsets }).setHTML(
+                        `${placesOfInterestArray[poiArrayIndex].formatted !== undefined ? placesOfInterestArray[poiArrayIndex].formatted : placesOfInterestArray[poiArrayIndex].name}`
+                      )
+                      
+                      marker.setPopup(popup);
+                      poiArrayIndex++;
                 });
             }
         };
