@@ -15,7 +15,6 @@ const encryptPassword = async (password) => {
 const checkDuplicateEmail = async (req, res, next) => {
     try {
         const user = await User.findOne({ email: req.body.email }).exec();
-        console.log(user);
         if (user) {
             res.status(400).send({ message: `Email already in use` });
             return;

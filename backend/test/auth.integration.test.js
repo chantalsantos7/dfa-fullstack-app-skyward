@@ -47,7 +47,18 @@ describe('Integration tests on requests to the /auth route', () => {
             expect(response.body.message).to.equal("User was successfully created");
         });
 
-        //TODO: add test for email already in use
+        it("should not allow account signup if email already in use", async () => {
+            await request
+                .post(SIGNUP_ENDPOINT)
+                .send(validSignupRequest);
+
+            const response = await request
+                .post(SIGNUP_ENDPOINT)
+                .send(validSignupRequest);
+
+            expect(response).to.have.status(400);
+            expect(response.body.message).to.equal(`Email already in use`);
+        });
     });
 
     describe('tests on /auth/login', () => {

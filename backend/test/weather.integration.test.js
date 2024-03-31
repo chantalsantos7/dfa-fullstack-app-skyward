@@ -18,6 +18,11 @@ describe('Integration tests on /weather route', () => {
             const response = await request.get(`/weather/get-location-weather/vienna`);
             expect(response).to.have.status(200);
             expect(response.body.weatherData).to.not.be.null;
-        })
+        });
+
+        it("should return 404 for a non-existent location", async () => {
+            const response = await request.get(`/weather/get-location-weather/nonexistentlocation`);
+            expect(response).to.have.status(404);
+        });
      })
  })

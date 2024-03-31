@@ -10,7 +10,6 @@ const fetchFavouritesController = async (req, res) => {
 
     try {
         const favouritesEntry = await fetchFavouritesService(req.body.userId);
-        // console.log(favouritesEntry)
         return res.status(200).send({ message: "Found favourites", favourites: favouritesEntry.favourites });
     }
     catch (err) {

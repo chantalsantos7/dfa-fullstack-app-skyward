@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import config from './db.config.js';
 
 const { uri } = config.db;
-// console.log(uri)
 
 export const connectDb = async () => {
     try {
@@ -11,6 +10,5 @@ export const connectDb = async () => {
     }
     catch (e) {
         console.log(`Failed to connect to DB: ${e.message}`);   
-        // console.error(e);
     }
 };

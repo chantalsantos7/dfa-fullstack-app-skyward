@@ -12,7 +12,7 @@ const getWeatherController = async (req, res) => {
         return res.status(200).send({ data: weatherData.data });
     }
     catch (err) {
-        res.status(500).send({ error: err });
+        res.status(err.response.status).send({ error: err });
         return;
     }
 }

@@ -14,8 +14,4 @@ describe('signupMiddleware tests', () => {
             expect(password).to.not.equal(plaintext);
         });
     });
-
-    describe('checkDuplicateEmail tests', () => { 
-        
-     });
 })

@@ -14,7 +14,7 @@ const getPoIForLocationController = async (req, res) => {
         return res.status(200).send({ features: response.data.features});
     }
     catch (err) {
-        return res.status(500).send({ error: err });
+        return res.status(err.response.status).send({ error: err });
     }
 }
 

@@ -111,16 +111,10 @@ describe("Integration tests on requests to the /favourite-locations route", () =
             };
 
             const response = await request.patch(ADD_NEW_FAVOURITE_ROUTE).send(addNewLocationRequest);
-            // console.log(response);
             expect(response).to.have.status(200);
             expect(response.body.message).to.equal(`Successfully added new location to favourites`);
             expect(response.body.favourites).to.include(addNewLocationRequest.location);
         });
-
-        //TODO: add test + code for attempting to add a duplicate entry
-        // it("should not allow a duplicate favourite to be added", () => {
-
-        // })
 
         it("should return a 404 error if attempting to add to an entry that does not exist", async () => {
             const addNewLocationRequest = {

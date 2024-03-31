@@ -22,13 +22,12 @@ const FavouriteLocationButton = ({ location }) => {
                 //if we get back saved locations:
                     //add Location to favourites
             //3. setSavedLocation to true
-            //4. update savedLocations
             //5. return
         //B. if location is already saved: 
             //2. confirm if user wants to remove this location from savedFaves
             //3. remove from favourites
-            //4. setSavedLocationToFalse
-            //5. update savedLocations
+            //4. set SavedLocation to False
+            //5. return
 
         if (loggedIn === true) {
             if (!savedLocation) {
@@ -36,8 +35,7 @@ const FavouriteLocationButton = ({ location }) => {
                 if (getFavesResponse.message === "No favourites saved yet") {
                     const newFavesReq = [`${location}`];
                     try {
-                        const createNewFavesResponse = await createNewFavouritesEntry(newFavesReq);
-                        console.log(createNewFavesResponse);
+                         await createNewFavouritesEntry(newFavesReq);
                     }
                     catch (err) {
                         console.error(err);
@@ -53,16 +51,13 @@ const FavouriteLocationButton = ({ location }) => {
                         return;
                     }
                 }
-                console.log("reached here, after the favourite has been added");                
                 setSavedLocation(true);
-                // await updateSavedLocations();
                 return;
             }
 
             if (confirm("Are you sure you want to remove this location from your favourites?")) {
                 try {
-                    const deleteResponse = await deleteLocationFromFavourites(location);
-                    console.log(deleteResponse);
+                    await deleteLocationFromFavourites(location);
                 }
                 catch (err)
                 {
@@ -70,7 +65,6 @@ const FavouriteLocationButton = ({ location }) => {
                     return;
                 }
                 setSavedLocation(false);
-                // await updateSavedLocations();
                 return;
             }
         }
@@ -92,8 +86,7 @@ const FavouriteLocationButton = ({ location }) => {
     useEffect(checkLocationIsSaved, [savedLocation]);
     useEffect(checkLocationIsSaved, [location]);
     useEffect(checkLocationIsSaved, []);
-    // once added to favourites, render the bookmark-star-fill icon instead - state + apply new class to change colour
-    // 
+    // once added to favourites, render the bookmark-star-fill icon instead 
     return (
         <>
             <button className='btn favourite-button save-favourite-btn ' type='button' onClick={clickHandler}>
@@ -106,7 +99,6 @@ const FavouriteLocationButton = ({ location }) => {
 
 FavouriteLocationButton.propTypes = {
     location: PropTypes.string.isRequired,
-    // checkHasSavedLocations: PropTypes.func.isRequired
 }
 
 FavouriteLocationButton.defaultProps = {

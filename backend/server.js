@@ -30,8 +30,4 @@ const server = app.listen(PORT, () => {
     console.log(`Server is listening at: http://${SERVERHOST}:${SERVERPORT}`);
 });
 
-// cron.schedule('*/10 * * * *', () => {
-//     console.log("running a function every 10 minutes")
-// })
-
 export default server;
