@@ -1,9 +1,6 @@
-import dotenv from 'dotenv';
+import configDotenvPath from '../helpers/dotenv-config.js';
 
-dotenv.config({
-    path: `.env${process.env.NODE_ENV ? `.${process.env.NODE_ENV}` : ``}`
-});
-
+configDotenvPath()
 
 const { DBURI } = process.env;
 

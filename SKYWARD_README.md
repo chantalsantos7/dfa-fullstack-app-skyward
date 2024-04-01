@@ -1,6 +1,6 @@
 # Skyward Travel App
 
-Full-stack web application for viewing travel information, mainly the 5-day weather forecast of a location.
+Full-stack web application for viewing travel information.
 
 Features:
 
