@@ -24,8 +24,10 @@ const Header = ({ handleLocationLinkClick, searchData, updateSearch, submitLocat
   }
 
   const obtainFavourites = async () => {
-    const { favourites } = await getSavedFavourites();
-    setHeaderSavedLocations(favourites);
+    if (loggedIn && loggedIn === true) {
+      const { favourites } = await getSavedFavourites();
+      setHeaderSavedLocations(favourites);
+    }
     // console.log(`savedLocations from Header: ${headerSavedLocations}`);
   }
 

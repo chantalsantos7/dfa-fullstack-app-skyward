@@ -73,12 +73,6 @@ const App = () => {
     };
 
     const submitLocation = (location) => {
-        /*
-        1. get weather forecast for the location being searched for
-        2. switch to the location information page (passing along the location information as a prop)
-        */
-        // checkHasSavedLocations();
-        console.log(location);
         getWeatherData(location);
     }
 
@@ -93,12 +87,17 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-        getWeatherData(weatherData.location);
+        if (weatherData.location !== undefined) {
+            getWeatherData(weatherData.location);
+        }
+        
 
         const intervalId = setInterval(() => {
-            console.log("called the interval")
-            getWeatherData(weatherData.location);
-            //does successfully call it, it's just that it returns a 304 which causes error eventually
+            
+            if (weatherData.location !== undefined) {
+                getWeatherData(weatherData.location);
+            }
+        
         }, 600000);
 
         return () => clearInterval(intervalId);

@@ -53,8 +53,7 @@ export const FavesProvider = ({ children }) => {
 
     useEffect(() => {
         const fetchFavourites = async () => {
-            if (loggedIn) {
-                const favourites = await getSavedFavourites(authToken);
+            if (loggedIn && loggedIn === true) {
                 updateSavedLocations();
             }
         }
