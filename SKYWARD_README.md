@@ -21,7 +21,6 @@ Backend services:
 
 ## Potential Improvements
 
-- Refine location requests, allow user to select from a dropdown
 - Severe weather alert feature
 
 ## External APIs used
