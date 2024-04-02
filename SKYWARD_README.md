@@ -5,8 +5,8 @@ Full-stack web application for viewing travel information.
 Features:
 
 - Able to search for a location, view:
-    - 5 day weather forecast
-    - Map showing points of interest
+  - 5 day weather forecast
+  - Map showing points of interest
 - Account signup & login
 - Saving favourite locations for later viewing
 
